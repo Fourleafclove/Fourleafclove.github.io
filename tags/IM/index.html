@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8" />
+
+    
+
+    
+
+    <title>Mot-clé: IM | Blog</title>
+    <meta name="author" content="FLC" />
+    <meta name="version" content="1.0.0" />
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no" />
+    <meta name="baidu-site-verification" content="F0CXvmUgA9" />
+
+    
+    
+
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+    <div class="app">
+        <header class="header clearfix">
+    <div id="nav" class="nav">
+    <button id="open-panel" class="open-panel"><i class="icon-library"></i></button>
+
+    <nav class="nav-inner">
+
+        
+        
+
+    </nav>
+</div>
+
+    <aside id="aside" class="aside">
+    <div id="aside-mask" class="aside-mask"></div>
+    <div id="aside-inner" class="aside-inner">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit"><i class="icon-search-stroke"></i></button><input type="hidden" name="sitesearch" value="https://fourleafclove.github.io"></form>
+
+        
+        
+        
+        
+        <div class="author-meta">
+            <div class="author-avatar">
+                <a href="/">
+                    <img src="/images/avatar.jpg" title="FLC">
+                </a>
+            </div>
+            <div class="author-name"></div>
+            <div class="author-work"></div>
+            <div class="author-location">
+                <i class="icon-location vm"></i>
+                <span class="vm"></span>
+            </div>
+            <div class="author-thread-wrap">
+                <div class="author-threads clearfix">
+                    <!-- <a class="thread-item" href="https://github.com/sanonz" target="_blank"><i class="icon-github"></i></a>
+                    <a class="thread-item" href="http://m.timegoto.com/user/1" target="_blank"><i class="icon-circle-more"></i></a>
+                    <a class="thread-item" href="https://twitter.com/sanonze" target="_blank"><i class="icon-twitter"></i></a> -->
+                </div>
+            </div>
+        </div>
+        
+    </div>
+</aside>
+
+</header>
+
+        <div id="content" class="content">
+    <article class="article" itemscope itemprop="blogPost">
+    
+    <header class="article-header">
+        
+        <h1 itemprop="name">
+            <a href="/2018/01/03/IM/requestResponse/">IM消息状态判定及回执实现</a>
+        </h1>
+        
+        <div class="article-meta clearfix">
+            <a class="article-date" href="/2018/01/03/IM/requestResponse/">
+    
+    <i class="icon-calendar"></i>
+    
+    <time datetime="2018-01-02T16:00:00.000Z" itemprop="datePublished">2018-01-03</time>
+</a>
+
+            
+<div class="article-tag-list">
+    <i class="icon-tag"></i>
+    <a class="article-tag-link" href="/tags/IM/">IM</a>
+</div>
+
+
+        </div>
+    </header>
+    
+    <section class="article-body markdown-body">
+        
+        <h3 id="状态判定"><a href="#状态判定" class="headerlink" title="状态判定"></a>状态判定</h3><p>从技术角度来看，消息的状态就是发送（输入消息、发送中，发送成功/失败）和接收状态（已接收）。</p>
+<p>从产品角度来看，消息发送和接收也都容易理解容易处理，容易混淆的是“阅读状态”。</p>
+<p>消息的“阅读状态”是针对于会话而言的，需要区分对话双方。A 和 B 进行聊天，A 是否已读和 B 是否已读显然是不同的问题：</p>
+<pre><code>1. A 和 B 分别维护自己的阅读状态，涉及处理“新消息”和“历史消息”的关系
+
+2. 让对方看自己的阅读状态 涉及“消息回执”
+</code></pre>
+        
+        
+    </section>
+</article>
+
+
+    <article class="article" itemscope itemprop="blogPost">
+    
+    <header class="article-header">
+        
+        <h1 itemprop="name">
+            <a href="/2017/12/16/IM/Electron开发小结/">Electron开发小结</a>
+        </h1>
+        
+        <div class="article-meta clearfix">
+            <a class="article-date" href="/2017/12/16/IM/Electron开发小结/">
+    
+    <i class="icon-calendar"></i>
+    
+    <time datetime="2017-12-15T16:00:00.000Z" itemprop="datePublished">2017-12-16</time>
+</a>
+
+            
+<div class="article-tag-list">
+    <i class="icon-tag"></i>
+    <a class="article-tag-link" href="/tags/IM/">IM</a>, <a class="article-tag-link" href="/tags/electron/">electron</a>
+</div>
+
+
+        </div>
+    </header>
+    
+    <section class="article-body markdown-body">
+        
+        <h2 id="Electron-是什么？"><a href="#Electron-是什么？" class="headerlink" title="Electron 是什么？"></a>Electron 是什么？</h2><p>Electron 是一个可以用 JavaScript、HTML 和 CSS 构建桌面应用程序的库。这些应用程序能打包到 Mac、Windows 和 Linux 系统上运行，也能上架到 Mac 和 Windows 的 App Store。</p>
+        
+        
+    </section>
+</article>
+
+
+    <article class="article" itemscope itemprop="blogPost">
+    
+    <header class="article-header">
+        
+        <h1 itemprop="name">
+            <a href="/2017/12/01/IM/融云消息体系架构/">融云消息体系架构</a>
+        </h1>
+        
+        <div class="article-meta clearfix">
+            <a class="article-date" href="/2017/12/01/IM/融云消息体系架构/">
+    
+    <i class="icon-calendar"></i>
+    
+    <time datetime="2017-11-30T16:00:00.000Z" itemprop="datePublished">2017-12-01</time>
+</a>
+
+            
+<div class="article-tag-list">
+    <i class="icon-tag"></i>
+    <a class="article-tag-link" href="/tags/IM/">IM</a>
+</div>
+
+
+        </div>
+    </header>
+    
+    <section class="article-body markdown-body">
+        
+        <p>海马汇的即时通讯(IM)模块的开发依赖于第三方也就是融云提供的消息服务。由他们的API服务器、IM服务器支持基础的消息通讯，我们在提供客户端的ios、android、web SDK的基础上，根据项目具体需求进行二次开发</p>
+<p>这篇文章主要分析一下整个融云的消息服务体系架构，弄明白各个服务器、客户端之间究竟是怎样协同工作的，数据流是怎么样跑起来的，也算是做一个阶段性的项目总结。</p>
+        
+        
+    </section>
+</article>
+
+
+    <article class="article" itemscope itemprop="blogPost">
+    
+    <header class="article-header">
+        
+        <h1 itemprop="name">
+            <a href="/2017/11/22/IM/图片预览实现拖动、缩放、旋转/">图片预览实现拖动、缩放、旋转</a>
+        </h1>
+        
+        <div class="article-meta clearfix">
+            <a class="article-date" href="/2017/11/22/IM/图片预览实现拖动、缩放、旋转/">
+    
+    <i class="icon-calendar"></i>
+    
+    <time datetime="2017-11-21T16:00:00.000Z" itemprop="datePublished">2017-11-22</time>
+</a>
+
+            
+<div class="article-tag-list">
+    <i class="icon-tag"></i>
+    <a class="article-tag-link" href="/tags/IM/">IM</a>
+</div>
+
+
+        </div>
+    </header>
+    
+    <section class="article-body markdown-body">
+        
+        <p>对于im中存在的图片消息，需要在原本可以全屏预览的基础上，增加鼠标拖动、放大缩小、自由旋转的功能</p>
+<p> <img src="https://ws3.sinaimg.cn/large/006tNc79gy1fmrx2h7ns9j30uu15a7wi.jpg" width="300"></p>
+<p>项目中点击放大图片的功能是用的一个基于 <code>jquery</code> 的插件 <code>rebox</code>，仅仅实现了全屏预览图片。自己在这个插件的基础上增加了功能，大体思路是使用top和left设置图片位置，用transform进行缩放旋转。下面记录分享一下遇到的问题和解决思路。</p>
+        
+        
+    </section>
+</article>
+
+
+    <article class="article" itemscope itemprop="blogPost">
+    
+    <header class="article-header">
+        
+        <h1 itemprop="name">
+            <a href="/2017/11/20/IM/文字和图片的复制/">文字和图片的复制</a>
+        </h1>
+        
+        <div class="article-meta clearfix">
+            <a class="article-date" href="/2017/11/20/IM/文字和图片的复制/">
+    
+    <i class="icon-calendar"></i>
+    
+    <time datetime="2017-11-19T16:00:00.000Z" itemprop="datePublished">2017-11-20</time>
+</a>
+
+            
+<div class="article-tag-list">
+    <i class="icon-tag"></i>
+    <a class="article-tag-link" href="/tags/IM/">IM</a>
+</div>
+
+
+        </div>
+    </header>
+    
+    <section class="article-body markdown-body">
+        
+        <p>im中需要对文字和图片消息进行复制,下面分享一下如何在浏览器和electron中的具体实现</p>
+<h3 id="1-文字复制"><a href="#1-文字复制" class="headerlink" title="1.文字复制"></a>1.文字复制</h3><p>文字的复制比较简单，本质上相当于帮用户实现 选择 <code>+ ctrl c</code></p>
+<p>手动创建选择容器 <code>selection</code> 和选择范围 <code>range</code></p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> selection = <span class="built_in">window</span>.getSelection();</span><br><span class="line"><span class="keyword">var</span> range = <span class="built_in">document</span>.createRange();</span><br></pre></td></tr></table></figure>
+<p>将文字内容添加到选择范围 <code>range</code> 中</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">range.selectNodeContents(<span class="xml"><span class="tag">&lt;<span class="name">any</span>&gt;</span>ele.find("pre")[0]);</span></span><br></pre></td></tr></table></figure>
+        
+        
+    </section>
+</article>
+
+
+    <article class="article" itemscope itemprop="blogPost">
+    
+    <header class="article-header">
+        
+        <h1 itemprop="name">
+            <a href="/2017/10/14/browser/notification/">Web Notification桌面通知</a>
+        </h1>
+        
+        <div class="article-meta clearfix">
+            <a class="article-date" href="/2017/10/14/browser/notification/">
+    
+    <i class="icon-calendar"></i>
+    
+    <time datetime="2017-10-13T16:00:00.000Z" itemprop="datePublished">2017-10-14</time>
+</a>
+
+            
+<div class="article-tag-list">
+    <i class="icon-tag"></i>
+    <a class="article-tag-link" href="/tags/H5/">H5</a>, <a class="article-tag-link" href="/tags/IM/">IM</a>
+</div>
+
+
+        </div>
+    </header>
+    
+    <section class="article-body markdown-body">
+        
+        <p>IM客户端中使用了Notifications API 的通知接口用于向用户配置和显示桌面通知。</p>
+<h4 id="请求权限"><a href="#请求权限" class="headerlink" title="请求权限"></a>请求权限</h4><p>并不是所有用户都想看到自己的桌面不停弹出通知，所以在使用前要申请权限以供用户选择</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">Notification.requestPermission()</span><br></pre></td></tr></table></figure>
+        
+        
+    </section>
+</article>
+
+
+    <article class="article" itemscope itemprop="blogPost">
+    
+    <header class="article-header">
+        
+        <h1 itemprop="name">
+            <a href="/2017/09/12/IM/scroll2/">滚动条禁用边缘回弹</a>
+        </h1>
+        
+        <div class="article-meta clearfix">
+            <a class="article-date" href="/2017/09/12/IM/scroll2/">
+    
+    <i class="icon-calendar"></i>
+    
+    <time datetime="2017-09-11T16:00:00.000Z" itemprop="datePublished">2017-09-12</time>
+</a>
+
+            
+<div class="article-tag-list">
+    <i class="icon-tag"></i>
+    <a class="article-tag-link" href="/tags/IM/">IM</a>, <a class="article-tag-link" href="/tags/browser/">browser</a>
+</div>
+
+
+        </div>
+    </header>
+    
+    <section class="article-body markdown-body">
+        
+        <p>webkit内核浏览器比如chrome、safari在处理页面滚动操作时会默认增加一个边缘回弹效果，本意是让人机交互更流畅，不至于出现界面突然静止的情况。但这个效果在electron页面里面却不太好，因为这样的话把鼠标放在窗口里滚动，即使上下没有滚动的内容，web窗口也会跟着上下抖，显得整个应用不那么“原生”。</p>
+        
+        
+    </section>
+</article>
+
+
+
+
+
+</div>
+        <footer class="footer">
+    Propulsé by <a href="http://hexo.io/" target="_blank">Hexo</a>, Theme by <a href="https://github.com/sanonz/hexo-theme-concise" target="_blank">Concise</a>
+</footer>
+
+
+    </div>
+
+    <script type="text/javascript" src="https://cdn.bootcss.com/jquery/3.2.1/jquery.slim.min.js"></script>
+    <script type="text/javascript">
+        $(function() {
+            var nodes = {
+                nav: $('#nav'),
+                aside: $('#aside'),
+                navTags: $('#nav-tags')
+            };
+
+            $('#open-panel, #aside-mask').on('click', function() {
+                nodes.aside.toggleClass('panel-show');
+            });
+            $('#nav-tag').on('click', function(event) {
+                event.preventDefault();console.log(nodes.navTags.attr('class'))
+                nodes.navTags.toggleClass('tag-show');console.log(nodes.navTags.attr('class'))
+            })/*.hover(function() {
+                nodes.navTags.addClass('tag-show');
+            }, function() {
+                nodes.navTags.removeClass('tag-show');
+            });*/
+        });
+    </script>
+
+</body>
+</html>

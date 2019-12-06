@@ -50,7 +50,7 @@
         
           <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Suche"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
       </nav>
       <div id="search-form-wrap">
         <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://fourleafclove.github.io"></form>
@@ -88,7 +88,7 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p>首先来看一下 html 代码：</p>
-<figure class="highlight jsx"><table><tr><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">  &lt;div ...&gt;</span><br><span class="line">    &lt;template v-<span class="keyword">if</span>=<span class="string">"type !== 'textarea'"</span>&gt;</span><br><span class="line">      &lt;!-- 前置元素 --&gt;</span><br><span class="line">      &lt;div <span class="class"><span class="keyword">class</span></span>=<span class="string">"el-input-group__prepend"</span> v-<span class="keyword">if</span>=<span class="string">"$slots.prepend"</span>&gt;</span><br><span class="line">        &lt;slot name=<span class="string">"prepend"</span>&gt;&lt;/slot&gt;</span><br><span class="line">      &lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">      &lt;!--主体input--&gt;</span></span><br><span class="line"><span class="regexp">      &lt;input ...&gt;</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">      &lt;!-- 前置内容 --&gt;</span></span><br><span class="line"><span class="regexp">      &lt;span class="el-input__prefix" v-if="$slots.prefix || prefixIcon"&gt;</span></span><br><span class="line"><span class="regexp">       ...</span></span><br><span class="line"><span class="regexp">      &lt;/</span>span&gt;</span><br><span class="line">      &lt;!-- 后置内容 --&gt;</span><br><span class="line">      &lt;span</span><br><span class="line">        ...</span><br><span class="line">      &lt;<span class="regexp">/span&gt;</span></span><br><span class="line"><span class="regexp">      &lt;!-- 后置元素 --&gt;</span></span><br><span class="line"><span class="regexp">      &lt;div class="el-input-group__append" v-if="$slots.append"&gt;</span></span><br><span class="line"><span class="regexp">       ...</span></span><br><span class="line"><span class="regexp">      &lt;/</span>div&gt;</span><br><span class="line">    &lt;<span class="regexp">/template&gt;</span></span><br><span class="line"><span class="regexp">    &lt;textarea v-else&gt;</span></span><br><span class="line"><span class="regexp">    &lt;/</span>textarea&gt;</span><br><span class="line">  &lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">&lt;/</span>template&gt;</span><br></pre></td></tr></table></figure>
+<figure class="highlight jsx"><table><tr><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">  &lt;div ...&gt;</span><br><span class="line">    &lt;template v-<span class="keyword">if</span>=<span class="string">"type !== 'textarea'"</span>&gt;</span><br><span class="line">      &lt;!-- 前置元素 --&gt;</span><br><span class="line">      &lt;div <span class="class"><span class="keyword">class</span></span>=<span class="string">"el-input-group__prepend"</span> v-<span class="keyword">if</span>=<span class="string">"$slots.prepend"</span>&gt;</span><br><span class="line">        &lt;slot name=<span class="string">"prepend"</span>&gt;<span class="xml"><span class="tag">&lt;/<span class="name">slot</span>&gt;</span></span></span><br><span class="line">      &lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">      &lt;!--主体input--&gt;</span></span><br><span class="line"><span class="regexp">      &lt;input ...&gt;</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">      &lt;!-- 前置内容 --&gt;</span></span><br><span class="line"><span class="regexp">      &lt;span class="el-input__prefix" v-if="$slots.prefix || prefixIcon"&gt;</span></span><br><span class="line"><span class="regexp">       ...</span></span><br><span class="line"><span class="regexp">      &lt;/</span>span&gt;</span><br><span class="line">      &lt;!-- 后置内容 --&gt;</span><br><span class="line">      &lt;span</span><br><span class="line">        ...</span><br><span class="line">      &lt;<span class="regexp">/span&gt;</span></span><br><span class="line"><span class="regexp">      &lt;!-- 后置元素 --&gt;</span></span><br><span class="line"><span class="regexp">      &lt;div class="el-input-group__append" v-if="$slots.append"&gt;</span></span><br><span class="line"><span class="regexp">       ...</span></span><br><span class="line"><span class="regexp">      &lt;/</span>div&gt;</span><br><span class="line">    &lt;<span class="regexp">/template&gt;</span></span><br><span class="line"><span class="regexp">    &lt;textarea v-else&gt;</span></span><br><span class="line"><span class="regexp">    &lt;/</span>textarea&gt;</span><br><span class="line">  &lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">&lt;/</span>template&gt;</span><br></pre></td></tr></table></figure>
         
           <p class="article-more-link">
             <a href="/2019/11/23/vue/element-input/#more">Read More</a>
@@ -97,7 +97,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://fourleafclove.github.io/2019/11/23/vue/element-input/" data-id="ck3sdjiiw000k0osky0029maw" class="article-share-link">Teilen</a>
+      <a data-url="https://fourleafclove.github.io/2019/11/23/vue/element-input/" data-id="ck3tvklyt0022lwski664y80v" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/element/">element</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/vue/">vue</a></li></ul>
@@ -136,7 +136,7 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p>button 是比较简单的组件</p>
-<figure class="highlight jsx"><table><tr><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">  &lt;button</span><br><span class="line">    <span class="class"><span class="keyword">class</span></span>=<span class="string">"el-button"</span></span><br><span class="line">    @click=<span class="string">"handleClick"</span></span><br><span class="line">    :disabled=<span class="string">"buttonDisabled || loading"</span></span><br><span class="line">    :autofocus=<span class="string">"autofocus"</span></span><br><span class="line">    :type=<span class="string">"nativeType"</span></span><br><span class="line">    :<span class="class"><span class="keyword">class</span></span>=<span class="string">"[</span></span><br><span class="line"><span class="string">      type ? 'el-button--' + type : '',</span></span><br><span class="line"><span class="string">      buttonSize ? 'el-button--' + buttonSize : '',</span></span><br><span class="line"><span class="string">      &#123;</span></span><br><span class="line"><span class="string">        'is-disabled': buttonDisabled,</span></span><br><span class="line"><span class="string">        'is-loading': loading,</span></span><br><span class="line"><span class="string">        'is-plain': plain,</span></span><br><span class="line"><span class="string">        'is-round': round,</span></span><br><span class="line"><span class="string">        'is-circle': circle</span></span><br><span class="line"><span class="string">      &#125;</span></span><br><span class="line"><span class="string">    ]"</span></span><br><span class="line">  &gt;</span><br><span class="line">    &lt;i <span class="class"><span class="keyword">class</span></span>=<span class="string">"el-icon-loading"</span> v-<span class="keyword">if</span>=<span class="string">"loading"</span>&gt;&lt;/i&gt;</span><br><span class="line">    &lt;i :<span class="class"><span class="keyword">class</span></span>=<span class="string">"icon"</span> v-<span class="keyword">if</span>=<span class="string">"icon &amp;&amp; !loading"</span>&gt;&lt;/i&gt;</span><br><span class="line">    &lt;span v-<span class="keyword">if</span>=<span class="string">"$slots.default"</span>&gt;&lt;slot&gt;&lt;/slot&gt;&lt;/span&gt;</span><br><span class="line">  &lt;<span class="regexp">/button&gt;</span></span><br><span class="line"><span class="regexp">&lt;/</span>template&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line">  <span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">    name: <span class="string">'ElButton'</span>,</span><br><span class="line">    inject: &#123;</span><br><span class="line">      elForm: &#123;</span><br><span class="line">        <span class="keyword">default</span>: <span class="string">''</span></span><br><span class="line">      &#125;,</span><br><span class="line">      elFormItem: &#123;</span><br><span class="line">        <span class="keyword">default</span>: <span class="string">''</span></span><br><span class="line">      &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    props: &#123;</span><br><span class="line">      type: &#123;</span><br><span class="line">        type: <span class="built_in">String</span>,</span><br><span class="line">        <span class="keyword">default</span>: <span class="string">'default'</span></span><br><span class="line">      &#125;,</span><br><span class="line">      size: <span class="built_in">String</span>,</span><br><span class="line">      icon: &#123;</span><br><span class="line">        type: <span class="built_in">String</span>,</span><br><span class="line">        <span class="keyword">default</span>: <span class="string">''</span></span><br><span class="line">      &#125;,</span><br><span class="line">      nativeType: &#123;</span><br><span class="line">        type: <span class="built_in">String</span>,</span><br><span class="line">        <span class="keyword">default</span>: <span class="string">'button'</span></span><br><span class="line">      &#125;,</span><br><span class="line">      loading: <span class="built_in">Boolean</span>,</span><br><span class="line">      disabled: <span class="built_in">Boolean</span>,</span><br><span class="line">      plain: <span class="built_in">Boolean</span>,</span><br><span class="line">      autofocus: <span class="built_in">Boolean</span>,</span><br><span class="line">      round: <span class="built_in">Boolean</span>,</span><br><span class="line">      circle: <span class="built_in">Boolean</span></span><br><span class="line">    &#125;,</span><br><span class="line">    computed: &#123;</span><br><span class="line">      _elFormItemSize() &#123;</span><br><span class="line">        <span class="keyword">return</span> (<span class="keyword">this</span>.elFormItem || &#123;&#125;).elFormItemSize;</span><br><span class="line">      &#125;,</span><br><span class="line">      buttonSize() &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>.size || <span class="keyword">this</span>._elFormItemSize || (<span class="keyword">this</span>.$ELEMENT || &#123;&#125;).size;</span><br><span class="line">      &#125;,</span><br><span class="line">      buttonDisabled() &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>.disabled || (<span class="keyword">this</span>.elForm || &#123;&#125;).disabled;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    methods: &#123;</span><br><span class="line">      handleClick(evt) &#123;</span><br><span class="line">        <span class="keyword">this</span>.$emit(<span class="string">'click'</span>, evt);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;;</span><br><span class="line">&lt;<span class="regexp">/script&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight jsx"><table><tr><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">  &lt;button</span><br><span class="line">    <span class="class"><span class="keyword">class</span></span>=<span class="string">"el-button"</span></span><br><span class="line">    @click=<span class="string">"handleClick"</span></span><br><span class="line">    :disabled=<span class="string">"buttonDisabled || loading"</span></span><br><span class="line">    :autofocus=<span class="string">"autofocus"</span></span><br><span class="line">    :type=<span class="string">"nativeType"</span></span><br><span class="line">    :<span class="class"><span class="keyword">class</span></span>=<span class="string">"[</span></span><br><span class="line"><span class="string">      type ? 'el-button--' + type : '',</span></span><br><span class="line"><span class="string">      buttonSize ? 'el-button--' + buttonSize : '',</span></span><br><span class="line"><span class="string">      &#123;</span></span><br><span class="line"><span class="string">        'is-disabled': buttonDisabled,</span></span><br><span class="line"><span class="string">        'is-loading': loading,</span></span><br><span class="line"><span class="string">        'is-plain': plain,</span></span><br><span class="line"><span class="string">        'is-round': round,</span></span><br><span class="line"><span class="string">        'is-circle': circle</span></span><br><span class="line"><span class="string">      &#125;</span></span><br><span class="line"><span class="string">    ]"</span></span><br><span class="line">  &gt;</span><br><span class="line">    &lt;i <span class="class"><span class="keyword">class</span></span>=<span class="string">"el-icon-loading"</span> v-<span class="keyword">if</span>=<span class="string">"loading"</span>&gt;<span class="xml"><span class="tag">&lt;/<span class="name">i</span>&gt;</span></span></span><br><span class="line">    &lt;i :<span class="class"><span class="keyword">class</span></span>=<span class="string">"icon"</span> v-<span class="keyword">if</span>=<span class="string">"icon &amp;&amp; !loading"</span>&gt;<span class="xml"><span class="tag">&lt;/<span class="name">i</span>&gt;</span></span></span><br><span class="line">    &lt;span v-<span class="keyword">if</span>=<span class="string">"$slots.default"</span>&gt;<span class="xml"><span class="tag">&lt;<span class="name">slot</span>&gt;</span><span class="tag">&lt;/<span class="name">slot</span>&gt;</span></span><span class="xml"><span class="tag">&lt;/<span class="name">span</span>&gt;</span></span></span><br><span class="line">  &lt;<span class="regexp">/button&gt;</span></span><br><span class="line"><span class="regexp">&lt;/</span>template&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line">  <span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">    name: <span class="string">'ElButton'</span>,</span><br><span class="line">    inject: &#123;</span><br><span class="line">      elForm: &#123;</span><br><span class="line">        <span class="keyword">default</span>: <span class="string">''</span></span><br><span class="line">      &#125;,</span><br><span class="line">      elFormItem: &#123;</span><br><span class="line">        <span class="keyword">default</span>: <span class="string">''</span></span><br><span class="line">      &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    props: &#123;</span><br><span class="line">      type: &#123;</span><br><span class="line">        type: <span class="built_in">String</span>,</span><br><span class="line">        <span class="keyword">default</span>: <span class="string">'default'</span></span><br><span class="line">      &#125;,</span><br><span class="line">      size: <span class="built_in">String</span>,</span><br><span class="line">      icon: &#123;</span><br><span class="line">        type: <span class="built_in">String</span>,</span><br><span class="line">        <span class="keyword">default</span>: <span class="string">''</span></span><br><span class="line">      &#125;,</span><br><span class="line">      nativeType: &#123;</span><br><span class="line">        type: <span class="built_in">String</span>,</span><br><span class="line">        <span class="keyword">default</span>: <span class="string">'button'</span></span><br><span class="line">      &#125;,</span><br><span class="line">      loading: <span class="built_in">Boolean</span>,</span><br><span class="line">      disabled: <span class="built_in">Boolean</span>,</span><br><span class="line">      plain: <span class="built_in">Boolean</span>,</span><br><span class="line">      autofocus: <span class="built_in">Boolean</span>,</span><br><span class="line">      round: <span class="built_in">Boolean</span>,</span><br><span class="line">      circle: <span class="built_in">Boolean</span></span><br><span class="line">    &#125;,</span><br><span class="line">    computed: &#123;</span><br><span class="line">      _elFormItemSize() &#123;</span><br><span class="line">        <span class="keyword">return</span> (<span class="keyword">this</span>.elFormItem || &#123;&#125;).elFormItemSize;</span><br><span class="line">      &#125;,</span><br><span class="line">      buttonSize() &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>.size || <span class="keyword">this</span>._elFormItemSize || (<span class="keyword">this</span>.$ELEMENT || &#123;&#125;).size;</span><br><span class="line">      &#125;,</span><br><span class="line">      buttonDisabled() &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>.disabled || (<span class="keyword">this</span>.elForm || &#123;&#125;).disabled;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    methods: &#123;</span><br><span class="line">      handleClick(evt) &#123;</span><br><span class="line">        <span class="keyword">this</span>.$emit(<span class="string">'click'</span>, evt);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;;</span><br><span class="line">&lt;<span class="regexp">/script&gt;</span></span><br></pre></td></tr></table></figure>
         
           <p class="article-more-link">
             <a href="/2019/11/10/vue/element-button/#more">Read More</a>
@@ -145,7 +145,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://fourleafclove.github.io/2019/11/10/vue/element-button/" data-id="ck3sdpttx000s0oskhkpx7d6h" class="article-share-link">Teilen</a>
+      <a data-url="https://fourleafclove.github.io/2019/11/10/vue/element-button/" data-id="ck3tvklyu0025lwskuos9ikw6" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/element/">element</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/vue/">vue</a></li></ul>
@@ -193,7 +193,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://fourleafclove.github.io/2019/10/27/vue/element-layout/" data-id="ck3sdt206000y0osk53ghgt0t" class="article-share-link">Teilen</a>
+      <a data-url="https://fourleafclove.github.io/2019/10/27/vue/element-layout/" data-id="ck3tvklyr001zlwskddiobm9b" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/element/">element</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/vue/">vue</a></li></ul>
@@ -242,7 +242,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://fourleafclove.github.io/2019/10/16/devOps/docker/" data-id="ck3sd9gm4000e0oskz0epyrxu" class="article-share-link">Teilen</a>
+      <a data-url="https://fourleafclove.github.io/2019/10/16/devOps/docker/" data-id="ck3tvklye0015lwskh2ilf4bk" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/css/">css</a></li></ul>
@@ -296,7 +296,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://fourleafclove.github.io/2019/10/05/vue/vue3/" data-id="ck3sd2ega00060osk9fbu46cm" class="article-share-link">Teilen</a>
+      <a data-url="https://fourleafclove.github.io/2019/10/05/vue/vue3/" data-id="ck3tvklyv0028lwskkf7irigw" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/vue/">vue</a></li></ul>
@@ -343,7 +343,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://fourleafclove.github.io/2019/09/13/browser/层叠上下文/" data-id="ck3sd2eev00000osk72enl335" class="article-share-link">Teilen</a>
+      <a data-url="https://fourleafclove.github.io/2019/09/13/browser/层叠上下文/" data-id="ck3tvklyd0013lwsku4aya5t4" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/css/">css</a></li></ul>
@@ -382,7 +382,7 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p>button 是比较简单的组件</p>
-<figure class="highlight jsx"><table><tr><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">  &lt;button</span><br><span class="line">    <span class="class"><span class="keyword">class</span></span>=<span class="string">"el-button"</span></span><br><span class="line">    @click=<span class="string">"handleClick"</span></span><br><span class="line">    :disabled=<span class="string">"buttonDisabled || loading"</span></span><br><span class="line">    :autofocus=<span class="string">"autofocus"</span></span><br><span class="line">    :type=<span class="string">"nativeType"</span></span><br><span class="line">    :<span class="class"><span class="keyword">class</span></span>=<span class="string">"[</span></span><br><span class="line"><span class="string">      type ? 'el-button--' + type : '',</span></span><br><span class="line"><span class="string">      buttonSize ? 'el-button--' + buttonSize : '',</span></span><br><span class="line"><span class="string">      &#123;</span></span><br><span class="line"><span class="string">        'is-disabled': buttonDisabled,</span></span><br><span class="line"><span class="string">        'is-loading': loading,</span></span><br><span class="line"><span class="string">        'is-plain': plain,</span></span><br><span class="line"><span class="string">        'is-round': round,</span></span><br><span class="line"><span class="string">        'is-circle': circle</span></span><br><span class="line"><span class="string">      &#125;</span></span><br><span class="line"><span class="string">    ]"</span></span><br><span class="line">  &gt;</span><br><span class="line">    &lt;i <span class="class"><span class="keyword">class</span></span>=<span class="string">"el-icon-loading"</span> v-<span class="keyword">if</span>=<span class="string">"loading"</span>&gt;&lt;/i&gt;</span><br><span class="line">    &lt;i :<span class="class"><span class="keyword">class</span></span>=<span class="string">"icon"</span> v-<span class="keyword">if</span>=<span class="string">"icon &amp;&amp; !loading"</span>&gt;&lt;/i&gt;</span><br><span class="line">    &lt;span v-<span class="keyword">if</span>=<span class="string">"$slots.default"</span>&gt;&lt;slot&gt;&lt;/slot&gt;&lt;/span&gt;</span><br><span class="line">  &lt;<span class="regexp">/button&gt;</span></span><br><span class="line"><span class="regexp">&lt;/</span>template&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line">  <span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">    name: <span class="string">'ElButton'</span>,</span><br><span class="line">    inject: &#123;</span><br><span class="line">      elForm: &#123;</span><br><span class="line">        <span class="keyword">default</span>: <span class="string">''</span></span><br><span class="line">      &#125;,</span><br><span class="line">      elFormItem: &#123;</span><br><span class="line">        <span class="keyword">default</span>: <span class="string">''</span></span><br><span class="line">      &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    props: &#123;</span><br><span class="line">      type: &#123;</span><br><span class="line">        type: <span class="built_in">String</span>,</span><br><span class="line">        <span class="keyword">default</span>: <span class="string">'default'</span></span><br><span class="line">      &#125;,</span><br><span class="line">      size: <span class="built_in">String</span>,</span><br><span class="line">      icon: &#123;</span><br><span class="line">        type: <span class="built_in">String</span>,</span><br><span class="line">        <span class="keyword">default</span>: <span class="string">''</span></span><br><span class="line">      &#125;,</span><br><span class="line">      nativeType: &#123;</span><br><span class="line">        type: <span class="built_in">String</span>,</span><br><span class="line">        <span class="keyword">default</span>: <span class="string">'button'</span></span><br><span class="line">      &#125;,</span><br><span class="line">      loading: <span class="built_in">Boolean</span>,</span><br><span class="line">      disabled: <span class="built_in">Boolean</span>,</span><br><span class="line">      plain: <span class="built_in">Boolean</span>,</span><br><span class="line">      autofocus: <span class="built_in">Boolean</span>,</span><br><span class="line">      round: <span class="built_in">Boolean</span>,</span><br><span class="line">      circle: <span class="built_in">Boolean</span></span><br><span class="line">    &#125;,</span><br><span class="line">    computed: &#123;</span><br><span class="line">      _elFormItemSize() &#123;</span><br><span class="line">        <span class="keyword">return</span> (<span class="keyword">this</span>.elFormItem || &#123;&#125;).elFormItemSize;</span><br><span class="line">      &#125;,</span><br><span class="line">      buttonSize() &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>.size || <span class="keyword">this</span>._elFormItemSize || (<span class="keyword">this</span>.$ELEMENT || &#123;&#125;).size;</span><br><span class="line">      &#125;,</span><br><span class="line">      buttonDisabled() &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>.disabled || (<span class="keyword">this</span>.elForm || &#123;&#125;).disabled;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    methods: &#123;</span><br><span class="line">      handleClick(evt) &#123;</span><br><span class="line">        <span class="keyword">this</span>.$emit(<span class="string">'click'</span>, evt);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;;</span><br><span class="line">&lt;<span class="regexp">/script&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight jsx"><table><tr><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">  &lt;button</span><br><span class="line">    <span class="class"><span class="keyword">class</span></span>=<span class="string">"el-button"</span></span><br><span class="line">    @click=<span class="string">"handleClick"</span></span><br><span class="line">    :disabled=<span class="string">"buttonDisabled || loading"</span></span><br><span class="line">    :autofocus=<span class="string">"autofocus"</span></span><br><span class="line">    :type=<span class="string">"nativeType"</span></span><br><span class="line">    :<span class="class"><span class="keyword">class</span></span>=<span class="string">"[</span></span><br><span class="line"><span class="string">      type ? 'el-button--' + type : '',</span></span><br><span class="line"><span class="string">      buttonSize ? 'el-button--' + buttonSize : '',</span></span><br><span class="line"><span class="string">      &#123;</span></span><br><span class="line"><span class="string">        'is-disabled': buttonDisabled,</span></span><br><span class="line"><span class="string">        'is-loading': loading,</span></span><br><span class="line"><span class="string">        'is-plain': plain,</span></span><br><span class="line"><span class="string">        'is-round': round,</span></span><br><span class="line"><span class="string">        'is-circle': circle</span></span><br><span class="line"><span class="string">      &#125;</span></span><br><span class="line"><span class="string">    ]"</span></span><br><span class="line">  &gt;</span><br><span class="line">    &lt;i <span class="class"><span class="keyword">class</span></span>=<span class="string">"el-icon-loading"</span> v-<span class="keyword">if</span>=<span class="string">"loading"</span>&gt;<span class="xml"><span class="tag">&lt;/<span class="name">i</span>&gt;</span></span></span><br><span class="line">    &lt;i :<span class="class"><span class="keyword">class</span></span>=<span class="string">"icon"</span> v-<span class="keyword">if</span>=<span class="string">"icon &amp;&amp; !loading"</span>&gt;<span class="xml"><span class="tag">&lt;/<span class="name">i</span>&gt;</span></span></span><br><span class="line">    &lt;span v-<span class="keyword">if</span>=<span class="string">"$slots.default"</span>&gt;<span class="xml"><span class="tag">&lt;<span class="name">slot</span>&gt;</span><span class="tag">&lt;/<span class="name">slot</span>&gt;</span></span><span class="xml"><span class="tag">&lt;/<span class="name">span</span>&gt;</span></span></span><br><span class="line">  &lt;<span class="regexp">/button&gt;</span></span><br><span class="line"><span class="regexp">&lt;/</span>template&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line">  <span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">    name: <span class="string">'ElButton'</span>,</span><br><span class="line">    inject: &#123;</span><br><span class="line">      elForm: &#123;</span><br><span class="line">        <span class="keyword">default</span>: <span class="string">''</span></span><br><span class="line">      &#125;,</span><br><span class="line">      elFormItem: &#123;</span><br><span class="line">        <span class="keyword">default</span>: <span class="string">''</span></span><br><span class="line">      &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    props: &#123;</span><br><span class="line">      type: &#123;</span><br><span class="line">        type: <span class="built_in">String</span>,</span><br><span class="line">        <span class="keyword">default</span>: <span class="string">'default'</span></span><br><span class="line">      &#125;,</span><br><span class="line">      size: <span class="built_in">String</span>,</span><br><span class="line">      icon: &#123;</span><br><span class="line">        type: <span class="built_in">String</span>,</span><br><span class="line">        <span class="keyword">default</span>: <span class="string">''</span></span><br><span class="line">      &#125;,</span><br><span class="line">      nativeType: &#123;</span><br><span class="line">        type: <span class="built_in">String</span>,</span><br><span class="line">        <span class="keyword">default</span>: <span class="string">'button'</span></span><br><span class="line">      &#125;,</span><br><span class="line">      loading: <span class="built_in">Boolean</span>,</span><br><span class="line">      disabled: <span class="built_in">Boolean</span>,</span><br><span class="line">      plain: <span class="built_in">Boolean</span>,</span><br><span class="line">      autofocus: <span class="built_in">Boolean</span>,</span><br><span class="line">      round: <span class="built_in">Boolean</span>,</span><br><span class="line">      circle: <span class="built_in">Boolean</span></span><br><span class="line">    &#125;,</span><br><span class="line">    computed: &#123;</span><br><span class="line">      _elFormItemSize() &#123;</span><br><span class="line">        <span class="keyword">return</span> (<span class="keyword">this</span>.elFormItem || &#123;&#125;).elFormItemSize;</span><br><span class="line">      &#125;,</span><br><span class="line">      buttonSize() &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>.size || <span class="keyword">this</span>._elFormItemSize || (<span class="keyword">this</span>.$ELEMENT || &#123;&#125;).size;</span><br><span class="line">      &#125;,</span><br><span class="line">      buttonDisabled() &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>.disabled || (<span class="keyword">this</span>.elForm || &#123;&#125;).disabled;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    methods: &#123;</span><br><span class="line">      handleClick(evt) &#123;</span><br><span class="line">        <span class="keyword">this</span>.$emit(<span class="string">'click'</span>, evt);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;;</span><br><span class="line">&lt;<span class="regexp">/script&gt;</span></span><br></pre></td></tr></table></figure>
         
           <p class="article-more-link">
             <a href="/2019/09/10/js/puppeteer/#more">Read More</a>
@@ -391,7 +391,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://fourleafclove.github.io/2019/09/10/js/puppeteer/" data-id="ck3sdyiy700160oskyapj5twa" class="article-share-link">Teilen</a>
+      <a data-url="https://fourleafclove.github.io/2019/09/10/js/puppeteer/" data-id="ck3tvklyl001jlwsk9gtifwci" class="article-share-link">Share</a>
       
       
     </footer>
@@ -437,7 +437,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://fourleafclove.github.io/2019/09/01/css/BFC/" data-id="ck3sd2ef900010oskzj3jzxsv" class="article-share-link">Teilen</a>
+      <a data-url="https://fourleafclove.github.io/2019/09/01/css/BFC/" data-id="ck3tvklyc0010lwskakruyyhc" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/css/">css</a></li></ul>
@@ -484,7 +484,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://fourleafclove.github.io/2019/08/20/js/Javascript执行上下文和执行栈/" data-id="ck3qmnl7t0000agskk6uzeyul" class="article-share-link">Teilen</a>
+      <a data-url="https://fourleafclove.github.io/2019/08/20/js/Javascript执行上下文和执行栈/" data-id="ck3tvklyi001flwskp6p4yz21" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/">javascript</a></li></ul>
@@ -537,7 +537,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://fourleafclove.github.io/2018/01/03/IM/requestResponse/" data-id="ck3pojb5g0009nwskh9xr9i40" class="article-share-link">Teilen</a>
+      <a data-url="https://fourleafclove.github.io/2018/01/03/IM/requestResponse/" data-id="ck3tvklxw000alwskkmrbtrgs" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/IM/">IM</a></li></ul>
@@ -584,7 +584,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://fourleafclove.github.io/2017/12/16/IM/Electron开发小结/" data-id="ck3pojb5m000dnwsk60zbknrk" class="article-share-link">Teilen</a>
+      <a data-url="https://fourleafclove.github.io/2017/12/16/IM/Electron开发小结/" data-id="ck3tvklxv0009lwsk28kezngl" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/IM/">IM</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/electron/">electron</a></li></ul>
@@ -632,7 +632,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://fourleafclove.github.io/2017/12/06/css/iphoneX样式兼容/" data-id="ck3pojb5z000wnwske3fg0yb0" class="article-share-link">Teilen</a>
+      <a data-url="https://fourleafclove.github.io/2017/12/06/css/iphoneX样式兼容/" data-id="ck3tvklyg0018lwskolacvnmo" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/mobile/">mobile</a></li></ul>
@@ -680,7 +680,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://fourleafclove.github.io/2017/12/01/IM/融云消息体系架构/" data-id="ck3pojb5r000jnwsknk2ti3fw" class="article-share-link">Teilen</a>
+      <a data-url="https://fourleafclove.github.io/2017/12/01/IM/融云消息体系架构/" data-id="ck3tvkly0000flwskywhq7xgb" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/IM/">IM</a></li></ul>
@@ -729,7 +729,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://fourleafclove.github.io/2017/11/22/IM/图片预览实现拖动、缩放、旋转/" data-id="ck3pojb5i000anwskrtiky9lw" class="article-share-link">Teilen</a>
+      <a data-url="https://fourleafclove.github.io/2017/11/22/IM/图片预览实现拖动、缩放、旋转/" data-id="ck3tvklxz000dlwskbcwgyvrz" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/IM/">IM</a></li></ul>
@@ -781,7 +781,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://fourleafclove.github.io/2017/11/20/IM/文字和图片的复制/" data-id="ck3pojb5o000fnwskj1zzosso" class="article-share-link">Teilen</a>
+      <a data-url="https://fourleafclove.github.io/2017/11/20/IM/文字和图片的复制/" data-id="ck3tvkly2000jlwskf4xex10m" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/IM/">IM</a></li></ul>
@@ -830,7 +830,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://fourleafclove.github.io/2017/10/25/js/async与promise/" data-id="ck3pojb650014nwsk1f4mtbwl" class="article-share-link">Teilen</a>
+      <a data-url="https://fourleafclove.github.io/2017/10/25/js/async与promise/" data-id="ck3tvklyq001vlwskl6e2rp0o" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/">javascript</a></li></ul>
@@ -879,7 +879,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://fourleafclove.github.io/2017/10/14/browser/notification/" data-id="ck3pojb5t000mnwskouce5kfa" class="article-share-link">Teilen</a>
+      <a data-url="https://fourleafclove.github.io/2017/10/14/browser/notification/" data-id="ck3tvkly7000tlwsk919g9u31" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/H5/">H5</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/IM/">IM</a></li></ul>
@@ -928,7 +928,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://fourleafclove.github.io/2017/10/11/Commitizen/" data-id="ck3pojb4t0000nwsky4sx7osx" class="article-share-link">Teilen</a>
+      <a data-url="https://fourleafclove.github.io/2017/10/11/Commitizen/" data-id="ck3tvklxb0000lwskv0c57d1z" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/">git</a></li></ul>
@@ -975,7 +975,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://fourleafclove.github.io/2017/09/12/IM/scroll2/" data-id="ck3pojb5k000cnwskcjwv32nh" class="article-share-link">Teilen</a>
+      <a data-url="https://fourleafclove.github.io/2017/09/12/IM/scroll2/" data-id="ck3tvklxy000clwsksui8ps8d" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/IM/">IM</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/browser/">browser</a></li></ul>
@@ -1024,7 +1024,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://fourleafclove.github.io/2017/09/05/js/网络连接状态监测/" data-id="ck3pojb6a001fnwskgcsaxupl" class="article-share-link">Teilen</a>
+      <a data-url="https://fourleafclove.github.io/2017/09/05/js/网络连接状态监测/" data-id="ck3tvklyn001qlwskwjcm25eb" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/">javascript</a></li></ul>
@@ -1040,7 +1040,7 @@
 
   <nav id="page-nav">
     
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">weiter &raquo;</a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
   </nav>
 
 </section>
@@ -1049,7 +1049,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Kategorien</h3>
+    <h3 class="widget-title">Categories</h3>
     <div class="widget">
       <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/blog/">blog</a></li></ul>
     </div>
@@ -1078,7 +1078,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Archiv</h3>
+    <h3 class="widget-title">Archives</h3>
     <div class="widget">
       <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">November 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">October 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">September 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">August 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">October 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">August 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">July 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/01/">January 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">November 2015</a></li></ul>
     </div>
@@ -1088,7 +1088,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">letzter Beitrag</h3>
+    <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
         
@@ -1139,15 +1139,9 @@
 </nav>
     
 
-<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script src="//code.jquery.com/jquery-2.0.3.min.js"></script>
 
-
-  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
-  <script src="/fancybox/jquery.fancybox.pack.js"></script>
-
-
-<script src="/js/script.js"></script>
-
+ <link rel="stylesheet" href="/fancybox/jquery.fancybox.css"> <script src="/fancybox/jquery.fancybox.pack.js"></script>  <script src="/js/script.js"></script> 
 
 
   </div>

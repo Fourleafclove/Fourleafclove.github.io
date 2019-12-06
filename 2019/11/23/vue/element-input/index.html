@@ -14,7 +14,7 @@
 <meta property="og:url" content="https://fourleafclove.github.io/2019/11/23/vue/element-input/index.html">
 <meta property="og:site_name" content="Blog">
 <meta property="og:description" content="Element源码分析-Input">
-<meta property="og:updated_time" content="2019-12-05T07:18:17.290Z">
+<meta property="og:updated_time" content="2019-12-05T07:18:17.695Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Element源码分析-Input">
 <meta name="twitter:description" content="Element源码分析-Input">
@@ -55,7 +55,7 @@
         
           <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Suche"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
       </nav>
       <div id="search-form-wrap">
         <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://fourleafclove.github.io"></form>
@@ -91,13 +91,13 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p>首先来看一下 html 代码：</p>
-<figure class="highlight jsx"><table><tr><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">  &lt;div ...&gt;</span><br><span class="line">    &lt;template v-<span class="keyword">if</span>=<span class="string">"type !== 'textarea'"</span>&gt;</span><br><span class="line">      &lt;!-- 前置元素 --&gt;</span><br><span class="line">      &lt;div <span class="class"><span class="keyword">class</span></span>=<span class="string">"el-input-group__prepend"</span> v-<span class="keyword">if</span>=<span class="string">"$slots.prepend"</span>&gt;</span><br><span class="line">        &lt;slot name=<span class="string">"prepend"</span>&gt;&lt;/slot&gt;</span><br><span class="line">      &lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">      &lt;!--主体input--&gt;</span></span><br><span class="line"><span class="regexp">      &lt;input ...&gt;</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">      &lt;!-- 前置内容 --&gt;</span></span><br><span class="line"><span class="regexp">      &lt;span class="el-input__prefix" v-if="$slots.prefix || prefixIcon"&gt;</span></span><br><span class="line"><span class="regexp">       ...</span></span><br><span class="line"><span class="regexp">      &lt;/</span>span&gt;</span><br><span class="line">      &lt;!-- 后置内容 --&gt;</span><br><span class="line">      &lt;span</span><br><span class="line">        ...</span><br><span class="line">      &lt;<span class="regexp">/span&gt;</span></span><br><span class="line"><span class="regexp">      &lt;!-- 后置元素 --&gt;</span></span><br><span class="line"><span class="regexp">      &lt;div class="el-input-group__append" v-if="$slots.append"&gt;</span></span><br><span class="line"><span class="regexp">       ...</span></span><br><span class="line"><span class="regexp">      &lt;/</span>div&gt;</span><br><span class="line">    &lt;<span class="regexp">/template&gt;</span></span><br><span class="line"><span class="regexp">    &lt;textarea v-else&gt;</span></span><br><span class="line"><span class="regexp">    &lt;/</span>textarea&gt;</span><br><span class="line">  &lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">&lt;/</span>template&gt;</span><br></pre></td></tr></table></figure>
+<figure class="highlight jsx"><table><tr><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">  &lt;div ...&gt;</span><br><span class="line">    &lt;template v-<span class="keyword">if</span>=<span class="string">"type !== 'textarea'"</span>&gt;</span><br><span class="line">      &lt;!-- 前置元素 --&gt;</span><br><span class="line">      &lt;div <span class="class"><span class="keyword">class</span></span>=<span class="string">"el-input-group__prepend"</span> v-<span class="keyword">if</span>=<span class="string">"$slots.prepend"</span>&gt;</span><br><span class="line">        &lt;slot name=<span class="string">"prepend"</span>&gt;<span class="xml"><span class="tag">&lt;/<span class="name">slot</span>&gt;</span></span></span><br><span class="line">      &lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">      &lt;!--主体input--&gt;</span></span><br><span class="line"><span class="regexp">      &lt;input ...&gt;</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">      &lt;!-- 前置内容 --&gt;</span></span><br><span class="line"><span class="regexp">      &lt;span class="el-input__prefix" v-if="$slots.prefix || prefixIcon"&gt;</span></span><br><span class="line"><span class="regexp">       ...</span></span><br><span class="line"><span class="regexp">      &lt;/</span>span&gt;</span><br><span class="line">      &lt;!-- 后置内容 --&gt;</span><br><span class="line">      &lt;span</span><br><span class="line">        ...</span><br><span class="line">      &lt;<span class="regexp">/span&gt;</span></span><br><span class="line"><span class="regexp">      &lt;!-- 后置元素 --&gt;</span></span><br><span class="line"><span class="regexp">      &lt;div class="el-input-group__append" v-if="$slots.append"&gt;</span></span><br><span class="line"><span class="regexp">       ...</span></span><br><span class="line"><span class="regexp">      &lt;/</span>div&gt;</span><br><span class="line">    &lt;<span class="regexp">/template&gt;</span></span><br><span class="line"><span class="regexp">    &lt;textarea v-else&gt;</span></span><br><span class="line"><span class="regexp">    &lt;/</span>textarea&gt;</span><br><span class="line">  &lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">&lt;/</span>template&gt;</span><br></pre></td></tr></table></figure>
 <a id="more"></a>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://fourleafclove.github.io/2019/11/23/vue/element-input/" data-id="ck3sdjiiw000k0osky0029maw" class="article-share-link">Teilen</a>
+      <a data-url="https://fourleafclove.github.io/2019/11/23/vue/element-input/" data-id="ck3tvklyt0022lwski664y80v" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/element/">element</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/vue/">vue</a></li></ul>
@@ -110,7 +110,7 @@
   
   
     <a href="/2019/11/10/vue/element-button/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Älter</strong>
+      <strong class="article-nav-caption">Older</strong>
       <div class="article-nav-title">Element源码分析-Button</div>
     </a>
   
@@ -125,7 +125,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Kategorien</h3>
+    <h3 class="widget-title">Categories</h3>
     <div class="widget">
       <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/blog/">blog</a></li></ul>
     </div>
@@ -154,7 +154,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Archiv</h3>
+    <h3 class="widget-title">Archives</h3>
     <div class="widget">
       <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">November 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">October 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">September 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">August 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">October 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">August 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">July 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/01/">January 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">November 2015</a></li></ul>
     </div>
@@ -164,7 +164,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">letzter Beitrag</h3>
+    <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
         
@@ -215,15 +215,9 @@
 </nav>
     
 
-<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script src="//code.jquery.com/jquery-2.0.3.min.js"></script>
 
-
-  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
-  <script src="/fancybox/jquery.fancybox.pack.js"></script>
-
-
-<script src="/js/script.js"></script>
-
+ <link rel="stylesheet" href="/fancybox/jquery.fancybox.css"> <script src="/fancybox/jquery.fancybox.pack.js"></script>  <script src="/js/script.js"></script> 
 
 
   </div>

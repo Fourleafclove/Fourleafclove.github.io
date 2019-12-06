@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>融云消息体系架构 | Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="融云消息体系架构">
+<meta name="keywords" content="IM">
+<meta property="og:type" content="article">
+<meta property="og:title" content="融云消息体系架构">
+<meta property="og:url" content="https://fourleafclove.github.io/2017/12/01/IM/融云消息体系架构/index.html">
+<meta property="og:site_name" content="Blog">
+<meta property="og:description" content="融云消息体系架构">
+<meta property="og:image" content="https://ws3.sinaimg.cn/large/006tNc79gy1fmr54bvt00j318g0p3wh9.jpg">
+<meta property="og:updated_time" content="2019-12-03T09:45:40.241Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="融云消息体系架构">
+<meta name="twitter:description" content="融云消息体系架构">
+<meta name="twitter:image" content="https://ws3.sinaimg.cn/large/006tNc79gy1fmr54bvt00j318g0p3wh9.jpg">
+  
+    <link rel="alternate" href="/atom.xml" title="Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Blog</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Suche"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://fourleafclove.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-IM/融云消息体系架构" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/12/01/IM/融云消息体系架构/" class="article-date">
+  <time datetime="2017-11-30T16:00:00.000Z" itemprop="datePublished">2017-12-01</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/blog/">blog</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      融云消息体系架构
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>海马汇的即时通讯(IM)模块的开发依赖于第三方也就是融云提供的消息服务。由他们的API服务器、IM服务器支持基础的消息通讯，我们在提供客户端的ios、android、web SDK的基础上，根据项目具体需求进行二次开发</p>
+<p>这篇文章主要分析一下整个融云的消息服务体系架构，弄明白各个服务器、客户端之间究竟是怎样协同工作的，数据流是怎么样跑起来的，也算是做一个阶段性的项目总结。</p>
+<a id="more"></a>
+<p>在没有弄懂整个流程之前，我其实一直以为融云只需要提供一台服务器，各个客户端连上这台服务器之后根据用户id之类的就可以自由地互相通讯了。初步研究之后才发现，整个系统远没这么简单，要复杂得多。</p>
+<p>首先，需要的服务器不是一台而是三台，分别是我们自己的应用服务器(App Server)、融云的API服务器(RongCloud API Server)、融云的IM服务器(RongCloud IM Server)：</p>
+<p><img src="https://ws3.sinaimg.cn/large/006tNc79gy1fmr54bvt00j318g0p3wh9.jpg" alt=""></p>
+<p>任务最繁忙的，也是大家普遍都能想到的是IM服务器，它负责根据接收、发送各类消息.</p>
+<p>好比一个物流公司的转运中心，接收所有客户端发出的消息，并确保消息的接收方上线时把消息准确推送。</p>
+<p>现实中我们的每件快递都有自己的快递单号，上面有发送人、发送地址、收件地址等等信息，有了这些信息才能保证快递准确送达。</p>
+<p>消息推送也是一样的道理，每个用户在同一套IM环境中都有自己的唯一id，每条消息体都会有发送方id(senderUserId)和接收方id(targetId)两条字段，IM服务器根据这两条字段来判断消息转发路径。</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">//文本类型消息体结构</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="string">"content"</span>: &#123;</span><br><span class="line">        <span class="string">"messageName"</span>: <span class="string">"TextMessage"</span>,</span><br><span class="line">        <span class="string">"content"</span>: <span class="string">"Hi"</span>,</span><br><span class="line">        <span class="string">"extra"</span>: <span class="string">"&#123;\"key\":\"value\", \"key2\" : 12, \"key3\":true&#125;"</span>,</span><br><span class="line">        <span class="string">"user"</span>: &#123;</span><br><span class="line">            <span class="string">"id"</span>: <span class="string">"this-is-a-test-id"</span>,</span><br><span class="line">            <span class="string">"name"</span>: <span class="string">"张三"</span>,</span><br><span class="line">            <span class="string">"portrait"</span>: <span class="string">"http://rongcloud.cn/images/newVersion/log_wx.png"</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="string">"conversationType"</span>: <span class="number">1</span>,</span><br><span class="line">    <span class="string">"objectName"</span>: <span class="string">"RC:TxtMsg"</span>,</span><br><span class="line">    <span class="string">"messageDirection"</span>: <span class="number">1</span>,</span><br><span class="line">    <span class="string">"messageId"</span>: <span class="number">2</span>,</span><br><span class="line">    <span class="string">"senderUserId"</span>: <span class="string">"user10"</span>,</span><br><span class="line">    <span class="string">"sentStatus"</span>: <span class="number">30</span>,</span><br><span class="line">    <span class="string">"sentTime"</span>: <span class="number">1512494913653</span>,</span><br><span class="line">    <span class="string">"targetId"</span>: <span class="string">"user9"</span>,</span><br><span class="line">    <span class="string">"messageType"</span>: <span class="string">"TextMessage"</span>,</span><br><span class="line">    <span class="string">"messageUId"</span>: <span class="string">"5G2F-E6OE-K43A-D3EE"</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>然而要想让IM服务器正常工作，链接它的客户端必须先进行一次身份验证，表明使用权限并区分IM应用环境，这就用到了应用服务器和API服务器。<br>要想使用融云的服务，必须在融云后台注册并新建应用环境，接着得到该应用的appkey和appsecret。API服务器负责通过appkey、appsecret、用户Id返回一个该用户的融云token，客户端在使用该token链接IM服务器就能使用消息服务了。而获取融云token的过程不能直接通过客户端发起，因为这样必须把appkey和appsecret存储在客户端，这样有可能造成信息泄露，因此请求token的过程要由应用服务器发起。</p>
+<p>应用服务器除了获取融云token这一功能外，还负责存储群组信息、发起自定义消息等一些非通用功能，这些功能往往依赖项目需求，所以融云并没有直接支持，而是提供了一系列的接口，需要后端再次开发部署。</p>
+<p>在客户端，融云提供了各种平台的sdk，封装了基于socket的消息传输机制。我们开发者不太需要关心内部的具体实现，只要根据sdk暴露出来的发送、接收消息等方法对消息体进行数据处理、显示、更新就可以了</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 设置接收消息的监听器。</span></span><br><span class="line"><span class="comment"> * @param &#123;object&#125; listener  接收消息的监听器</span></span><br><span class="line"><span class="comment"> * @example</span></span><br><span class="line"><span class="comment"> * RongIMClient.getInstance().setOnReceiveMessageListener(&#123;</span></span><br><span class="line"><span class="comment"> * onReceived:function(message)&#123;</span></span><br><span class="line"><span class="comment"> * //message 为具体的消息对象</span></span><br><span class="line"><span class="comment"> *  &#125;</span></span><br><span class="line"><span class="comment"> * &#125;);</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line">RongIMClient.setOnReceiveMessageListener = <span class="function"><span class="keyword">function</span>(<span class="params">listener</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (RongIMClient.bridge) &#123;</span><br><span class="line">    RongIMClient.bridge.setListener(listener);</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    RongIMClient._memoryStore.listenerList.push(listener);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>这就是融云最核心的消息传输机制，理解整个架构是进行后续开发的基础，开发的主要工作就在于处理各种类型的消息并确保前端本地与服务端的数据同步、不同客户端(web、手机)之间的数据同步</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://fourleafclove.github.io/2017/12/01/IM/融云消息体系架构/" data-id="ck3pojb5r000jnwsknk2ti3fw" class="article-share-link">Teilen</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/IM/">IM</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2017/12/06/css/iphoneX样式兼容/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Neuer</strong>
+      <div class="article-nav-title">
+        
+          iPhone X移动端样式适配
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/11/22/IM/图片预览实现拖动、缩放、旋转/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Älter</strong>
+      <div class="article-nav-title">图片预览实现拖动、缩放、旋转</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Kategorien</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/blog/">blog</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/H5/">H5</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/IM/">IM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/angular/">angular</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/browser/">browser</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/">css</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/electron/">electron</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/element/">element</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/font/">font</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javascript/">javascript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/markdown/">markdown</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mobile/">mobile</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vue/">vue</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/H5/" style="font-size: 10px;">H5</a> <a href="/tags/IM/" style="font-size: 20px;">IM</a> <a href="/tags/angular/" style="font-size: 10px;">angular</a> <a href="/tags/browser/" style="font-size: 12px;">browser</a> <a href="/tags/css/" style="font-size: 20px;">css</a> <a href="/tags/electron/" style="font-size: 10px;">electron</a> <a href="/tags/element/" style="font-size: 14px;">element</a> <a href="/tags/font/" style="font-size: 12px;">font</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/javascript/" style="font-size: 18px;">javascript</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/mobile/" style="font-size: 10px;">mobile</a> <a href="/tags/vue/" style="font-size: 16px;">vue</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archiv</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">November 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">October 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">September 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">August 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">October 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">August 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">July 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/01/">January 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">November 2015</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">letzter Beitrag</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2019/11/23/vue/element-input/">Element源码分析-Input</a>
+          </li>
+        
+          <li>
+            <a href="/2019/11/10/vue/element-button/">Element源码分析-Button</a>
+          </li>
+        
+          <li>
+            <a href="/2019/10/27/vue/element-layout/">Element源码分析-Layout</a>
+          </li>
+        
+          <li>
+            <a href="/2019/10/16/devOps/docker/">Docker部署一个spa应用</a>
+          </li>
+        
+          <li>
+            <a href="/2019/10/05/vue/vue3/">Vue3 中的数据侦测</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2019 FLC<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>

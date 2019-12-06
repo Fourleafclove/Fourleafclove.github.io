@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>滚动条禁用边缘回弹 | Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="滚动条禁用边缘回弹">
+<meta name="keywords" content="IM,browser">
+<meta property="og:type" content="article">
+<meta property="og:title" content="滚动条禁用边缘回弹">
+<meta property="og:url" content="https://fourleafclove.github.io/2017/09/12/IM/scroll2/index.html">
+<meta property="og:site_name" content="Blog">
+<meta property="og:description" content="滚动条禁用边缘回弹">
+<meta property="og:updated_time" content="2019-12-03T09:45:40.241Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="滚动条禁用边缘回弹">
+<meta name="twitter:description" content="滚动条禁用边缘回弹">
+  
+    <link rel="alternate" href="/atom.xml" title="Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Blog</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Suche"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://fourleafclove.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-IM/scroll2" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/09/12/IM/scroll2/" class="article-date">
+  <time datetime="2017-09-11T16:00:00.000Z" itemprop="datePublished">2017-09-12</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/blog/">blog</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      滚动条禁用边缘回弹
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>webkit内核浏览器比如chrome、safari在处理页面滚动操作时会默认增加一个边缘回弹效果，本意是让人机交互更流畅，不至于出现界面突然静止的情况。但这个效果在electron页面里面却不太好，因为这样的话把鼠标放在窗口里滚动，即使上下没有滚动的内容，web窗口也会跟着上下抖，显得整个应用不那么“原生”。</p>
+<a id="more"></a>
+<p>我们既然用要用web做桌面客户端，模仿也要模仿得像一点，所以得想办法把这个效果禁掉，让页面在它应该待的地方待着，同时还得注意不要影响其他页面正常的滚动。</p>
+<p>代码如下：</p>
+<figure class="highlight typescript"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getDirection</span>(<span class="params">ev: <span class="built_in">any</span></span>) </span>&#123;<span class="comment">//true:下 false:上</span></span><br><span class="line">        <span class="keyword">return</span> ev.originalEvent.detail ? ev.originalEvent.detail &gt; <span class="number">0</span> : ev.originalEvent.wheelDelta &lt; <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">bindScroll</span>(<span class="params">ev: <span class="built_in">any</span></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">var</span> _top = $(<span class="keyword">this</span>).scrollTop();</span><br><span class="line">        <span class="keyword">var</span> direction = getDirection(ev);</span><br><span class="line">        <span class="keyword">var</span> viewHeight = $(<span class="keyword">this</span>).outerHeight();</span><br><span class="line">        <span class="keyword">var</span> height = $(<span class="keyword">this</span>)[<span class="number">0</span>].scrollHeight;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (_top == <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="keyword">if</span> (!direction) &#123;</span><br><span class="line">                ev.preventDefault();</span><br><span class="line">            &#125; <span class="keyword">else</span> <span class="keyword">if</span> ((viewHeight + _top) &lt; height) &#123;</span><br><span class="line">                ev.stopPropagation();</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                ev.preventDefault();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">if</span> ((viewHeight + _top) &lt; height) &#123;</span><br><span class="line">                ev.stopPropagation();</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="keyword">if</span> (direction) &#123;</span><br><span class="line">                    ev.preventDefault();</span><br><span class="line">                &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                    ev.stopPropagation();</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">var</span> listScroll = [</span><br><span class="line">        <span class="string">"body"</span>,</span><br><span class="line">        <span class="string">".layui-layer-shade"</span>,</span><br><span class="line">        <span class="string">".selected-items-pad"</span>,</span><br><span class="line">        <span class="string">"#functionBox"</span>,</span><br><span class="line">        <span class="string">"#chatArea"</span>,</span><br><span class="line">        <span class="string">"#Messages"</span>,</span><br><span class="line">        <span class="string">"#message-content"</span>,</span><br><span class="line">        <span class="string">".main"</span>,</span><br><span class="line">        <span class="string">".info-body"</span>,</span><br><span class="line">        <span class="string">".workspace-body"</span>,</span><br><span class="line">        <span class="string">".bulletin-content"</span>,</span><br><span class="line">        <span class="string">".groupInfo-scroll"</span>,</span><br><span class="line">        <span class="string">".chatArea"</span>,</span><br><span class="line">        <span class="string">".readReceipt-list"</span>,</span><br><span class="line">        <span class="string">".communicateList"</span>,</span><br><span class="line">        <span class="string">".update-detail-content"</span>,</span><br><span class="line">        <span class="string">".temp-contactList-search"</span>,</span><br><span class="line">        <span class="string">".temp-contactList"</span>,</span><br><span class="line">        <span class="string">".selected-items"</span>,</span><br><span class="line">        <span class="string">".arobase"</span>];</span><br><span class="line">    <span class="keyword">var</span> len = listScroll.length;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; len; i++) &#123;</span><br><span class="line">        <span class="keyword">if</span> (listScroll[i] == <span class="string">'body'</span>) &#123;</span><br><span class="line">            $(<span class="string">"body"</span>).on(<span class="string">'mousewheel'</span>, bindScroll);</span><br><span class="line">        &#125;</span><br><span class="line">        $(<span class="built_in">document</span>.body).on(<span class="string">'mousewheel'</span>, listScroll[i], bindScroll);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<p>使用时要把可以滚动的区域选择符放在<code>listScroll</code>里</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://fourleafclove.github.io/2017/09/12/IM/scroll2/" data-id="ck3pojb5k000cnwskcjwv32nh" class="article-share-link">Teilen</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/IM/">IM</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/browser/">browser</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2017/10/11/Commitizen/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Neuer</strong>
+      <div class="article-nav-title">
+        
+          Commit message规范和Commitizen使用
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/09/05/js/网络连接状态监测/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Älter</strong>
+      <div class="article-nav-title">网络连接状态监测</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Kategorien</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/blog/">blog</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/H5/">H5</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/IM/">IM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/angular/">angular</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/browser/">browser</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/">css</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/electron/">electron</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/element/">element</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/font/">font</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javascript/">javascript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/markdown/">markdown</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mobile/">mobile</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vue/">vue</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/H5/" style="font-size: 10px;">H5</a> <a href="/tags/IM/" style="font-size: 20px;">IM</a> <a href="/tags/angular/" style="font-size: 10px;">angular</a> <a href="/tags/browser/" style="font-size: 12px;">browser</a> <a href="/tags/css/" style="font-size: 20px;">css</a> <a href="/tags/electron/" style="font-size: 10px;">electron</a> <a href="/tags/element/" style="font-size: 14px;">element</a> <a href="/tags/font/" style="font-size: 12px;">font</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/javascript/" style="font-size: 18px;">javascript</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/mobile/" style="font-size: 10px;">mobile</a> <a href="/tags/vue/" style="font-size: 16px;">vue</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archiv</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">November 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">October 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">September 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">August 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">October 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">August 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">July 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/01/">January 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">November 2015</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">letzter Beitrag</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2019/11/23/vue/element-input/">Element源码分析-Input</a>
+          </li>
+        
+          <li>
+            <a href="/2019/11/10/vue/element-button/">Element源码分析-Button</a>
+          </li>
+        
+          <li>
+            <a href="/2019/10/27/vue/element-layout/">Element源码分析-Layout</a>
+          </li>
+        
+          <li>
+            <a href="/2019/10/16/devOps/docker/">Docker部署一个spa应用</a>
+          </li>
+        
+          <li>
+            <a href="/2019/10/05/vue/vue3/">Vue3 中的数据侦测</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2019 FLC<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>

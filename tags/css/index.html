@@ -1,261 +1,330 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html>
 <head>
-    <meta charset="UTF-8" />
+  <meta charset="utf-8">
+  
 
-    
-
-    
-
-    <title>Mot-clé: css | Blog</title>
-    <meta name="author" content="FLC" />
-    <meta name="version" content="1.0.0" />
-    <meta name="keywords" content="" />
-    <meta name="description" content="" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no" />
-    <meta name="baidu-site-verification" content="F0CXvmUgA9" />
-
-    
-    
-
-    <link rel="stylesheet" href="/css/style.css">
+  
+  <title>Tag: css | Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta property="og:type" content="website">
+<meta property="og:title" content="Blog">
+<meta property="og:url" content="https://fourleafclove.github.io/tags/css/index.html">
+<meta property="og:site_name" content="Blog">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Blog">
+  
+    <link rel="alternate" href="/atom.xml" title="Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
 </head>
+
 <body>
-
-    <div class="app">
-        <header class="header clearfix">
-    <div id="nav" class="nav">
-    <button id="open-panel" class="open-panel"><i class="icon-library"></i></button>
-
-    <nav class="nav-inner">
-
-        
-        
-
-    </nav>
-</div>
-
-    <aside id="aside" class="aside">
-    <div id="aside-mask" class="aside-mask"></div>
-    <div id="aside-inner" class="aside-inner">
-        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit"><i class="icon-search-stroke"></i></button><input type="hidden" name="sitesearch" value="https://fourleafclove.github.io"></form>
-
-        
-        
-        
-        
-        <div class="author-meta">
-            <div class="author-avatar">
-                <a href="/">
-                    <img src="/images/avatar.jpg" title="FLC">
-                </a>
-            </div>
-            <div class="author-name"></div>
-            <div class="author-work"></div>
-            <div class="author-location">
-                <i class="icon-location vm"></i>
-                <span class="vm"></span>
-            </div>
-            <div class="author-thread-wrap">
-                <div class="author-threads clearfix">
-                    <!-- <a class="thread-item" href="https://github.com/sanonz" target="_blank"><i class="icon-github"></i></a>
-                    <a class="thread-item" href="http://m.timegoto.com/user/1" target="_blank"><i class="icon-circle-more"></i></a>
-                    <a class="thread-item" href="https://twitter.com/sanonze" target="_blank"><i class="icon-twitter"></i></a> -->
-                </div>
-            </div>
-        </div>
-        
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Blog</a>
+      </h1>
+      
     </div>
-</aside>
-
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Suche"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://fourleafclove.github.io"></form>
+      </div>
+    </div>
+  </div>
 </header>
-
-        <div id="content" class="content">
-    <article class="article" itemscope itemprop="blogPost">
+      <div class="outer">
+        <section id="main">
+  
+  
     
-    <header class="article-header">
-        
-        <h1 itemprop="name">
-            <a href="/2017/08/22/js/图片预加载/">图片预加载的几种方式</a>
-        </h1>
-        
-        <div class="article-meta clearfix">
-            <a class="article-date" href="/2017/08/22/js/图片预加载/">
     
-    <i class="icon-calendar"></i>
-    
-    <time datetime="2017-08-21T16:00:00.000Z" itemprop="datePublished">2017-08-22</time>
-</a>
-
-            
-<div class="article-tag-list">
-    <i class="icon-tag"></i>
-    <a class="article-tag-link" href="/tags/css/">css</a>, <a class="article-tag-link" href="/tags/javascript/">javascript</a>
-</div>
-
-
+      
+      
+      <section class="archives-wrap">
+        <div class="archive-year-wrap">
+          <a href="/archives/2019" class="archive-year">2019</a>
         </div>
-    </header>
+        <div class="archives">
     
-    <section class="article-body markdown-body">
-        
-        <p>在开发的过程，我们会经常遇到这样的要求，当鼠标点击的时候，更改图标的背景。如果没有进行图片预加载的话，会出现闪烁。而且在网络状态较差的情况下，甚至会出现按钮忽然消失、过阵子才加载出来的情况，这是无法容忍的。<br> <img src="https://ws3.sinaimg.cn/large/006tNc79gy1fmt1nm9lfuj304e0o80st.jpg" width="60"><br>一种解决思路是把icon做成雪碧图，另一种比较简单通用的就是图片预加载了</p>
-        
-        
-    </section>
-</article>
-
-
-    <article class="article" itemscope itemprop="blogPost">
-    
-    <header class="article-header">
-        
-        <h1 itemprop="name">
-            <a href="/2017/08/04/browser/font2/">深入探究font(2)</a>
-        </h1>
-        
-        <div class="article-meta clearfix">
-            <a class="article-date" href="/2017/08/04/browser/font2/">
-    
-    <i class="icon-calendar"></i>
-    
-    <time datetime="2017-08-03T16:00:00.000Z" itemprop="datePublished">2017-08-04</time>
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      <a href="/2019/10/16/devOps/docker/" class="archive-article-date">
+  <time datetime="2019-10-15T16:00:00.000Z" itemprop="datePublished">Oct 16</time>
 </a>
+      
+  
+    <h1 itemprop="name">
+      <a class="archive-article-title" href="/2019/10/16/devOps/docker/">Docker部署一个spa应用</a>
+    </h1>
+  
 
-            
-<div class="article-tag-list">
-    <i class="icon-tag"></i>
-    <a class="article-tag-link" href="/tags/css/">css</a>, <a class="article-tag-link" href="/tags/font/">font</a>
-</div>
-
-
-        </div>
     </header>
-    
-    <section class="article-body markdown-body">
-        
-        <h3 id="字体样式"><a href="#字体样式" class="headerlink" title="字体样式"></a>字体样式</h3><p>常见的字体样式分为</p>
-<pre><code>正常（Normal）
-
-粗体（Bold）：会让字体颜色更深、更粗。
-
-斜体（Italic）：用于在当前段落中强调某段文字。
-</code></pre><p>不同的字体样式意味着不同版本的字体库。</p>
-        
-        
-    </section>
+  </div>
 </article>
-
-
-    <article class="article" itemscope itemprop="blogPost">
+  
     
-    <header class="article-header">
-        
-        <h1 itemprop="name">
-            <a href="/2017/08/02/browser/font1/">深入探究font(1)</a>
-        </h1>
-        
-        <div class="article-meta clearfix">
-            <a class="article-date" href="/2017/08/02/browser/font1/">
     
-    <i class="icon-calendar"></i>
-    
-    <time datetime="2017-08-01T16:00:00.000Z" itemprop="datePublished">2017-08-02</time>
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      <a href="/2019/09/13/browser/层叠上下文/" class="archive-article-date">
+  <time datetime="2019-09-12T16:00:00.000Z" itemprop="datePublished">Sep 13</time>
 </a>
+      
+  
+    <h1 itemprop="name">
+      <a class="archive-article-title" href="/2019/09/13/browser/层叠上下文/">层叠上下文、层叠等级、层叠顺序</a>
+    </h1>
+  
 
-            
-<div class="article-tag-list">
-    <i class="icon-tag"></i>
-    <a class="article-tag-link" href="/tags/css/">css</a>, <a class="article-tag-link" href="/tags/font/">font</a>
-</div>
-
-
-        </div>
     </header>
-    
-    <section class="article-body markdown-body">
-        
-        <h3 id="字体类型"><a href="#字体类型" class="headerlink" title="字体类型"></a>字体类型</h3><h4 id="1-衬线体（Serif）"><a href="#1-衬线体（Serif）" class="headerlink" title="1. 衬线体（Serif）"></a>1. 衬线体（Serif）</h4><p>衬线是笔画末端的装饰部分，用于更清晰地标明笔触末端，提高辨识率从而提高阅读速度。另外衬线字体感觉会更正统。<br>下图红色部分就是衬线。</p>
-<p><img src="https://ws4.sinaimg.cn/large/006tKfTcgy1fncmvri0rej305t01h3yb.jpg" width="180"></p>
-<h4 id="2-无衬线体-非衬线体（Sans-serif）"><a href="#2-无衬线体-非衬线体（Sans-serif）" class="headerlink" title="2. 无衬线体/非衬线体（Sans-serif）"></a>2. 无衬线体/非衬线体（Sans-serif）</h4><p><img src="https://ws2.sinaimg.cn/large/006tKfTcgy1fncmy4yg1yj305t01nwea.jpg" width="180"></p>
-<blockquote>
-<p>10px~12px的衬线字体在屏幕下难以辨认，因此网页中常用无衬线字体而非衬线字体。</p>
-</blockquote>
-        
-        
-    </section>
+  </div>
 </article>
-
-
-    <article class="article" itemscope itemprop="blogPost">
+  
     
-    <header class="article-header">
-        
-        <h1 itemprop="name">
-            <a href="/2017/07/26/browser/scroll/">自定义webkit内核浏览器滚动条样式</a>
-        </h1>
-        
-        <div class="article-meta clearfix">
-            <a class="article-date" href="/2017/07/26/browser/scroll/">
     
-    <i class="icon-calendar"></i>
-    
-    <time datetime="2017-07-25T16:00:00.000Z" itemprop="datePublished">2017-07-26</time>
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      <a href="/2019/09/01/css/BFC/" class="archive-article-date">
+  <time datetime="2019-08-31T16:00:00.000Z" itemprop="datePublished">Sep 1</time>
 </a>
+      
+  
+    <h1 itemprop="name">
+      <a class="archive-article-title" href="/2019/09/01/css/BFC/">BFC相关(Block Formatting Context)</a>
+    </h1>
+  
 
-            
-<div class="article-tag-list">
-    <i class="icon-tag"></i>
-    <a class="article-tag-link" href="/tags/browser/">browser</a>, <a class="article-tag-link" href="/tags/css/">css</a>
-</div>
-
-
-        </div>
     </header>
-    
-    <section class="article-body markdown-body">
-        
-        <p>在客户端IM中，web部分的内容统一由electron内置的chromium浏览器内核负责渲染和展示，在开发过程中并不需要考虑太多操作系统的差异。然而chromium在Mac和windows上还是会有不同的内置样式，最为直观的就是滚动条了</p>
-        
-        
-    </section>
+  </div>
 </article>
+  
+    
+    
+      
+        </div></section>
+      
+      
+      <section class="archives-wrap">
+        <div class="archive-year-wrap">
+          <a href="/archives/2017" class="archive-year">2017</a>
+        </div>
+        <div class="archives">
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      <a href="/2017/08/22/js/图片预加载/" class="archive-article-date">
+  <time datetime="2017-08-21T16:00:00.000Z" itemprop="datePublished">Aug 22</time>
+</a>
+      
+  
+    <h1 itemprop="name">
+      <a class="archive-article-title" href="/2017/08/22/js/图片预加载/">图片预加载的几种方式</a>
+    </h1>
+  
+
+    </header>
+  </div>
+</article>
+  
+    
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      <a href="/2017/08/04/browser/font2/" class="archive-article-date">
+  <time datetime="2017-08-03T16:00:00.000Z" itemprop="datePublished">Aug 4</time>
+</a>
+      
+  
+    <h1 itemprop="name">
+      <a class="archive-article-title" href="/2017/08/04/browser/font2/">深入探究font(2)</a>
+    </h1>
+  
+
+    </header>
+  </div>
+</article>
+  
+    
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      <a href="/2017/08/02/browser/font1/" class="archive-article-date">
+  <time datetime="2017-08-01T16:00:00.000Z" itemprop="datePublished">Aug 2</time>
+</a>
+      
+  
+    <h1 itemprop="name">
+      <a class="archive-article-title" href="/2017/08/02/browser/font1/">深入探究font(1)</a>
+    </h1>
+  
+
+    </header>
+  </div>
+</article>
+  
+    
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      <a href="/2017/07/26/browser/scroll/" class="archive-article-date">
+  <time datetime="2017-07-25T16:00:00.000Z" itemprop="datePublished">Jul 26</time>
+</a>
+      
+  
+    <h1 itemprop="name">
+      <a class="archive-article-title" href="/2017/07/26/browser/scroll/">自定义webkit内核浏览器滚动条样式</a>
+    </h1>
+  
+
+    </header>
+  </div>
+</article>
+  
+  
+    </div></section>
+  
 
 
-
-
-
-</div>
-        <footer class="footer">
-    Propulsé by <a href="http://hexo.io/" target="_blank">Hexo</a>, Theme by <a href="https://github.com/sanonz/hexo-theme-concise" target="_blank">Concise</a>
-</footer>
-
-
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Kategorien</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/blog/">blog</a></li></ul>
     </div>
+  </div>
 
-    <script type="text/javascript" src="https://cdn.bootcss.com/jquery/3.2.1/jquery.slim.min.js"></script>
-    <script type="text/javascript">
-        $(function() {
-            var nodes = {
-                nav: $('#nav'),
-                aside: $('#aside'),
-                navTags: $('#nav-tags')
-            };
 
-            $('#open-panel, #aside-mask').on('click', function() {
-                nodes.aside.toggleClass('panel-show');
-            });
-            $('#nav-tag').on('click', function(event) {
-                event.preventDefault();console.log(nodes.navTags.attr('class'))
-                nodes.navTags.toggleClass('tag-show');console.log(nodes.navTags.attr('class'))
-            })/*.hover(function() {
-                nodes.navTags.addClass('tag-show');
-            }, function() {
-                nodes.navTags.removeClass('tag-show');
-            });*/
-        });
-    </script>
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/H5/">H5</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/IM/">IM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/angular/">angular</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/browser/">browser</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/">css</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/electron/">electron</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/element/">element</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/font/">font</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javascript/">javascript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/markdown/">markdown</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mobile/">mobile</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vue/">vue</a></li></ul>
+    </div>
+  </div>
 
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/H5/" style="font-size: 10px;">H5</a> <a href="/tags/IM/" style="font-size: 20px;">IM</a> <a href="/tags/angular/" style="font-size: 10px;">angular</a> <a href="/tags/browser/" style="font-size: 12px;">browser</a> <a href="/tags/css/" style="font-size: 20px;">css</a> <a href="/tags/electron/" style="font-size: 10px;">electron</a> <a href="/tags/element/" style="font-size: 14px;">element</a> <a href="/tags/font/" style="font-size: 12px;">font</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/javascript/" style="font-size: 18px;">javascript</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/mobile/" style="font-size: 10px;">mobile</a> <a href="/tags/vue/" style="font-size: 16px;">vue</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archiv</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">November 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">October 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">September 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">August 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">October 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">August 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">July 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/01/">January 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">November 2015</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">letzter Beitrag</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2019/11/23/vue/element-input/">Element源码分析-Input</a>
+          </li>
+        
+          <li>
+            <a href="/2019/11/10/vue/element-button/">Element源码分析-Button</a>
+          </li>
+        
+          <li>
+            <a href="/2019/10/27/vue/element-layout/">Element源码分析-Layout</a>
+          </li>
+        
+          <li>
+            <a href="/2019/10/16/devOps/docker/">Docker部署一个spa应用</a>
+          </li>
+        
+          <li>
+            <a href="/2019/10/05/vue/vue3/">Vue3 中的数据侦测</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2019 FLC<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
 </body>
 </html>

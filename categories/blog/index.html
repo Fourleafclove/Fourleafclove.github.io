@@ -1,826 +1,592 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html>
 <head>
-    <meta charset="UTF-8" />
+  <meta charset="utf-8">
+  
 
-    
-
-    
-
-    <title>Catégorie: blog | Blog</title>
-    <meta name="author" content="FLC" />
-    <meta name="version" content="1.0.0" />
-    <meta name="keywords" content="" />
-    <meta name="description" content="" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no" />
-    <meta name="baidu-site-verification" content="F0CXvmUgA9" />
-
-    
-    
-
-    <link rel="stylesheet" href="/css/style.css">
+  
+  <title>Kategorie: blog | Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta property="og:type" content="website">
+<meta property="og:title" content="Blog">
+<meta property="og:url" content="https://fourleafclove.github.io/categories/blog/index.html">
+<meta property="og:site_name" content="Blog">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Blog">
+  
+    <link rel="alternate" href="/atom.xml" title="Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
 </head>
+
 <body>
-
-    <div class="app">
-        <header class="header clearfix">
-    <div id="nav" class="nav">
-    <button id="open-panel" class="open-panel"><i class="icon-library"></i></button>
-
-    <nav class="nav-inner">
-
-        
-        
-
-    </nav>
-</div>
-
-    <aside id="aside" class="aside">
-    <div id="aside-mask" class="aside-mask"></div>
-    <div id="aside-inner" class="aside-inner">
-        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit"><i class="icon-search-stroke"></i></button><input type="hidden" name="sitesearch" value="https://fourleafclove.github.io"></form>
-
-        
-        
-        
-        
-        <div class="author-meta">
-            <div class="author-avatar">
-                <a href="/">
-                    <img src="/images/avatar.jpg" title="FLC">
-                </a>
-            </div>
-            <div class="author-name"></div>
-            <div class="author-work"></div>
-            <div class="author-location">
-                <i class="icon-location vm"></i>
-                <span class="vm"></span>
-            </div>
-            <div class="author-thread-wrap">
-                <div class="author-threads clearfix">
-                    <!-- <a class="thread-item" href="https://github.com/sanonz" target="_blank"><i class="icon-github"></i></a>
-                    <a class="thread-item" href="http://m.timegoto.com/user/1" target="_blank"><i class="icon-circle-more"></i></a>
-                    <a class="thread-item" href="https://twitter.com/sanonze" target="_blank"><i class="icon-twitter"></i></a> -->
-                </div>
-            </div>
-        </div>
-        
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Blog</a>
+      </h1>
+      
     </div>
-</aside>
-
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Suche"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://fourleafclove.github.io"></form>
+      </div>
+    </div>
+  </div>
 </header>
-
-        <div id="content" class="content">
-    <article class="article" itemscope itemprop="blogPost">
+      <div class="outer">
+        <section id="main">
+  
+  
     
-    <header class="article-header">
-        
-        <h1 itemprop="name">
-            <a href="/2018/01/03/IM/requestResponse/">IM消息状态判定及回执实现</a>
-        </h1>
-        
-        <div class="article-meta clearfix">
-            <a class="article-date" href="/2018/01/03/IM/requestResponse/">
     
-    <i class="icon-calendar"></i>
-    
-    <time datetime="2018-01-02T16:00:00.000Z" itemprop="datePublished">2018-01-03</time>
-</a>
-
-            
-<div class="article-tag-list">
-    <i class="icon-tag"></i>
-    <a class="article-tag-link" href="/tags/IM/">IM</a>
-</div>
-
-
+      
+      
+      <section class="archives-wrap">
+        <div class="archive-year-wrap">
+          <a href="/archives/2019" class="archive-year">2019</a>
         </div>
-    </header>
+        <div class="archives">
     
-    <section class="article-body markdown-body">
-        
-        <h3 id="状态判定"><a href="#状态判定" class="headerlink" title="状态判定"></a>状态判定</h3><p>从技术角度来看，消息的状态就是发送（输入消息、发送中，发送成功/失败）和接收状态（已接收）。</p>
-<p>从产品角度来看，消息发送和接收也都容易理解容易处理，容易混淆的是“阅读状态”。</p>
-<p>消息的“阅读状态”是针对于会话而言的，需要区分对话双方。A 和 B 进行聊天，A 是否已读和 B 是否已读显然是不同的问题：</p>
-<pre><code>1. A 和 B 分别维护自己的阅读状态，涉及处理“新消息”和“历史消息”的关系
-
-2. 让对方看自己的阅读状态 涉及“消息回执”
-</code></pre>
-        
-        
-    </section>
-</article>
-
-
-    <article class="article" itemscope itemprop="blogPost">
-    
-    <header class="article-header">
-        
-        <h1 itemprop="name">
-            <a href="/2017/12/16/IM/Electron开发小结/">Electron开发小结</a>
-        </h1>
-        
-        <div class="article-meta clearfix">
-            <a class="article-date" href="/2017/12/16/IM/Electron开发小结/">
-    
-    <i class="icon-calendar"></i>
-    
-    <time datetime="2017-12-15T16:00:00.000Z" itemprop="datePublished">2017-12-16</time>
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      <a href="/2019/11/23/vue/element-input/" class="archive-article-date">
+  <time datetime="2019-11-22T16:00:00.000Z" itemprop="datePublished">Nov 23</time>
 </a>
+      
+  
+    <h1 itemprop="name">
+      <a class="archive-article-title" href="/2019/11/23/vue/element-input/">Element源码分析-Input</a>
+    </h1>
+  
 
-            
-<div class="article-tag-list">
-    <i class="icon-tag"></i>
-    <a class="article-tag-link" href="/tags/IM/">IM</a>, <a class="article-tag-link" href="/tags/electron/">electron</a>
-</div>
-
-
-        </div>
     </header>
-    
-    <section class="article-body markdown-body">
-        
-        <h2 id="Electron-是什么？"><a href="#Electron-是什么？" class="headerlink" title="Electron 是什么？"></a>Electron 是什么？</h2><p>Electron 是一个可以用 JavaScript、HTML 和 CSS 构建桌面应用程序的库。这些应用程序能打包到 Mac、Windows 和 Linux 系统上运行，也能上架到 Mac 和 Windows 的 App Store。</p>
-        
-        
-    </section>
+  </div>
 </article>
-
-
-    <article class="article" itemscope itemprop="blogPost">
+  
     
-    <header class="article-header">
-        
-        <h1 itemprop="name">
-            <a href="/2017/12/06/css/iphoneX样式兼容/">iPhone X移动端样式适配</a>
-        </h1>
-        
-        <div class="article-meta clearfix">
-            <a class="article-date" href="/2017/12/06/css/iphoneX样式兼容/">
     
-    <i class="icon-calendar"></i>
-    
-    <time datetime="2017-12-05T16:00:00.000Z" itemprop="datePublished">2017-12-06</time>
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      <a href="/2019/11/10/vue/element-button/" class="archive-article-date">
+  <time datetime="2019-11-09T16:00:00.000Z" itemprop="datePublished">Nov 10</time>
 </a>
+      
+  
+    <h1 itemprop="name">
+      <a class="archive-article-title" href="/2019/11/10/vue/element-button/">Element源码分析-Button</a>
+    </h1>
+  
 
-            
-<div class="article-tag-list">
-    <i class="icon-tag"></i>
-    <a class="article-tag-link" href="/tags/mobile/">mobile</a>
-</div>
-
-
-        </div>
     </header>
-    
-    <section class="article-body markdown-body">
-        
-        <p>iPhone X 正面的全面屏上方有一条刘海，对于如何适配 iPhone X，苹果的 Human Interface Guidelines 文档已经给出详细的说明。</p>
-<p>苹果对于 iPhone X 的设计布局意见如下：</p>
-        
-        
-    </section>
+  </div>
 </article>
-
-
-    <article class="article" itemscope itemprop="blogPost">
+  
     
-    <header class="article-header">
-        
-        <h1 itemprop="name">
-            <a href="/2017/12/01/IM/融云消息体系架构/">融云消息体系架构</a>
-        </h1>
-        
-        <div class="article-meta clearfix">
-            <a class="article-date" href="/2017/12/01/IM/融云消息体系架构/">
     
-    <i class="icon-calendar"></i>
-    
-    <time datetime="2017-11-30T16:00:00.000Z" itemprop="datePublished">2017-12-01</time>
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      <a href="/2019/10/27/vue/element-layout/" class="archive-article-date">
+  <time datetime="2019-10-26T16:00:00.000Z" itemprop="datePublished">Oct 27</time>
 </a>
+      
+  
+    <h1 itemprop="name">
+      <a class="archive-article-title" href="/2019/10/27/vue/element-layout/">Element源码分析-Layout</a>
+    </h1>
+  
 
-            
-<div class="article-tag-list">
-    <i class="icon-tag"></i>
-    <a class="article-tag-link" href="/tags/IM/">IM</a>
-</div>
-
-
-        </div>
     </header>
-    
-    <section class="article-body markdown-body">
-        
-        <p>海马汇的即时通讯(IM)模块的开发依赖于第三方也就是融云提供的消息服务。由他们的API服务器、IM服务器支持基础的消息通讯，我们在提供客户端的ios、android、web SDK的基础上，根据项目具体需求进行二次开发</p>
-<p>这篇文章主要分析一下整个融云的消息服务体系架构，弄明白各个服务器、客户端之间究竟是怎样协同工作的，数据流是怎么样跑起来的，也算是做一个阶段性的项目总结。</p>
-        
-        
-    </section>
+  </div>
 </article>
-
-
-    <article class="article" itemscope itemprop="blogPost">
+  
     
-    <header class="article-header">
-        
-        <h1 itemprop="name">
-            <a href="/2017/11/22/IM/图片预览实现拖动、缩放、旋转/">图片预览实现拖动、缩放、旋转</a>
-        </h1>
-        
-        <div class="article-meta clearfix">
-            <a class="article-date" href="/2017/11/22/IM/图片预览实现拖动、缩放、旋转/">
     
-    <i class="icon-calendar"></i>
-    
-    <time datetime="2017-11-21T16:00:00.000Z" itemprop="datePublished">2017-11-22</time>
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      <a href="/2019/10/16/devOps/docker/" class="archive-article-date">
+  <time datetime="2019-10-15T16:00:00.000Z" itemprop="datePublished">Oct 16</time>
 </a>
+      
+  
+    <h1 itemprop="name">
+      <a class="archive-article-title" href="/2019/10/16/devOps/docker/">Docker部署一个spa应用</a>
+    </h1>
+  
 
-            
-<div class="article-tag-list">
-    <i class="icon-tag"></i>
-    <a class="article-tag-link" href="/tags/IM/">IM</a>
-</div>
-
-
-        </div>
     </header>
-    
-    <section class="article-body markdown-body">
-        
-        <p>对于im中存在的图片消息，需要在原本可以全屏预览的基础上，增加鼠标拖动、放大缩小、自由旋转的功能</p>
-<p> <img src="https://ws3.sinaimg.cn/large/006tNc79gy1fmrx2h7ns9j30uu15a7wi.jpg" width="300"></p>
-<p>项目中点击放大图片的功能是用的一个基于 <code>jquery</code> 的插件 <code>rebox</code>，仅仅实现了全屏预览图片。自己在这个插件的基础上增加了功能，大体思路是使用top和left设置图片位置，用transform进行缩放旋转。下面记录分享一下遇到的问题和解决思路。</p>
-        
-        
-    </section>
+  </div>
 </article>
-
-
-    <article class="article" itemscope itemprop="blogPost">
+  
     
-    <header class="article-header">
-        
-        <h1 itemprop="name">
-            <a href="/2017/11/20/IM/文字和图片的复制/">文字和图片的复制</a>
-        </h1>
-        
-        <div class="article-meta clearfix">
-            <a class="article-date" href="/2017/11/20/IM/文字和图片的复制/">
     
-    <i class="icon-calendar"></i>
-    
-    <time datetime="2017-11-19T16:00:00.000Z" itemprop="datePublished">2017-11-20</time>
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      <a href="/2019/10/05/vue/vue3/" class="archive-article-date">
+  <time datetime="2019-10-04T16:00:00.000Z" itemprop="datePublished">Oct 5</time>
 </a>
+      
+  
+    <h1 itemprop="name">
+      <a class="archive-article-title" href="/2019/10/05/vue/vue3/">Vue3 中的数据侦测</a>
+    </h1>
+  
 
-            
-<div class="article-tag-list">
-    <i class="icon-tag"></i>
-    <a class="article-tag-link" href="/tags/IM/">IM</a>
-</div>
-
-
-        </div>
     </header>
-    
-    <section class="article-body markdown-body">
-        
-        <p>im中需要对文字和图片消息进行复制,下面分享一下如何在浏览器和electron中的具体实现</p>
-<h3 id="1-文字复制"><a href="#1-文字复制" class="headerlink" title="1.文字复制"></a>1.文字复制</h3><p>文字的复制比较简单，本质上相当于帮用户实现 选择 <code>+ ctrl c</code></p>
-<p>手动创建选择容器 <code>selection</code> 和选择范围 <code>range</code></p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> selection = <span class="built_in">window</span>.getSelection();</span><br><span class="line"><span class="keyword">var</span> range = <span class="built_in">document</span>.createRange();</span><br></pre></td></tr></table></figure>
-<p>将文字内容添加到选择范围 <code>range</code> 中</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">range.selectNodeContents(<span class="xml"><span class="tag">&lt;<span class="name">any</span>&gt;</span>ele.find("pre")[0]);</span></span><br></pre></td></tr></table></figure>
-        
-        
-    </section>
+  </div>
 </article>
-
-
-    <article class="article" itemscope itemprop="blogPost">
+  
     
-    <header class="article-header">
-        
-        <h1 itemprop="name">
-            <a href="/2017/10/25/js/async与promise/">async与promise</a>
-        </h1>
-        
-        <div class="article-meta clearfix">
-            <a class="article-date" href="/2017/10/25/js/async与promise/">
     
-    <i class="icon-calendar"></i>
-    
-    <time datetime="2017-10-24T16:00:00.000Z" itemprop="datePublished">2017-10-25</time>
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      <a href="/2019/09/13/browser/层叠上下文/" class="archive-article-date">
+  <time datetime="2019-09-12T16:00:00.000Z" itemprop="datePublished">Sep 13</time>
 </a>
+      
+  
+    <h1 itemprop="name">
+      <a class="archive-article-title" href="/2019/09/13/browser/层叠上下文/">层叠上下文、层叠等级、层叠顺序</a>
+    </h1>
+  
 
-            
-<div class="article-tag-list">
-    <i class="icon-tag"></i>
-    <a class="article-tag-link" href="/tags/javascript/">javascript</a>
-</div>
-
-
-        </div>
     </header>
-    
-    <section class="article-body markdown-body">
-        
-        <h3 id="async-和-await-在干什么"><a href="#async-和-await-在干什么" class="headerlink" title="async 和 await 在干什么"></a>async 和 await 在干什么</h3><p>任意一个名称都是有意义的，先从字面意思来理解。async 是“异步”的简写，而 await 可以认为是 async wait 的简写。所以应该很好理解 async 用于申明一个 function 是异步的，而 await 用于等待一个异步方法执行完成。</p>
-<p>另外还有一个很有意思的语法规定，await 只能出现在 async 函数中。但如果 await 只能出现在 async 函数中，那这个 async 函数应该怎么调用？</p>
-<p>如果 async 函数不需要 await 来调用，那 async 到底起个啥作用？</p>
-        
-        
-    </section>
+  </div>
 </article>
-
-
-    <article class="article" itemscope itemprop="blogPost">
+  
     
-    <header class="article-header">
-        
-        <h1 itemprop="name">
-            <a href="/2017/10/14/browser/notification/">Web Notification桌面通知</a>
-        </h1>
-        
-        <div class="article-meta clearfix">
-            <a class="article-date" href="/2017/10/14/browser/notification/">
     
-    <i class="icon-calendar"></i>
-    
-    <time datetime="2017-10-13T16:00:00.000Z" itemprop="datePublished">2017-10-14</time>
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      <a href="/2019/09/10/js/puppeteer/" class="archive-article-date">
+  <time datetime="2019-09-09T16:00:00.000Z" itemprop="datePublished">Sep 10</time>
 </a>
+      
+  
+    <h1 itemprop="name">
+      <a class="archive-article-title" href="/2019/09/10/js/puppeteer/">无头浏览器 Puppeteer 初探</a>
+    </h1>
+  
 
-            
-<div class="article-tag-list">
-    <i class="icon-tag"></i>
-    <a class="article-tag-link" href="/tags/H5/">H5</a>, <a class="article-tag-link" href="/tags/IM/">IM</a>
-</div>
-
-
-        </div>
     </header>
-    
-    <section class="article-body markdown-body">
-        
-        <p>IM客户端中使用了Notifications API 的通知接口用于向用户配置和显示桌面通知。</p>
-<h4 id="请求权限"><a href="#请求权限" class="headerlink" title="请求权限"></a>请求权限</h4><p>并不是所有用户都想看到自己的桌面不停弹出通知，所以在使用前要申请权限以供用户选择</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">Notification.requestPermission()</span><br></pre></td></tr></table></figure>
-        
-        
-    </section>
+  </div>
 </article>
-
-
-    <article class="article" itemscope itemprop="blogPost">
+  
     
-    <header class="article-header">
-        
-        <h1 itemprop="name">
-            <a href="/2017/10/11/Commitizen/">Commit message规范和Commitizen使用</a>
-        </h1>
-        
-        <div class="article-meta clearfix">
-            <a class="article-date" href="/2017/10/11/Commitizen/">
     
-    <i class="icon-calendar"></i>
-    
-    <time datetime="2017-10-10T16:00:00.000Z" itemprop="datePublished">2017-10-11</time>
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      <a href="/2019/09/01/css/BFC/" class="archive-article-date">
+  <time datetime="2019-08-31T16:00:00.000Z" itemprop="datePublished">Sep 1</time>
 </a>
+      
+  
+    <h1 itemprop="name">
+      <a class="archive-article-title" href="/2019/09/01/css/BFC/">BFC相关(Block Formatting Context)</a>
+    </h1>
+  
 
-            
-<div class="article-tag-list">
-    <i class="icon-tag"></i>
-    <a class="article-tag-link" href="/tags/git/">git</a>
-</div>
-
-
-        </div>
     </header>
-    
-    <section class="article-body markdown-body">
-        
-        <p>Git 每次提交代码，都要写 commit message（提交说明），否则就不允许提交。</p>
-<p><code>$ git commit -m &quot;hello world&quot;</code></p>
-<p>虽说理论上讲commit message想怎么写都可以，但是一个规范的项目，message应该应该清晰明了，说明本次提交的目的，多名成员最好共用一套commit规范。</p>
-        
-        
-    </section>
+  </div>
 </article>
-
-
-    <article class="article" itemscope itemprop="blogPost">
+  
     
-    <header class="article-header">
-        
-        <h1 itemprop="name">
-            <a href="/2017/09/12/IM/scroll2/">滚动条禁用边缘回弹</a>
-        </h1>
-        
-        <div class="article-meta clearfix">
-            <a class="article-date" href="/2017/09/12/IM/scroll2/">
     
-    <i class="icon-calendar"></i>
-    
-    <time datetime="2017-09-11T16:00:00.000Z" itemprop="datePublished">2017-09-12</time>
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      <a href="/2019/08/20/js/Javascript执行上下文和执行栈/" class="archive-article-date">
+  <time datetime="2019-08-19T16:00:00.000Z" itemprop="datePublished">Aug 20</time>
 </a>
+      
+  
+    <h1 itemprop="name">
+      <a class="archive-article-title" href="/2019/08/20/js/Javascript执行上下文和执行栈/">Javascript 执行上下文和执行栈</a>
+    </h1>
+  
 
-            
-<div class="article-tag-list">
-    <i class="icon-tag"></i>
-    <a class="article-tag-link" href="/tags/IM/">IM</a>, <a class="article-tag-link" href="/tags/browser/">browser</a>
-</div>
-
-
-        </div>
     </header>
-    
-    <section class="article-body markdown-body">
-        
-        <p>webkit内核浏览器比如chrome、safari在处理页面滚动操作时会默认增加一个边缘回弹效果，本意是让人机交互更流畅，不至于出现界面突然静止的情况。但这个效果在electron页面里面却不太好，因为这样的话把鼠标放在窗口里滚动，即使上下没有滚动的内容，web窗口也会跟着上下抖，显得整个应用不那么“原生”。</p>
-        
-        
-    </section>
+  </div>
 </article>
-
-
-    <article class="article" itemscope itemprop="blogPost">
+  
     
-    <header class="article-header">
-        
-        <h1 itemprop="name">
-            <a href="/2017/09/05/js/网络连接状态监测/">网络连接状态监测</a>
-        </h1>
-        
-        <div class="article-meta clearfix">
-            <a class="article-date" href="/2017/09/05/js/网络连接状态监测/">
     
-    <i class="icon-calendar"></i>
+      
+        </div></section>
+      
+      
+      <section class="archives-wrap">
+        <div class="archive-year-wrap">
+          <a href="/archives/2018" class="archive-year">2018</a>
+        </div>
+        <div class="archives">
     
-    <time datetime="2017-09-04T16:00:00.000Z" itemprop="datePublished">2017-09-05</time>
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      <a href="/2018/01/03/IM/requestResponse/" class="archive-article-date">
+  <time datetime="2018-01-02T16:00:00.000Z" itemprop="datePublished">Jan 3</time>
 </a>
+      
+  
+    <h1 itemprop="name">
+      <a class="archive-article-title" href="/2018/01/03/IM/requestResponse/">IM消息状态判定及回执实现</a>
+    </h1>
+  
 
-            
-<div class="article-tag-list">
-    <i class="icon-tag"></i>
-    <a class="article-tag-link" href="/tags/javascript/">javascript</a>
-</div>
-
-
-        </div>
     </header>
-    
-    <section class="article-body markdown-body">
-        
-        <p>用JavaScript监测网络连接状态的几种思路</p>
-<h2 id="navigator-onLine"><a href="#navigator-onLine" class="headerlink" title="navigator.onLine"></a>navigator.onLine</h2><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span>(navigator.onLine == <span class="literal">true</span>)&#123;</span><br><span class="line">    alert（<span class="string">"已连接"</span>）；</span><br><span class="line">&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">    alert（<span class="string">"未连接"</span>）；</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p><code>navigator.onLine</code> 是一个值为 <code>true</code>/<code>false</code>  (<code>true</code> 表示在线， <code>false</code> 表示离线) 的属性。。一旦浏览器的联网状态发生改变，该属性值也会随之变化。当用户点击链接或者脚本进行网络请求时，如果发现浏览器连接不上互联网，则该属性会被赋值为 <code>false</code>。</p>
-        
-        
-    </section>
+  </div>
 </article>
-
-
-    <article class="article" itemscope itemprop="blogPost">
+  
     
-    <header class="article-header">
-        
-        <h1 itemprop="name">
-            <a href="/2017/08/22/js/图片预加载/">图片预加载的几种方式</a>
-        </h1>
-        
-        <div class="article-meta clearfix">
-            <a class="article-date" href="/2017/08/22/js/图片预加载/">
     
-    <i class="icon-calendar"></i>
+      
+        </div></section>
+      
+      
+      <section class="archives-wrap">
+        <div class="archive-year-wrap">
+          <a href="/archives/2017" class="archive-year">2017</a>
+        </div>
+        <div class="archives">
     
-    <time datetime="2017-08-21T16:00:00.000Z" itemprop="datePublished">2017-08-22</time>
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      <a href="/2017/12/16/IM/Electron开发小结/" class="archive-article-date">
+  <time datetime="2017-12-15T16:00:00.000Z" itemprop="datePublished">Dec 16</time>
 </a>
+      
+  
+    <h1 itemprop="name">
+      <a class="archive-article-title" href="/2017/12/16/IM/Electron开发小结/">Electron开发小结</a>
+    </h1>
+  
 
-            
-<div class="article-tag-list">
-    <i class="icon-tag"></i>
-    <a class="article-tag-link" href="/tags/css/">css</a>, <a class="article-tag-link" href="/tags/javascript/">javascript</a>
-</div>
-
-
-        </div>
     </header>
-    
-    <section class="article-body markdown-body">
-        
-        <p>在开发的过程，我们会经常遇到这样的要求，当鼠标点击的时候，更改图标的背景。如果没有进行图片预加载的话，会出现闪烁。而且在网络状态较差的情况下，甚至会出现按钮忽然消失、过阵子才加载出来的情况，这是无法容忍的。<br> <img src="https://ws3.sinaimg.cn/large/006tNc79gy1fmt1nm9lfuj304e0o80st.jpg" width="60"><br>一种解决思路是把icon做成雪碧图，另一种比较简单通用的就是图片预加载了</p>
-        
-        
-    </section>
+  </div>
 </article>
-
-
-    <article class="article" itemscope itemprop="blogPost">
+  
     
-    <header class="article-header">
-        
-        <h1 itemprop="name">
-            <a href="/2017/08/04/browser/font2/">深入探究font(2)</a>
-        </h1>
-        
-        <div class="article-meta clearfix">
-            <a class="article-date" href="/2017/08/04/browser/font2/">
     
-    <i class="icon-calendar"></i>
-    
-    <time datetime="2017-08-03T16:00:00.000Z" itemprop="datePublished">2017-08-04</time>
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      <a href="/2017/12/06/css/iphoneX样式兼容/" class="archive-article-date">
+  <time datetime="2017-12-05T16:00:00.000Z" itemprop="datePublished">Dec 6</time>
 </a>
+      
+  
+    <h1 itemprop="name">
+      <a class="archive-article-title" href="/2017/12/06/css/iphoneX样式兼容/">iPhone X移动端样式适配</a>
+    </h1>
+  
 
-            
-<div class="article-tag-list">
-    <i class="icon-tag"></i>
-    <a class="article-tag-link" href="/tags/css/">css</a>, <a class="article-tag-link" href="/tags/font/">font</a>
-</div>
-
-
-        </div>
     </header>
-    
-    <section class="article-body markdown-body">
-        
-        <h3 id="字体样式"><a href="#字体样式" class="headerlink" title="字体样式"></a>字体样式</h3><p>常见的字体样式分为</p>
-<pre><code>正常（Normal）
-
-粗体（Bold）：会让字体颜色更深、更粗。
-
-斜体（Italic）：用于在当前段落中强调某段文字。
-</code></pre><p>不同的字体样式意味着不同版本的字体库。</p>
-        
-        
-    </section>
+  </div>
 </article>
-
-
-    <article class="article" itemscope itemprop="blogPost">
+  
     
-    <header class="article-header">
-        
-        <h1 itemprop="name">
-            <a href="/2017/08/02/browser/font1/">深入探究font(1)</a>
-        </h1>
-        
-        <div class="article-meta clearfix">
-            <a class="article-date" href="/2017/08/02/browser/font1/">
     
-    <i class="icon-calendar"></i>
-    
-    <time datetime="2017-08-01T16:00:00.000Z" itemprop="datePublished">2017-08-02</time>
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      <a href="/2017/12/01/IM/融云消息体系架构/" class="archive-article-date">
+  <time datetime="2017-11-30T16:00:00.000Z" itemprop="datePublished">Dec 1</time>
 </a>
+      
+  
+    <h1 itemprop="name">
+      <a class="archive-article-title" href="/2017/12/01/IM/融云消息体系架构/">融云消息体系架构</a>
+    </h1>
+  
 
-            
-<div class="article-tag-list">
-    <i class="icon-tag"></i>
-    <a class="article-tag-link" href="/tags/css/">css</a>, <a class="article-tag-link" href="/tags/font/">font</a>
-</div>
-
-
-        </div>
     </header>
-    
-    <section class="article-body markdown-body">
-        
-        <h3 id="字体类型"><a href="#字体类型" class="headerlink" title="字体类型"></a>字体类型</h3><h4 id="1-衬线体（Serif）"><a href="#1-衬线体（Serif）" class="headerlink" title="1. 衬线体（Serif）"></a>1. 衬线体（Serif）</h4><p>衬线是笔画末端的装饰部分，用于更清晰地标明笔触末端，提高辨识率从而提高阅读速度。另外衬线字体感觉会更正统。<br>下图红色部分就是衬线。</p>
-<p><img src="https://ws4.sinaimg.cn/large/006tKfTcgy1fncmvri0rej305t01h3yb.jpg" width="180"></p>
-<h4 id="2-无衬线体-非衬线体（Sans-serif）"><a href="#2-无衬线体-非衬线体（Sans-serif）" class="headerlink" title="2. 无衬线体/非衬线体（Sans-serif）"></a>2. 无衬线体/非衬线体（Sans-serif）</h4><p><img src="https://ws2.sinaimg.cn/large/006tKfTcgy1fncmy4yg1yj305t01nwea.jpg" width="180"></p>
-<blockquote>
-<p>10px~12px的衬线字体在屏幕下难以辨认，因此网页中常用无衬线字体而非衬线字体。</p>
-</blockquote>
-        
-        
-    </section>
+  </div>
 </article>
-
-
-    <article class="article" itemscope itemprop="blogPost">
+  
     
-    <header class="article-header">
-        
-        <h1 itemprop="name">
-            <a href="/2017/07/26/browser/scroll/">自定义webkit内核浏览器滚动条样式</a>
-        </h1>
-        
-        <div class="article-meta clearfix">
-            <a class="article-date" href="/2017/07/26/browser/scroll/">
     
-    <i class="icon-calendar"></i>
-    
-    <time datetime="2017-07-25T16:00:00.000Z" itemprop="datePublished">2017-07-26</time>
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      <a href="/2017/11/22/IM/图片预览实现拖动、缩放、旋转/" class="archive-article-date">
+  <time datetime="2017-11-21T16:00:00.000Z" itemprop="datePublished">Nov 22</time>
 </a>
+      
+  
+    <h1 itemprop="name">
+      <a class="archive-article-title" href="/2017/11/22/IM/图片预览实现拖动、缩放、旋转/">图片预览实现拖动、缩放、旋转</a>
+    </h1>
+  
 
-            
-<div class="article-tag-list">
-    <i class="icon-tag"></i>
-    <a class="article-tag-link" href="/tags/browser/">browser</a>, <a class="article-tag-link" href="/tags/css/">css</a>
-</div>
-
-
-        </div>
     </header>
-    
-    <section class="article-body markdown-body">
-        
-        <p>在客户端IM中，web部分的内容统一由electron内置的chromium浏览器内核负责渲染和展示，在开发过程中并不需要考虑太多操作系统的差异。然而chromium在Mac和windows上还是会有不同的内置样式，最为直观的就是滚动条了</p>
-        
-        
-    </section>
+  </div>
 </article>
-
-
-    <article class="article" itemscope itemprop="blogPost">
+  
     
-    <header class="article-header">
-        
-        <h1 itemprop="name">
-            <a href="/2017/07/15/ngdirective/">angular directive学习总结</a>
-        </h1>
-        
-        <div class="article-meta clearfix">
-            <a class="article-date" href="/2017/07/15/ngdirective/">
     
-    <i class="icon-calendar"></i>
-    
-    <time datetime="2017-07-14T16:00:00.000Z" itemprop="datePublished">2017-07-15</time>
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      <a href="/2017/11/20/IM/文字和图片的复制/" class="archive-article-date">
+  <time datetime="2017-11-19T16:00:00.000Z" itemprop="datePublished">Nov 20</time>
 </a>
+      
+  
+    <h1 itemprop="name">
+      <a class="archive-article-title" href="/2017/11/20/IM/文字和图片的复制/">文字和图片的复制</a>
+    </h1>
+  
 
-            
-<div class="article-tag-list">
-    <i class="icon-tag"></i>
-    <a class="article-tag-link" href="/tags/angular/">angular</a>
-</div>
-
-
-        </div>
     </header>
-    
-    <section class="article-body markdown-body">
-        
-        <p>最近做项目需要修改大量的directive，自己之前也是懂一点皮毛，总结一下项目上用到的directive相关知识。</p>
-<h3 id="1-restrict"><a href="#1-restrict" class="headerlink" title="1.restrict"></a>1.restrict</h3><figure class="highlight html"><table><tr><td class="code"><pre><span class="line">E(元素)：<span class="tag">&lt;<span class="name">directiveName</span>&gt;</span><span class="tag">&lt;/<span class="name">directiveName</span>&gt;</span></span><br><span class="line">A(属性)：<span class="tag">&lt;<span class="name">div</span> <span class="attr">directiveName</span>=<span class="string">'expression'</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">C(类)： <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">'directiveName'</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">M(注释)：<span class="tag">&lt;<span class="name">--directive:directiveName</span> <span class="attr">expression--</span>&gt;</span></span><br></pre></td></tr></table></figure>
-        
-        
-    </section>
+  </div>
 </article>
-
-
-    <article class="article" itemscope itemprop="blogPost">
+  
     
-    <header class="article-header">
-        
-        <h1 itemprop="name">
-            <a href="/2016/12/09/js/javascript链式调用的实现方式/">JavaScript链式调用的实现方式</a>
-        </h1>
-        
-        <div class="article-meta clearfix">
-            <a class="article-date" href="/2016/12/09/js/javascript链式调用的实现方式/">
     
-    <i class="icon-calendar"></i>
-    
-    <time datetime="2016-12-08T16:00:00.000Z" itemprop="datePublished">2016-12-09</time>
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      <a href="/2017/10/25/js/async与promise/" class="archive-article-date">
+  <time datetime="2017-10-24T16:00:00.000Z" itemprop="datePublished">Oct 25</time>
 </a>
+      
+  
+    <h1 itemprop="name">
+      <a class="archive-article-title" href="/2017/10/25/js/async与promise/">async与promise</a>
+    </h1>
+  
 
-            
-<div class="article-tag-list">
-    <i class="icon-tag"></i>
-    <a class="article-tag-link" href="/tags/javascript/">javascript</a>
-</div>
-
-
-        </div>
     </header>
-    
-    <section class="article-body markdown-body">
-        
-        <p>在我们所用到的库中，可以看到很多诸如</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">$(<span class="built_in">window</span>).addEvent(<span class="string">'load'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    $(<span class="string">'test'</span>).show().setStyle(<span class="string">'color'</span>, <span class="string">'red'</span>).addEvent(<span class="string">'click'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">e</span>)</span>&#123;</span><br><span class="line">        $(<span class="keyword">this</span>).setStyle(<span class="string">'color'</span>, <span class="string">'yellow'</span>);</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-<p>的链式调用，那么这样的链式结构是怎么实现的呢，下面我们利用代码来探讨一番：</p>
-        
-        
-    </section>
+  </div>
 </article>
-
-
-    <article class="article" itemscope itemprop="blogPost">
+  
     
-    <header class="article-header">
-        
-        <h1 itemprop="name">
-            <a href="/2016/01/22/md/markdown示例/">MarkDown简单示例</a>
-        </h1>
-        
-        <div class="article-meta clearfix">
-            <a class="article-date" href="/2016/01/22/md/markdown示例/">
     
-    <i class="icon-calendar"></i>
-    
-    <time datetime="2016-01-21T16:00:00.000Z" itemprop="datePublished">2016-01-22</time>
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      <a href="/2017/10/14/browser/notification/" class="archive-article-date">
+  <time datetime="2017-10-13T16:00:00.000Z" itemprop="datePublished">Oct 14</time>
 </a>
+      
+  
+    <h1 itemprop="name">
+      <a class="archive-article-title" href="/2017/10/14/browser/notification/">Web Notification桌面通知</a>
+    </h1>
+  
 
-            
-<div class="article-tag-list">
-    <i class="icon-tag"></i>
-    <a class="article-tag-link" href="/tags/markdown/">markdown</a>
-</div>
-
-
-        </div>
     </header>
-    
-    <section class="article-body markdown-body">
-        
-        <h2 id="Block-Elements"><a href="#Block-Elements" class="headerlink" title="Block Elements"></a>Block Elements</h2><h3 id="Headers"><a href="#Headers" class="headerlink" title="Headers"></a>Headers</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">This is an H1</span><br><span class="line">=============</span><br><span class="line"></span><br><span class="line">This is an H2</span><br><span class="line">-------------</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"># This is an H1</span><br><span class="line"></span><br><span class="line">## This is an H2</span><br><span class="line"></span><br><span class="line">###### This is an H6</span><br></pre></td></tr></table></figure>
-        
-        
-    </section>
+  </div>
 </article>
-
-
-    <article class="article" itemscope itemprop="blogPost">
+  
     
-    <header class="article-header">
-        
-        <h1 itemprop="name">
-            <a href="/2015/11/25/js/JavaScript语言精粹学习笔记/">JavaScript语言精粹学习笔记</a>
-        </h1>
-        
-        <div class="article-meta clearfix">
-            <a class="article-date" href="/2015/11/25/js/JavaScript语言精粹学习笔记/">
     
-    <i class="icon-calendar"></i>
-    
-    <time datetime="2015-11-24T16:00:00.000Z" itemprop="datePublished">2015-11-25</time>
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      <a href="/2017/10/11/Commitizen/" class="archive-article-date">
+  <time datetime="2017-10-10T16:00:00.000Z" itemprop="datePublished">Oct 11</time>
 </a>
+      
+  
+    <h1 itemprop="name">
+      <a class="archive-article-title" href="/2017/10/11/Commitizen/">Commit message规范和Commitizen使用</a>
+    </h1>
+  
 
-            
-<div class="article-tag-list">
-    <i class="icon-tag"></i>
-    <a class="article-tag-link" href="/tags/javascript/">javascript</a>
-</div>
-
-
-        </div>
     </header>
-    
-    <section class="article-body markdown-body">
-        
-        <h2 id="基本数据类型："><a href="#基本数据类型：" class="headerlink" title="基本数据类型："></a>基本数据类型：</h2><ul>
-<li>数值型：<ul>
-<li>内部为64位浮点数；NaN表示不能产生正常结果的预案算结果</li>
-</ul>
-</li>
-<li>字符串型：<ul>
-<li>所有字符均为16位；’a’+’b’+’c’===’abc’;有length属性表示长度</li>
-</ul>
-</li>
-<li>布尔型：<ul>
-<li>值为假：false,null,undefined,0,””,NaN</li>
-</ul>
-</li>
-</ul>
-        
-        
-    </section>
+  </div>
 </article>
+  
+    
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      <a href="/2017/09/12/IM/scroll2/" class="archive-article-date">
+  <time datetime="2017-09-11T16:00:00.000Z" itemprop="datePublished">Sep 12</time>
+</a>
+      
+  
+    <h1 itemprop="name">
+      <a class="archive-article-title" href="/2017/09/12/IM/scroll2/">滚动条禁用边缘回弹</a>
+    </h1>
+  
+
+    </header>
+  </div>
+</article>
+  
+    
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      <a href="/2017/09/05/js/网络连接状态监测/" class="archive-article-date">
+  <time datetime="2017-09-04T16:00:00.000Z" itemprop="datePublished">Sep 5</time>
+</a>
+      
+  
+    <h1 itemprop="name">
+      <a class="archive-article-title" href="/2017/09/05/js/网络连接状态监测/">网络连接状态监测</a>
+    </h1>
+  
+
+    </header>
+  </div>
+</article>
+  
+  
+    </div></section>
+  
 
 
+  <nav id="page-nav">
+    
+    <span class="page-number current">1</span><a class="page-number" href="/categories/blog/page/2/">2</a><a class="extend next" rel="next" href="/categories/blog/page/2/">weiter &raquo;</a>
+  </nav>
 
-
-
-</div>
-        <footer class="footer">
-    Propulsé by <a href="http://hexo.io/" target="_blank">Hexo</a>, Theme by <a href="https://github.com/sanonz/hexo-theme-concise" target="_blank">Concise</a>
-</footer>
-
-
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Kategorien</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/blog/">blog</a></li></ul>
     </div>
+  </div>
 
-    <script type="text/javascript" src="https://cdn.bootcss.com/jquery/3.2.1/jquery.slim.min.js"></script>
-    <script type="text/javascript">
-        $(function() {
-            var nodes = {
-                nav: $('#nav'),
-                aside: $('#aside'),
-                navTags: $('#nav-tags')
-            };
 
-            $('#open-panel, #aside-mask').on('click', function() {
-                nodes.aside.toggleClass('panel-show');
-            });
-            $('#nav-tag').on('click', function(event) {
-                event.preventDefault();console.log(nodes.navTags.attr('class'))
-                nodes.navTags.toggleClass('tag-show');console.log(nodes.navTags.attr('class'))
-            })/*.hover(function() {
-                nodes.navTags.addClass('tag-show');
-            }, function() {
-                nodes.navTags.removeClass('tag-show');
-            });*/
-        });
-    </script>
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/H5/">H5</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/IM/">IM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/angular/">angular</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/browser/">browser</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/">css</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/electron/">electron</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/element/">element</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/font/">font</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javascript/">javascript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/markdown/">markdown</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mobile/">mobile</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vue/">vue</a></li></ul>
+    </div>
+  </div>
 
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/H5/" style="font-size: 10px;">H5</a> <a href="/tags/IM/" style="font-size: 20px;">IM</a> <a href="/tags/angular/" style="font-size: 10px;">angular</a> <a href="/tags/browser/" style="font-size: 12px;">browser</a> <a href="/tags/css/" style="font-size: 20px;">css</a> <a href="/tags/electron/" style="font-size: 10px;">electron</a> <a href="/tags/element/" style="font-size: 14px;">element</a> <a href="/tags/font/" style="font-size: 12px;">font</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/javascript/" style="font-size: 18px;">javascript</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/mobile/" style="font-size: 10px;">mobile</a> <a href="/tags/vue/" style="font-size: 16px;">vue</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archiv</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">November 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">October 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">September 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">August 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">October 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">August 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">July 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/01/">January 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">November 2015</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">letzter Beitrag</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2019/11/23/vue/element-input/">Element源码分析-Input</a>
+          </li>
+        
+          <li>
+            <a href="/2019/11/10/vue/element-button/">Element源码分析-Button</a>
+          </li>
+        
+          <li>
+            <a href="/2019/10/27/vue/element-layout/">Element源码分析-Layout</a>
+          </li>
+        
+          <li>
+            <a href="/2019/10/16/devOps/docker/">Docker部署一个spa应用</a>
+          </li>
+        
+          <li>
+            <a href="/2019/10/05/vue/vue3/">Vue3 中的数据侦测</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2019 FLC<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
 </body>
 </html>

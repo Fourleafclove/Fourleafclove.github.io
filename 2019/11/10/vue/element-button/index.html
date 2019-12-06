@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>Element源码分析-Button | Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Element源码分析-Button">
+<meta name="keywords" content="vue,element">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Element源码分析-Button">
+<meta property="og:url" content="https://fourleafclove.github.io/2019/11/10/vue/element-button/index.html">
+<meta property="og:site_name" content="Blog">
+<meta property="og:description" content="Element源码分析-Button">
+<meta property="og:updated_time" content="2019-12-05T07:18:17.695Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Element源码分析-Button">
+<meta name="twitter:description" content="Element源码分析-Button">
+  
+    <link rel="alternate" href="/atom.xml" title="Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Blog</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Suche"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://fourleafclove.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-vue/element-button" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/11/10/vue/element-button/" class="article-date">
+  <time datetime="2019-11-09T16:00:00.000Z" itemprop="datePublished">2019-11-10</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/blog/">blog</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Element源码分析-Button
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>button 是比较简单的组件</p>
+<figure class="highlight jsx"><table><tr><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">  &lt;button</span><br><span class="line">    <span class="class"><span class="keyword">class</span></span>=<span class="string">"el-button"</span></span><br><span class="line">    @click=<span class="string">"handleClick"</span></span><br><span class="line">    :disabled=<span class="string">"buttonDisabled || loading"</span></span><br><span class="line">    :autofocus=<span class="string">"autofocus"</span></span><br><span class="line">    :type=<span class="string">"nativeType"</span></span><br><span class="line">    :<span class="class"><span class="keyword">class</span></span>=<span class="string">"[</span></span><br><span class="line"><span class="string">      type ? 'el-button--' + type : '',</span></span><br><span class="line"><span class="string">      buttonSize ? 'el-button--' + buttonSize : '',</span></span><br><span class="line"><span class="string">      &#123;</span></span><br><span class="line"><span class="string">        'is-disabled': buttonDisabled,</span></span><br><span class="line"><span class="string">        'is-loading': loading,</span></span><br><span class="line"><span class="string">        'is-plain': plain,</span></span><br><span class="line"><span class="string">        'is-round': round,</span></span><br><span class="line"><span class="string">        'is-circle': circle</span></span><br><span class="line"><span class="string">      &#125;</span></span><br><span class="line"><span class="string">    ]"</span></span><br><span class="line">  &gt;</span><br><span class="line">    &lt;i <span class="class"><span class="keyword">class</span></span>=<span class="string">"el-icon-loading"</span> v-<span class="keyword">if</span>=<span class="string">"loading"</span>&gt;&lt;/i&gt;</span><br><span class="line">    &lt;i :<span class="class"><span class="keyword">class</span></span>=<span class="string">"icon"</span> v-<span class="keyword">if</span>=<span class="string">"icon &amp;&amp; !loading"</span>&gt;&lt;/i&gt;</span><br><span class="line">    &lt;span v-<span class="keyword">if</span>=<span class="string">"$slots.default"</span>&gt;&lt;slot&gt;&lt;/slot&gt;&lt;/span&gt;</span><br><span class="line">  &lt;<span class="regexp">/button&gt;</span></span><br><span class="line"><span class="regexp">&lt;/</span>template&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line">  <span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">    name: <span class="string">'ElButton'</span>,</span><br><span class="line">    inject: &#123;</span><br><span class="line">      elForm: &#123;</span><br><span class="line">        <span class="keyword">default</span>: <span class="string">''</span></span><br><span class="line">      &#125;,</span><br><span class="line">      elFormItem: &#123;</span><br><span class="line">        <span class="keyword">default</span>: <span class="string">''</span></span><br><span class="line">      &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    props: &#123;</span><br><span class="line">      type: &#123;</span><br><span class="line">        type: <span class="built_in">String</span>,</span><br><span class="line">        <span class="keyword">default</span>: <span class="string">'default'</span></span><br><span class="line">      &#125;,</span><br><span class="line">      size: <span class="built_in">String</span>,</span><br><span class="line">      icon: &#123;</span><br><span class="line">        type: <span class="built_in">String</span>,</span><br><span class="line">        <span class="keyword">default</span>: <span class="string">''</span></span><br><span class="line">      &#125;,</span><br><span class="line">      nativeType: &#123;</span><br><span class="line">        type: <span class="built_in">String</span>,</span><br><span class="line">        <span class="keyword">default</span>: <span class="string">'button'</span></span><br><span class="line">      &#125;,</span><br><span class="line">      loading: <span class="built_in">Boolean</span>,</span><br><span class="line">      disabled: <span class="built_in">Boolean</span>,</span><br><span class="line">      plain: <span class="built_in">Boolean</span>,</span><br><span class="line">      autofocus: <span class="built_in">Boolean</span>,</span><br><span class="line">      round: <span class="built_in">Boolean</span>,</span><br><span class="line">      circle: <span class="built_in">Boolean</span></span><br><span class="line">    &#125;,</span><br><span class="line">    computed: &#123;</span><br><span class="line">      _elFormItemSize() &#123;</span><br><span class="line">        <span class="keyword">return</span> (<span class="keyword">this</span>.elFormItem || &#123;&#125;).elFormItemSize;</span><br><span class="line">      &#125;,</span><br><span class="line">      buttonSize() &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>.size || <span class="keyword">this</span>._elFormItemSize || (<span class="keyword">this</span>.$ELEMENT || &#123;&#125;).size;</span><br><span class="line">      &#125;,</span><br><span class="line">      buttonDisabled() &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>.disabled || (<span class="keyword">this</span>.elForm || &#123;&#125;).disabled;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    methods: &#123;</span><br><span class="line">      handleClick(evt) &#123;</span><br><span class="line">        <span class="keyword">this</span>.$emit(<span class="string">'click'</span>, evt);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;;</span><br><span class="line">&lt;<span class="regexp">/script&gt;</span></span><br></pre></td></tr></table></figure>
+<a id="more"></a>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://fourleafclove.github.io/2019/11/10/vue/element-button/" data-id="ck3sdpttx000s0oskhkpx7d6h" class="article-share-link">Teilen</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/element/">element</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/vue/">vue</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2019/11/23/vue/element-input/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Neuer</strong>
+      <div class="article-nav-title">
+        
+          Element源码分析-Input
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2019/10/27/vue/element-layout/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Älter</strong>
+      <div class="article-nav-title">Element源码分析-Layout</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Kategorien</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/blog/">blog</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/H5/">H5</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/IM/">IM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/angular/">angular</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/browser/">browser</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/">css</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/electron/">electron</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/element/">element</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/font/">font</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javascript/">javascript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/markdown/">markdown</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mobile/">mobile</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vue/">vue</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/H5/" style="font-size: 10px;">H5</a> <a href="/tags/IM/" style="font-size: 20px;">IM</a> <a href="/tags/angular/" style="font-size: 10px;">angular</a> <a href="/tags/browser/" style="font-size: 12px;">browser</a> <a href="/tags/css/" style="font-size: 20px;">css</a> <a href="/tags/electron/" style="font-size: 10px;">electron</a> <a href="/tags/element/" style="font-size: 14px;">element</a> <a href="/tags/font/" style="font-size: 12px;">font</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/javascript/" style="font-size: 18px;">javascript</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/mobile/" style="font-size: 10px;">mobile</a> <a href="/tags/vue/" style="font-size: 16px;">vue</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archiv</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">November 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">October 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">September 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">August 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">October 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">August 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">July 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/01/">January 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">November 2015</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">letzter Beitrag</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2019/11/23/vue/element-input/">Element源码分析-Input</a>
+          </li>
+        
+          <li>
+            <a href="/2019/11/10/vue/element-button/">Element源码分析-Button</a>
+          </li>
+        
+          <li>
+            <a href="/2019/10/27/vue/element-layout/">Element源码分析-Layout</a>
+          </li>
+        
+          <li>
+            <a href="/2019/10/16/devOps/docker/">Docker部署一个spa应用</a>
+          </li>
+        
+          <li>
+            <a href="/2019/10/05/vue/vue3/">Vue3 中的数据侦测</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2019 FLC<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>

@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>Commit message规范和Commitizen使用 | Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="git commit message">
+<meta name="keywords" content="git">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Commit message规范和Commitizen使用">
+<meta property="og:url" content="https://fourleafclove.github.io/2017/10/11/Commitizen/index.html">
+<meta property="og:site_name" content="Blog">
+<meta property="og:description" content="git commit message">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/006tNc79gy1fmr4ukb9ugj30o612wdun.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/006tNc79gy1fmr4u91svhj30zu0d07do.jpg">
+<meta property="og:image" content="https://ws2.sinaimg.cn/large/006tNc79gy1fmr4v4di8nj31000fkjyi.jpg">
+<meta property="og:updated_time" content="2019-12-03T09:45:40.241Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Commit message规范和Commitizen使用">
+<meta name="twitter:description" content="git commit message">
+<meta name="twitter:image" content="https://ws1.sinaimg.cn/large/006tNc79gy1fmr4ukb9ugj30o612wdun.jpg">
+  
+    <link rel="alternate" href="/atom.xml" title="Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Blog</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Suche"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://fourleafclove.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-Commitizen" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/10/11/Commitizen/" class="article-date">
+  <time datetime="2017-10-10T16:00:00.000Z" itemprop="datePublished">2017-10-11</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/blog/">blog</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Commit message规范和Commitizen使用
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Git 每次提交代码，都要写 commit message（提交说明），否则就不允许提交。</p>
+<p><code>$ git commit -m &quot;hello world&quot;</code></p>
+<p>虽说理论上讲commit message想怎么写都可以，但是一个规范的项目，message应该应该清晰明了，说明本次提交的目的，多名成员最好共用一套commit规范。</p>
+<a id="more"></a>
+<p>虽然海马汇PC端IM项目只有我一个人T_T，但我在项目初期就尝试使用了一套目前使用最广的Angular 规范，并用了配套的工具Commitizen。用起来效果确实很好，在检查更新历史、生成版本更新说明的时候更有效率。</p>
+<p><img src="https://ws1.sinaimg.cn/large/006tNc79gy1fmr4ukb9ugj30o612wdun.jpg" width="400"></p>
+<h2 id="一-Angular-规范"><a href="#一-Angular-规范" class="headerlink" title="一.Angular 规范"></a><strong>一.Angular 规范</strong></h2><p>格式：<br>每次提交，Commit message 都包括三个部分：Header，Body 和 Footer。</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">type</span>&gt;</span>(<span class="tag">&lt;<span class="name">scope</span>&gt;</span>): <span class="tag">&lt;<span class="name">subject</span>&gt;</span></span><br><span class="line">// 空一行</span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">// 空一行</span><br><span class="line"><span class="tag">&lt;<span class="name">footer</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>其中，Header 是必需的，Body 和 Footer 可以省略。</p>
+<h3 id="1-Header"><a href="#1-Header" class="headerlink" title="1.Header"></a>1.Header</h3><p>header部分只有一行，包括三个字段：type（必需）、scope（可选）和subject（必需）。</p>
+<h4 id="1-1-type"><a href="#1-1-type" class="headerlink" title="1.1 type"></a>1.1 type</h4><p>用于说明 commit 的类别，只允许使用下面7个标识。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">- feat：新功能（feature）</span><br><span class="line"></span><br><span class="line">- fix：修补bug</span><br><span class="line"></span><br><span class="line">- docs：文档（documentation）</span><br><span class="line"></span><br><span class="line">- style： 格式（不影响代码运行的变动）</span><br><span class="line"></span><br><span class="line">- refactor：重构（即不是新增功能，也不是修改bug的代码变动）</span><br><span class="line"></span><br><span class="line">- perf：更改外观</span><br><span class="line"></span><br><span class="line">- <span class="built_in">test</span>：增加测试</span><br><span class="line"></span><br><span class="line">- chore：构建过程或辅助工具的变动</span><br></pre></td></tr></table></figure>
+<h4 id="1-2-scope"><a href="#1-2-scope" class="headerlink" title="1.2 scope"></a>1.2 scope</h4><p>用于说明 commit 影响的范围</p>
+<p>具体范围可根据项目而定，我在海马汇中根据功能模块大致分了conversation、contract、global、login、worksapce等几个模块，在查看git log的时候涉及范围一目了然</p>
+<h4 id="1-3-subject"><a href="#1-3-subject" class="headerlink" title="1.3 subject"></a>1.3 subject</h4><p>commit 目的的简短描述，不超过50个字符</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"> //英文规范：</span><br><span class="line"></span><br><span class="line">- 以动词开头，使用第一人称现在时，比如change，而不是changed或changes</span><br><span class="line"></span><br><span class="line">- 第一个字母小写</span><br><span class="line"></span><br><span class="line">- 结尾不加句号（.）</span><br></pre></td></tr></table></figure>
+<p>为了直观，我没用蹩脚的英文，直接使用中文说明</p>
+<h3 id="2-Body"><a href="#2-Body" class="headerlink" title="2.Body"></a>2.Body</h3><p>Body 部分是对本次 commit 的详细描述，可以分成多行。例：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">More detailed explanatory text, <span class="keyword">if</span> necessary.  Wrap it to</span><br><span class="line">about 72 characters or so.</span><br><span class="line"></span><br><span class="line">Further paragraphs come after blank lines.</span><br><span class="line"></span><br><span class="line">- Bullet points are okay, too</span><br><span class="line">- Use a hanging indent</span><br></pre></td></tr></table></figure>
+<h3 id="3-Footer"><a href="#3-Footer" class="headerlink" title="3.Footer"></a>3.Footer</h3><p>Footer 部分只用于两种情况。<br>（1）不兼容变动<br>（2）关闭 Issue</p>
+<h2 id="二-Commitizen"><a href="#二-Commitizen" class="headerlink" title="二.Commitizen"></a><strong>二.Commitizen</strong></h2><p>Commitizen是一个撰写合格 Commit message 的工具。<br>安装命令如下。</p>
+<p><code>npm install -g commitizen</code></p>
+<p>然后，在项目目录里，运行下面的命令，使其支持 Angular 的 Commit message 格式。</p>
+<p><code>commitizen init cz-conventional-changelog --save --save-exact</code></p>
+<p>以后，凡是用到</p>
+<blockquote>
+<p>git commit</p>
+</blockquote>
+<p>命令，一律改为使用</p>
+<blockquote>
+<p>git cz</p>
+</blockquote>
+<p>这时，就会出现选项，用来生成符合格式的 Commit message。</p>
+<p><img src="https://ws1.sinaimg.cn/large/006tNc79gy1fmr4u91svhj30zu0d07do.jpg" alt=""></p>
+<p><img src="https://ws2.sinaimg.cn/large/006tNc79gy1fmr4v4di8nj31000fkjyi.jpg" alt=""></p>
+<p>再也不会出现名字缩写或者 fix bug、fix bug again之类的commit message了</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://fourleafclove.github.io/2017/10/11/Commitizen/" data-id="ck3pojb4t0000nwsky4sx7osx" class="article-share-link">Teilen</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/">git</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2017/10/14/browser/notification/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Neuer</strong>
+      <div class="article-nav-title">
+        
+          Web Notification桌面通知
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/09/12/IM/scroll2/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Älter</strong>
+      <div class="article-nav-title">滚动条禁用边缘回弹</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Kategorien</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/blog/">blog</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/H5/">H5</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/IM/">IM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/angular/">angular</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/browser/">browser</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/">css</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/electron/">electron</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/element/">element</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/font/">font</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javascript/">javascript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/markdown/">markdown</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mobile/">mobile</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vue/">vue</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/H5/" style="font-size: 10px;">H5</a> <a href="/tags/IM/" style="font-size: 20px;">IM</a> <a href="/tags/angular/" style="font-size: 10px;">angular</a> <a href="/tags/browser/" style="font-size: 12px;">browser</a> <a href="/tags/css/" style="font-size: 20px;">css</a> <a href="/tags/electron/" style="font-size: 10px;">electron</a> <a href="/tags/element/" style="font-size: 14px;">element</a> <a href="/tags/font/" style="font-size: 12px;">font</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/javascript/" style="font-size: 18px;">javascript</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/mobile/" style="font-size: 10px;">mobile</a> <a href="/tags/vue/" style="font-size: 16px;">vue</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archiv</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">November 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">October 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">September 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">August 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">October 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">August 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">July 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/01/">January 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">November 2015</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">letzter Beitrag</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2019/11/23/vue/element-input/">Element源码分析-Input</a>
+          </li>
+        
+          <li>
+            <a href="/2019/11/10/vue/element-button/">Element源码分析-Button</a>
+          </li>
+        
+          <li>
+            <a href="/2019/10/27/vue/element-layout/">Element源码分析-Layout</a>
+          </li>
+        
+          <li>
+            <a href="/2019/10/16/devOps/docker/">Docker部署一个spa应用</a>
+          </li>
+        
+          <li>
+            <a href="/2019/10/05/vue/vue3/">Vue3 中的数据侦测</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2019 FLC<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>

@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>深入探究font(1) | Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="深入探究font(1)">
+<meta name="keywords" content="font,css">
+<meta property="og:type" content="article">
+<meta property="og:title" content="深入探究font(1)">
+<meta property="og:url" content="https://fourleafclove.github.io/2017/08/02/browser/font1/index.html">
+<meta property="og:site_name" content="Blog">
+<meta property="og:description" content="深入探究font(1)">
+<meta property="og:image" content="https://ws4.sinaimg.cn/large/006tKfTcgy1fncmvri0rej305t01h3yb.jpg">
+<meta property="og:image" content="https://ws2.sinaimg.cn/large/006tKfTcgy1fncmy4yg1yj305t01nwea.jpg">
+<meta property="og:updated_time" content="2019-12-03T09:45:40.241Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="深入探究font(1)">
+<meta name="twitter:description" content="深入探究font(1)">
+<meta name="twitter:image" content="https://ws4.sinaimg.cn/large/006tKfTcgy1fncmvri0rej305t01h3yb.jpg">
+  
+    <link rel="alternate" href="/atom.xml" title="Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Blog</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Suche"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://fourleafclove.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-browser/font1" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/08/02/browser/font1/" class="article-date">
+  <time datetime="2017-08-01T16:00:00.000Z" itemprop="datePublished">2017-08-02</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/blog/">blog</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      深入探究font(1)
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="字体类型"><a href="#字体类型" class="headerlink" title="字体类型"></a>字体类型</h3><h4 id="1-衬线体（Serif）"><a href="#1-衬线体（Serif）" class="headerlink" title="1. 衬线体（Serif）"></a>1. 衬线体（Serif）</h4><p>衬线是笔画末端的装饰部分，用于更清晰地标明笔触末端，提高辨识率从而提高阅读速度。另外衬线字体感觉会更正统。<br>下图红色部分就是衬线。</p>
+<p><img src="https://ws4.sinaimg.cn/large/006tKfTcgy1fncmvri0rej305t01h3yb.jpg" width="180"></p>
+<h4 id="2-无衬线体-非衬线体（Sans-serif）"><a href="#2-无衬线体-非衬线体（Sans-serif）" class="headerlink" title="2. 无衬线体/非衬线体（Sans-serif）"></a>2. 无衬线体/非衬线体（Sans-serif）</h4><p><img src="https://ws2.sinaimg.cn/large/006tKfTcgy1fncmy4yg1yj305t01nwea.jpg" width="180"></p>
+<blockquote>
+<p>10px~12px的衬线字体在屏幕下难以辨认，因此网页中常用无衬线字体而非衬线字体。</p>
+</blockquote>
+<a id="more"></a>
+<h4 id="3-等宽体（Monospace）"><a href="#3-等宽体（Monospace）" class="headerlink" title="3. 等宽体（Monospace）"></a>3. 等宽体（Monospace）</h4><p>等宽字体仅针对西文字体。由于英文字母的宽度各不相同，导致编程时代码排版很难看。在DOS命令中，看到的均是等宽字体。<br>编程对等宽字体的要求：</p>
+<ol>
+<li>所有字体等宽</li>
+<li>字体简洁、清晰和规范</li>
+<li>支持ASCII码为128以上的扩展字符集（如GBK,gb2312和unicode等）</li>
+<li>空白字符(ASCII:0x20)与其他字符等宽</li>
+<li>1,I和i能容易地区分</li>
+<li>0,o和O能容易地区分</li>
+<li>双引号、单引号前后部分易于区分，最好是镜像对称</li>
+<li>标点符号外形清晰，尤其是大括号、圆括号和方括号</li>
+</ol>
+<h4 id="4-手写体-书法体（Calligraphy）"><a href="#4-手写体-书法体（Calligraphy）" class="headerlink" title="4. 手写体/书法体（Calligraphy）"></a>4. 手写体/书法体（Calligraphy）</h4><h4 id="5-符号体（Symbol）"><a href="#5-符号体（Symbol）" class="headerlink" title="5. 符号体（Symbol）"></a>5. 符号体（Symbol）</h4><p>例如Font Awesome</p>
+<h3 id="font-family"><a href="#font-family" class="headerlink" title="font-family"></a>font-family</h3><h4 id="1-font-family样式属性值"><a href="#1-font-family样式属性值" class="headerlink" title="1.font-family样式属性值"></a>1.font-family样式属性值</h4><figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-tag">font-family</span>: "<span class="selector-tag">Microsoft</span> <span class="selector-tag">YaHei</span>", <span class="selector-tag">arial</span>, <span class="selector-tag">sans-serif</span>;</span><br></pre></td></tr></table></figure>
+<p>属性值通过逗号<code>,</code>分割多个字体名称，当浏览器在解析文字时会从左往右依次搜索字体库，当搜索成功则采用该字体库渲染该文字，否则继续往右搜索。若均搜索失败则使用浏览器默认的字体库解析渲染文字。</p>
+<p>字体名称分为<code>字体族名称(family-name)</code>和<code>类族名称(generic-family)</code></p>
+<p><em>字体族名称(family-name)</em>：是具体的字体名称, 如”times”,”courier”,”arial”</p>
+<p><em>类族名称(generic-family)</em>：是字体类型名称,而具体的字体则由浏览器决定, 如”serif”,”sans-serif”,”cursive”,”fantasy”,”monospace”</p>
+<pre><code>注意：
+
+   1. font-family中设置的字体不会被浏览器自动下载, 字体是否可用则完全依靠客户端是否已安装该字体库而已.
+
+   2. 属性值必须以类族名称(generic-family)结尾确保字体会以正确的形式解析渲染.
+</code></pre><h4 id="2-浏览器的默认字体"><a href="#2-浏览器的默认字体" class="headerlink" title="2.浏览器的默认字体"></a>2.浏览器的默认字体</h4><p>类族名称(generic-family)的具体字体库是由浏览器决定的。</p>
+<p>Windows下的中文版IE、Chrome、FireFox的默认简体中文字体均是中易宋体。 因此类族名称为serif,sans-serif,monospace均使用中易宋体字体库，也就是说若网页中没有设置font-family样式属性或没有适合的中文字体库时则使用宋体字体库来解析渲染所有英文、中文和标点。</p>
+<p>但英文和半角标点使用宋体显示确实难看，因此建议至少设置一下英文字体：</p>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-tag">html</span>&#123;</span><br><span class="line">  <span class="attribute">font-family</span>: Arial, Tahoma, Sans-serif;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Mac OS 下浏览器的默认字体是文华黑体。</p>
+<p>Android下浏览器的默认字体是Droid Sans Fallback（效果和微软雅黑类似）。</p>
+<h4 id="3-为何以类族名称结尾？"><a href="#3-为何以类族名称结尾？" class="headerlink" title="3.为何以类族名称结尾？"></a>3.为何以类族名称结尾？</h4><p>类族名称(generic-family)后的字体族名称(family-name)不会生效。<br>例如<br><code>font-family:arial,sans-serif,&quot;宋体&quot;</code><br>搜索到sans-serif就已经在浏览器默认字体库中找到字体了,因此不会搜索宋体字库。</p>
+<h4 id="4-中文字体名称的表示方式"><a href="#4-中文字体名称的表示方式" class="headerlink" title="4. 中文字体名称的表示方式"></a>4. 中文字体名称的表示方式</h4><ol>
+<li>中文表示方式<br> <code>font-family: &quot;微软雅黑&quot;, &quot;黑体&quot;, &quot;宋体&quot;;</code></li>
+<li>英文表示方式<br> <code>font-family: &quot;Microsoft YaHei&quot;, SimHei, SimSun;</code></li>
+<li>unicode码表示方式<br> <code>font-family:&quot;\5FAE\8F6F\96C5\9ED1&quot;, &quot;\9ED1\4F53&quot;, &quot;\5B8B\4F53&quot;;</code><br>  或<br> <code>font-family: &quot;&amp;#x5FAE;&amp;#x8F6F;&amp;#x96C5;&amp;#x9ED1;&quot;, &quot;&amp;#x9ED1;&amp;#x4F53;&quot;, &quot;&amp;#x5B8B;&amp;#x4F53;&quot;;</code></li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://fourleafclove.github.io/2017/08/02/browser/font1/" data-id="ck3pojb5y000tnwskhz2c55s5" class="article-share-link">Teilen</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/css/">css</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/font/">font</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2017/08/04/browser/font2/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Neuer</strong>
+      <div class="article-nav-title">
+        
+          深入探究font(2)
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/07/26/browser/scroll/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Älter</strong>
+      <div class="article-nav-title">自定义webkit内核浏览器滚动条样式</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Kategorien</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/blog/">blog</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/H5/">H5</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/IM/">IM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/angular/">angular</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/browser/">browser</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/">css</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/electron/">electron</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/element/">element</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/font/">font</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javascript/">javascript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/markdown/">markdown</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mobile/">mobile</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vue/">vue</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/H5/" style="font-size: 10px;">H5</a> <a href="/tags/IM/" style="font-size: 20px;">IM</a> <a href="/tags/angular/" style="font-size: 10px;">angular</a> <a href="/tags/browser/" style="font-size: 12px;">browser</a> <a href="/tags/css/" style="font-size: 20px;">css</a> <a href="/tags/electron/" style="font-size: 10px;">electron</a> <a href="/tags/element/" style="font-size: 14px;">element</a> <a href="/tags/font/" style="font-size: 12px;">font</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/javascript/" style="font-size: 18px;">javascript</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/mobile/" style="font-size: 10px;">mobile</a> <a href="/tags/vue/" style="font-size: 16px;">vue</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archiv</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">November 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">October 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">September 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">August 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">October 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">August 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">July 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/01/">January 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">November 2015</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">letzter Beitrag</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2019/11/23/vue/element-input/">Element源码分析-Input</a>
+          </li>
+        
+          <li>
+            <a href="/2019/11/10/vue/element-button/">Element源码分析-Button</a>
+          </li>
+        
+          <li>
+            <a href="/2019/10/27/vue/element-layout/">Element源码分析-Layout</a>
+          </li>
+        
+          <li>
+            <a href="/2019/10/16/devOps/docker/">Docker部署一个spa应用</a>
+          </li>
+        
+          <li>
+            <a href="/2019/10/05/vue/vue3/">Vue3 中的数据侦测</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2019 FLC<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>

@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>网络连接状态监测 | Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="网络连接状态监测">
+<meta name="keywords" content="javascript">
+<meta property="og:type" content="article">
+<meta property="og:title" content="网络连接状态监测">
+<meta property="og:url" content="https://fourleafclove.github.io/2017/09/05/js/网络连接状态监测/index.html">
+<meta property="og:site_name" content="Blog">
+<meta property="og:description" content="网络连接状态监测">
+<meta property="og:image" content="https://ws2.sinaimg.cn/large/006tNc79gy1fmu4myw21aj30zq05w0sw.jpg">
+<meta property="og:image" content="https://ws4.sinaimg.cn/large/006tNc79gy1fmu4m4fd7sj31kw0elaal.jpg">
+<meta property="og:updated_time" content="2019-12-03T09:45:40.256Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="网络连接状态监测">
+<meta name="twitter:description" content="网络连接状态监测">
+<meta name="twitter:image" content="https://ws2.sinaimg.cn/large/006tNc79gy1fmu4myw21aj30zq05w0sw.jpg">
+  
+    <link rel="alternate" href="/atom.xml" title="Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Blog</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Suche"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://fourleafclove.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-js/网络连接状态监测" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/09/05/js/网络连接状态监测/" class="article-date">
+  <time datetime="2017-09-04T16:00:00.000Z" itemprop="datePublished">2017-09-05</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/blog/">blog</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      网络连接状态监测
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>用JavaScript监测网络连接状态的几种思路</p>
+<h2 id="navigator-onLine"><a href="#navigator-onLine" class="headerlink" title="navigator.onLine"></a>navigator.onLine</h2><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span>(navigator.onLine == <span class="literal">true</span>)&#123;</span><br><span class="line">    alert（<span class="string">"已连接"</span>）；</span><br><span class="line">&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">    alert（<span class="string">"未连接"</span>）；</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><code>navigator.onLine</code> 是一个值为 <code>true</code>/<code>false</code>  (<code>true</code> 表示在线， <code>false</code> 表示离线) 的属性。。一旦浏览器的联网状态发生改变，该属性值也会随之变化。当用户点击链接或者脚本进行网络请求时，如果发现浏览器连接不上互联网，则该属性会被赋值为 <code>false</code>。</p>
+<a id="more"></a>
+<p>各浏览器对该属性的实现有些不同。</p>
+<p>在Chrome和Safari中，如果浏览器连接不上局域网 (LAN)或者路由器，就是离线状态；否则就是在线状态。</p>
+<p>所以当该属性值为 <code>false</code>的时候，你可以说浏览器不能正常联网.但如果该属性值为 <code>true</code> 的时候，并不意味着浏览器一定能连接上互联网。</p>
+<p>还有其他一些可能引起误判的原因，比如你的电脑安装了虚拟化软件，可能会有一个虚拟网卡，这时它总是会显示正常联网;或者你连上了路由器，但路由器并没有联网，也会返回 <code>true</code> 因此，如果你想得到浏览器确切的联网状态，应该使用其他额外的检查手段。</p>
+<p>在Firefox和Internet Explorer中，如果浏览器处于”脱机工作”状态，则返回 false,其他情况都返回true.</p>
+<h2 id="navigator-connection"><a href="#navigator-connection" class="headerlink" title="navigator.connection"></a>navigator.connection</h2><p><code>navigator.connection</code> 是只读的，提供一个 <code>NetworkInformation</code> 对象来获取设备的网络连接信息。例如用户设备的当前带宽或连接是否被计量， 这可以用于基于用户的连接来选择高清晰度内容或低清晰度内容</p>
+<p> <img src="https://ws2.sinaimg.cn/large/006tNc79gy1fmu4myw21aj30zq05w0sw.jpg" width="700"></p>
+<p> 至于兼容性嘛…</p>
+<p>  <img src="https://ws4.sinaimg.cn/large/006tNc79gy1fmu4m4fd7sj31kw0elaal.jpg" width="700"></p>
+<p>不多说了 pass</p>
+<h2 id="Ajax"><a href="#Ajax" class="headerlink" title="Ajax"></a>Ajax</h2><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">checkNetwork</span>(<span class="params">callback</span>) </span>&#123;</span><br><span class="line">    $http.get(<span class="string">"index.html"</span>, &#123;</span><br><span class="line">        params: &#123; <span class="attr">t</span>: <span class="built_in">Math</span>.random() &#125;</span><br><span class="line">    &#125;).success(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'online'</span>);</span><br><span class="line">        callback &amp;&amp; callback.onSuccess &amp;&amp; callback.onSuccess();</span><br><span class="line">    &#125;).error(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'offline'</span>);</span><br><span class="line">        setTimeout(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">            checkNetwork(callback);</span><br><span class="line">        &#125;, <span class="number">2000</span>);</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>思路没啥好说的，很简单。</p>
+<p>有一点要提的是通过ajax监测，在弱网环境或者有网络拦截的情况下，有可能得到的结果与实际不符。</p>
+<p>比入公司网络连接后需要登录账号才能正常使用网络，如果连接上了不登录，或者长时间不操作下线了，这样的状态下接口调不通，但一些静态资源还是可以正常获取。所以为了准确性，最好还是用ajax调服务端接口的方式来监测连接状态。</p>
+<h2 id="img的onerror事件"><a href="#img的onerror事件" class="headerlink" title="img的onerror事件"></a>img的onerror事件</h2><p>通过轮询生成 <code>IMG</code>, 通过 <code>img</code> 的 <code>onerror</code> 事件判断是否断网<br>此方法弱点就是耗流量（一像素的空gif 轮询一次 1.43KB ）手机上用就会偷偷跑流量…</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">setInterval(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    $(<span class="string">'&lt;img src="img.gif"&gt;'</span>).appendTo(<span class="string">'body'</span>).css(<span class="string">"display"</span>,<span class="string">"none"</span>)</span><br><span class="line">    .load(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">"online"</span>)</span><br><span class="line">    &#125;).error(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">"offline"</span>)</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;,<span class="number">2000</span>)</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://fourleafclove.github.io/2017/09/05/js/网络连接状态监测/" data-id="ck3pojb6a001fnwskgcsaxupl" class="article-share-link">Teilen</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/">javascript</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2017/09/12/IM/scroll2/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Neuer</strong>
+      <div class="article-nav-title">
+        
+          滚动条禁用边缘回弹
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/08/22/js/图片预加载/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Älter</strong>
+      <div class="article-nav-title">图片预加载的几种方式</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Kategorien</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/blog/">blog</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/H5/">H5</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/IM/">IM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/angular/">angular</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/browser/">browser</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/">css</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/electron/">electron</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/element/">element</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/font/">font</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javascript/">javascript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/markdown/">markdown</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mobile/">mobile</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vue/">vue</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/H5/" style="font-size: 10px;">H5</a> <a href="/tags/IM/" style="font-size: 20px;">IM</a> <a href="/tags/angular/" style="font-size: 10px;">angular</a> <a href="/tags/browser/" style="font-size: 12px;">browser</a> <a href="/tags/css/" style="font-size: 20px;">css</a> <a href="/tags/electron/" style="font-size: 10px;">electron</a> <a href="/tags/element/" style="font-size: 14px;">element</a> <a href="/tags/font/" style="font-size: 12px;">font</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/javascript/" style="font-size: 18px;">javascript</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/mobile/" style="font-size: 10px;">mobile</a> <a href="/tags/vue/" style="font-size: 16px;">vue</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archiv</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">November 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">October 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">September 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">August 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">October 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">August 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">July 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/01/">January 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">November 2015</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">letzter Beitrag</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2019/11/23/vue/element-input/">Element源码分析-Input</a>
+          </li>
+        
+          <li>
+            <a href="/2019/11/10/vue/element-button/">Element源码分析-Button</a>
+          </li>
+        
+          <li>
+            <a href="/2019/10/27/vue/element-layout/">Element源码分析-Layout</a>
+          </li>
+        
+          <li>
+            <a href="/2019/10/16/devOps/docker/">Docker部署一个spa应用</a>
+          </li>
+        
+          <li>
+            <a href="/2019/10/05/vue/vue3/">Vue3 中的数据侦测</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2019 FLC<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>

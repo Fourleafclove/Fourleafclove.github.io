@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+
+  
+  <title>Proxy API | 个人工作记录</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Proxy API">
+<meta name="keywords" content="vue">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Proxy API">
+<meta property="og:url" content="https://fourleafclove.github.io/2019/10/05/vue/Proxy/index.html">
+<meta property="og:site_name" content="个人工作记录">
+<meta property="og:description" content="Proxy API">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2020-04-18T03:28:24.012Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Proxy API">
+<meta name="twitter:description" content="Proxy API">
+  
+    <link rel="alternate" href="/atom.xml" title="个人工作记录" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">个人工作记录</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://fourleafclove.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-vue/Proxy" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/10/05/vue/Proxy/" class="article-date">
+  <time datetime="2019-10-04T16:00:00.000Z" itemprop="datePublished">2019-10-05</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/blog/">blog</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Proxy API
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Vue 的核心之一就是响应式系统，通过侦测数据的变化，来驱动更新视图。</p>
+<p>通过可响应对象，实现对数据的侦测，从而告知外界数据变化。实现可响应对象的方式：</p>
+<ul>
+<li>getter 和 setter</li>
+<li>defineProperty</li>
+<li>Proxy</li>
+</ul>
+<p>关于前两个 API 的使用方式不多赘述，单一的访问器 getter/setter 功能相对简单，而作为 Vue2.x 实现可响应对象的 API - defineProperty ，<br>API 本身存在较多问题。<br>Vue2.x 中，实现数据的可响应，需要对 Object 和 Array 两种类型采用不同的处理方式。<br>Object 类型通过 Object.defineProperty 将属性转换成 getter/setter ，这个过程需要递归侦测所有的对象 key，来实现深度的侦测。<br>为了感知 Array 的变化，对 Array 原型上几个改变数组自身的内容的方法做了拦截，虽然实现了对数组的可响应，但同样存在一些问题，或者说不够方便的情况。<br>同时，defineProperty 通过递归实现 getter/setter 也存在一定的性能问题。<br>更好的实现方式是通过 ES6 提供的 Proxy API。</p>
+<a id="more"></a>
+<h3 id="Proxy-API-的一些细节"><a href="#Proxy-API-的一些细节" class="headerlink" title="Proxy API 的一些细节"></a>Proxy API 的一些细节</h3><p>Proxy API 具有更加强大的功能，<br>相比旧的 defineProperty API ，Proxy 可以代理数组，并且 API 提供了多个 traps ，可以实现诸多功能。<br>这里主要说两个 trap: get 、 set ， 以及其中的一些比较容易被忽略的细节。</p>
+<h4 id="细节一：trap-默认行为"><a href="#细节一：trap-默认行为" class="headerlink" title="细节一：trap 默认行为"></a>细节一：trap 默认行为</h4><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> data = &#123; <span class="attr">foo</span>: <span class="string">"foo"</span> &#125;;</span><br><span class="line"><span class="keyword">let</span> p = <span class="keyword">new</span> <span class="built_in">Proxy</span>(data, &#123;</span><br><span class="line">  <span class="keyword">get</span>(target, key, receiver) &#123;</span><br><span class="line">    <span class="keyword">return</span> target[key];</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="keyword">set</span>(target, key, value, receiver) &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">"set value"</span>);</span><br><span class="line">    target[key] = value; <span class="comment">// ?</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">p.foo = <span class="number">123</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// set value</span></span><br></pre></td></tr></table></figure>
+<p>通过 proxy 返回的对象 p 代理了对原始数据的操作，当对 p 设置时，便可以侦测到变化。但是这么写实际上是有问题， 当代理的对象数据是数组时，会报错。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> data = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>];</span><br><span class="line"><span class="keyword">let</span> p = <span class="keyword">new</span> <span class="built_in">Proxy</span>(data, &#123;</span><br><span class="line">  <span class="keyword">get</span>(target, key, receiver) &#123;</span><br><span class="line">    <span class="keyword">return</span> target[key];</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="keyword">set</span>(target, key, value, receiver) &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">"set value"</span>);</span><br><span class="line">    target[key] = value;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">p.push(<span class="number">4</span>); <span class="comment">// VM438:12 Uncaught TypeError: 'set' on proxy: trap returned falsish for property '3'</span></span><br></pre></td></tr></table></figure>
+<p>将代码更改为：</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> data = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>];</span><br><span class="line"><span class="keyword">let</span> p = <span class="keyword">new</span> <span class="built_in">Proxy</span>(data, &#123;</span><br><span class="line">  <span class="keyword">get</span>(target, key, receiver) &#123;</span><br><span class="line">    <span class="keyword">return</span> target[key];</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="keyword">set</span>(target, key, value, receiver) &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">"set value"</span>);</span><br><span class="line">    target[key] = value;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">p.push(<span class="number">4</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// set value // 打印2次</span></span><br></pre></td></tr></table></figure>
+<p>先看 set 操作，从打印输出可以看出，push 操作除了给数组的第 3 位下标设置值 1 ，还给数组的 length 值更改为 4。<br>同时这个操作还触发了 get 去获取 push 和 length 两个属性。<br>我们可以通过 Reflect 来返回 trap 相应的默认行为，对于 set 操作相对简单，但是一些比较复杂的默认行为处理起来相对繁琐得多，Reflect 的作用就显现出来了。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> data = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>];</span><br><span class="line"><span class="keyword">let</span> p = <span class="keyword">new</span> <span class="built_in">Proxy</span>(data, &#123;</span><br><span class="line">  <span class="keyword">get</span>(target, key, receiver) &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">"get value:"</span>, key);</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">Reflect</span>.get(target, key, receiver);</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="keyword">set</span>(target, key, value, receiver) &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">"set value:"</span>, key, value);</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">Reflect</span>.set(target, key, value, receiver);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">p.push(<span class="number">1</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// get value: push</span></span><br><span class="line"><span class="comment">// get value: length</span></span><br><span class="line"><span class="comment">// set value: 3 1</span></span><br><span class="line"><span class="comment">// set value: length 4</span></span><br></pre></td></tr></table></figure>
+<p>相比自己处理 set 的默认行为，Reflect 就方便得多。</p>
+<h4 id="细节二：多次触发-set-get"><a href="#细节二：多次触发-set-get" class="headerlink" title="细节二：多次触发 set / get"></a>细节二：多次触发 set / get</h4><p>从前面的例子中可以看出，当代理对象是数组时，push 操作会触发多次 set 执行，同时，也引发 get 操作，这点非常重要，vue3 就很好的使用了这点。 我们可以从另一个例子来看这个操作：</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> data = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>];</span><br><span class="line"><span class="keyword">let</span> p = <span class="keyword">new</span> <span class="built_in">Proxy</span>(data, &#123;</span><br><span class="line">  <span class="keyword">get</span>(target, key, receiver) &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">"get value:"</span>, key);</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">Reflect</span>.get(target, key, receiver);</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="keyword">set</span>(target, key, value, receiver) &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">"set value:"</span>, key, value);</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">Reflect</span>.set(target, key, value, receiver);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">p.unshift(<span class="string">"a"</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// get value: unshift</span></span><br><span class="line"><span class="comment">// get value: length</span></span><br><span class="line"><span class="comment">// get value: 2</span></span><br><span class="line"><span class="comment">// set value: 3 3</span></span><br><span class="line"><span class="comment">// get value: 1</span></span><br><span class="line"><span class="comment">// set value: 2 2</span></span><br><span class="line"><span class="comment">// get value: 0</span></span><br><span class="line"><span class="comment">// set value: 1 1</span></span><br><span class="line"><span class="comment">// set value: 0 a</span></span><br><span class="line"><span class="comment">// set value: length 4</span></span><br></pre></td></tr></table></figure>
+<p>可以看到，在对数组做 unshift 操作时，会多次触发 get 和 set 。<br>仔细观察输出，不难看出，get 先拿数组最末位下标，开辟新的下标 3 存放原有的末位数值，然后再将原数值都往后挪，将 0 下标设置为了 unshift 的值 a ，由此引发了多次 set 操作。<br>而这对于 通知外部操作 显然是不利，我们假设 set 中的 console 是触发外界渲染的 render 函数，那么这个 unshift 操作会引发 多次 render 。<br>我们后面会讲述如何解决相应的这个问题，继续。</p>
+<h4 id="细节三：proxy-只能代理一层"><a href="#细节三：proxy-只能代理一层" class="headerlink" title="细节三：proxy 只能代理一层"></a>细节三：proxy 只能代理一层</h4><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> data = &#123; <span class="attr">foo</span>: <span class="string">"foo"</span>, <span class="attr">bar</span>: &#123; <span class="attr">key</span>: <span class="number">1</span> &#125;, <span class="attr">ary</span>: [<span class="string">"a"</span>, <span class="string">"b"</span>] &#125;;</span><br><span class="line"><span class="keyword">let</span> p = <span class="keyword">new</span> <span class="built_in">Proxy</span>(data, &#123;</span><br><span class="line">  <span class="keyword">get</span>(target, key, receiver) &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">"get value:"</span>, key);</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">Reflect</span>.get(target, key, receiver);</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="keyword">set</span>(target, key, value, receiver) &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">"set value:"</span>, key, value);</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">Reflect</span>.set(target, key, value, receiver);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">p.bar.key = <span class="number">2</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// get value: bar</span></span><br></pre></td></tr></table></figure>
+<p>执行代码，可以看到并没有触发 set 的输出，反而是触发了 get ，因为 set 的过程中访问了 bar 这个属性。 由此可见，proxy 代理的对象只能代理到第一层，而对象内部的深度侦测，是需要开发者自己实现的。同样的，对于对象内部的数组也是一样。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">p.ary.push(<span class="string">"c"</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// get value: ary</span></span><br></pre></td></tr></table></figure>
+<p>同样只走了 get 操作，set 并不能感知到。</p>
+<p>我们注意到 get/set 还有一个参数：receiver ，对于 receiver ，其实接收的是一个代理对象：</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> data = &#123; <span class="attr">a</span>: &#123; <span class="attr">b</span>: &#123; <span class="attr">c</span>: <span class="number">1</span> &#125; &#125; &#125;;</span><br><span class="line"><span class="keyword">let</span> p = <span class="keyword">new</span> <span class="built_in">Proxy</span>(data, &#123;</span><br><span class="line">  <span class="keyword">get</span>(target, key, receiver) &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(receiver);</span><br><span class="line">    <span class="keyword">const</span> res = <span class="built_in">Reflect</span>.get(target, key, receiver);</span><br><span class="line">    <span class="keyword">return</span> res;</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="keyword">set</span>(target, key, value, receiver) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">Reflect</span>.set(target, key, value, receiver);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// Proxy &#123;a: &#123;…&#125;&#125;</span></span><br></pre></td></tr></table></figure>
+<p>这里 receiver 输出的是当前代理对象，注意，这是一个已经代理后的对象。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> data = &#123; <span class="attr">a</span>: &#123; <span class="attr">b</span>: &#123; <span class="attr">c</span>: <span class="number">1</span> &#125; &#125; &#125;;</span><br><span class="line"><span class="keyword">let</span> p = <span class="keyword">new</span> <span class="built_in">Proxy</span>(data, &#123;</span><br><span class="line">  <span class="keyword">get</span>(target, key, receiver) &#123;</span><br><span class="line">    <span class="keyword">const</span> res = <span class="built_in">Reflect</span>.get(target, key, receiver);</span><br><span class="line">    <span class="built_in">console</span>.log(res);</span><br><span class="line">    <span class="keyword">return</span> res;</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="keyword">set</span>(target, key, value, receiver) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">Reflect</span>.set(target, key, value, receiver);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// &#123;b: &#123;c: 1&#125; &#125;</span></span><br></pre></td></tr></table></figure>
+<p>当我们尝试输出 Reflect.get 返回的值，会发现，当代理的对象是多层结构时，Reflect.get 会返回对象的内层结构。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://fourleafclove.github.io/2019/10/05/vue/Proxy/" data-id="ck952tk110021rki57dhkd24i" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/vue/">vue</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2019/10/16/devOps/docker/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Docker部署一个spa应用
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2019/09/13/browser/层叠上下文/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">层叠上下文、层叠等级、层叠顺序</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/blog/">blog</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/H5/">H5</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/IM/">IM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/angular/">angular</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/browser/">browser</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/">css</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/electron/">electron</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/element/">element</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/font/">font</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javascript/">javascript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/markdown/">markdown</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mobile/">mobile</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vue/">vue</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/H5/" style="font-size: 10px;">H5</a> <a href="/tags/IM/" style="font-size: 20px;">IM</a> <a href="/tags/angular/" style="font-size: 10px;">angular</a> <a href="/tags/browser/" style="font-size: 12px;">browser</a> <a href="/tags/css/" style="font-size: 20px;">css</a> <a href="/tags/electron/" style="font-size: 10px;">electron</a> <a href="/tags/element/" style="font-size: 14px;">element</a> <a href="/tags/font/" style="font-size: 12px;">font</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/javascript/" style="font-size: 18px;">javascript</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/mobile/" style="font-size: 10px;">mobile</a> <a href="/tags/vue/" style="font-size: 16px;">vue</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">November 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">October 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">September 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">August 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">October 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">August 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">July 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/01/">January 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">November 2015</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2019/11/23/vue/element-input/">Element源码分析-Input</a>
+          </li>
+        
+          <li>
+            <a href="/2019/11/10/vue/element-button/">Element源码分析-Button</a>
+          </li>
+        
+          <li>
+            <a href="/2019/10/27/vue/element-layout/">Element源码分析-Layout</a>
+          </li>
+        
+          <li>
+            <a href="/2019/10/16/devOps/docker/">Docker部署一个spa应用</a>
+          </li>
+        
+          <li>
+            <a href="/2019/10/05/vue/Proxy/">Proxy API</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2020 FLC<br>
+      Copyright © 2020 FLC 版权所有.<br>
+      <a href="http://beian.miit.gov.cn" target="_blank">鲁ICP备18033113号-1</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//code.jquery.com/jquery-2.0.3.min.js"></script>
+
+ <link rel="stylesheet" href="/fancybox/jquery.fancybox.css"> <script src="/fancybox/jquery.fancybox.pack.js"></script>  <script src="/js/script.js"></script> 
+
+
+  </div>
+</body>
+</html>

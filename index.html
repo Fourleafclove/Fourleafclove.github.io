@@ -1,0 +1,1151 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+
+  
+  <title>个人工作记录</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta property="og:type" content="website">
+<meta property="og:title" content="个人工作记录">
+<meta property="og:url" content="https://fourleafclove.github.io/index.html">
+<meta property="og:site_name" content="个人工作记录">
+<meta property="og:locale" content="default">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="个人工作记录">
+  
+    <link rel="alternate" href="/atom.xml" title="个人工作记录" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">个人工作记录</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://fourleafclove.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main">
+  
+    <article id="post-vue/element-input" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/11/23/vue/element-input/" class="article-date">
+  <time datetime="2019-11-22T16:00:00.000Z" itemprop="datePublished">2019-11-23</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/blog/">blog</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/11/23/vue/element-input/">Element源码分析-Input</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>首先来看一下 html 代码：</p>
+<figure class="highlight jsx"><table><tr><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">  &lt;div ...&gt;</span><br><span class="line">    &lt;template v-<span class="keyword">if</span>=<span class="string">"type !== 'textarea'"</span>&gt;</span><br><span class="line">      &lt;!-- 前置元素 --&gt;</span><br><span class="line">      &lt;div <span class="class"><span class="keyword">class</span></span>=<span class="string">"el-input-group__prepend"</span> v-<span class="keyword">if</span>=<span class="string">"$slots.prepend"</span>&gt;</span><br><span class="line">        &lt;slot name=<span class="string">"prepend"</span>&gt;&lt;<span class="regexp">/slot&gt;</span></span><br><span class="line"><span class="regexp">      &lt;/</span>div&gt;</span><br><span class="line"></span><br><span class="line">      &lt;!--主体input--&gt;</span><br><span class="line">      &lt;input ...&gt;</span><br><span class="line"></span><br><span class="line">      &lt;!-- 前置内容 --&gt;</span><br><span class="line">      &lt;span <span class="class"><span class="keyword">class</span></span>=<span class="string">"el-input__prefix"</span> v-<span class="keyword">if</span>=<span class="string">"$slots.prefix || prefixIcon"</span>&gt;</span><br><span class="line">       ...</span><br><span class="line">      &lt;<span class="regexp">/span&gt;</span></span><br><span class="line"><span class="regexp">      &lt;!-- 后置内容 --&gt;</span></span><br><span class="line"><span class="regexp">      &lt;span</span></span><br><span class="line"><span class="regexp">        ...</span></span><br><span class="line"><span class="regexp">      &lt;/</span>span&gt;</span><br><span class="line">      &lt;!-- 后置元素 --&gt;</span><br><span class="line">      &lt;div <span class="class"><span class="keyword">class</span></span>=<span class="string">"el-input-group__append"</span> v-<span class="keyword">if</span>=<span class="string">"$slots.append"</span>&gt;</span><br><span class="line">       ...</span><br><span class="line">      &lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">    &lt;/</span>template&gt;</span><br><span class="line">    &lt;textarea v-<span class="keyword">else</span>&gt;</span><br><span class="line">    &lt;<span class="regexp">/textarea&gt;</span></span><br><span class="line"><span class="regexp">  &lt;/</span>div&gt;</span><br><span class="line">&lt;<span class="regexp">/template&gt;</span></span><br></pre></td></tr></table></figure>
+        
+          <p class="article-more-link">
+            <a href="/2019/11/23/vue/element-input/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://fourleafclove.github.io/2019/11/23/vue/element-input/" data-id="ck952tk160027rki5n54961qg" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/element/">element</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/vue/">vue</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-vue/element-button" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/11/10/vue/element-button/" class="article-date">
+  <time datetime="2019-11-09T16:00:00.000Z" itemprop="datePublished">2019-11-10</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/blog/">blog</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/11/10/vue/element-button/">Element源码分析-Button</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>button 是比较简单的组件</p>
+        
+          <p class="article-more-link">
+            <a href="/2019/11/10/vue/element-button/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://fourleafclove.github.io/2019/11/10/vue/element-button/" data-id="ck952tk0y001xrki5rchjaqys" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/element/">element</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/vue/">vue</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-vue/element-layout" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/10/27/vue/element-layout/" class="article-date">
+  <time datetime="2019-10-26T16:00:00.000Z" itemprop="datePublished">2019-10-27</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/blog/">blog</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/10/27/vue/element-layout/">Element源码分析-Layout</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>整个组件的代码量不多，下面是给出了详细注释：</p>
+<figure class="highlight jsx"><table><tr><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  <span class="comment">//组件名称，注意是驼峰命名法，这使得实际使用组件时短横线连接法&lt;el-row&gt;和驼峰法&lt;ElRow&gt;都可以使用</span></span><br><span class="line">  name: <span class="string">"ElRow"</span>,</span><br><span class="line">  <span class="comment">//自定义属性(该属性不是component必需属性)，重要，用于后面&lt;el-col&gt;不断向父级查找该组件</span></span><br><span class="line">  componentName: <span class="string">"ElRow"</span>,</span><br><span class="line">  <span class="comment">//组件的props</span></span><br><span class="line">  props: &#123;</span><br><span class="line">    <span class="comment">//组件渲染成html的实际标签，默认是div</span></span><br><span class="line">    tag: &#123;</span><br><span class="line">      type: <span class="built_in">String</span>,</span><br><span class="line">      <span class="keyword">default</span>: <span class="string">"div"</span></span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="comment">//该组件的里面的&lt;el-col&gt;组件的间隔</span></span><br><span class="line">    gutter: <span class="built_in">Number</span>,</span><br><span class="line">    <span class="comment">/* 组件是否是flex布局，将 type 属性赋值为 'flex'，可以启用 flex 布局，</span></span><br><span class="line"><span class="comment">     *  并可通过 justify 属性来指定 start, center, end, space-between, space-around</span></span><br><span class="line"><span class="comment">     *  其中的值来定义子元素的排版方式。</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line"></span><br><span class="line">    type: <span class="built_in">String</span>,</span><br><span class="line">    <span class="comment">//flex布局的justify属性</span></span><br><span class="line">    justify: &#123;</span><br><span class="line">      type: <span class="built_in">String</span>,</span><br><span class="line">      <span class="keyword">default</span>: <span class="string">"start"</span></span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="comment">//flex布局的align属性</span></span><br><span class="line">    align: &#123;</span><br><span class="line">      type: <span class="built_in">String</span>,</span><br><span class="line">      <span class="keyword">default</span>: <span class="string">"top"</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line"></span><br><span class="line">  computed: &#123;</span><br><span class="line">    <span class="comment">//row的左右margin，用于抵消col的padding，后面详细解释，注意是计算属性，这里通过gutter计算出实际margin</span></span><br><span class="line">    style() &#123;</span><br><span class="line">      <span class="keyword">const</span> ret = &#123;&#125;;</span><br><span class="line">      <span class="keyword">if</span> (<span class="keyword">this</span>.gutter) &#123;</span><br><span class="line">        ret.marginLeft = <span class="string">`-<span class="subst">$&#123;<span class="keyword">this</span>.gutter <span class="regexp">/ 2&#125;px`;</span></span></span></span><br><span class="line"><span class="string"><span class="subst"><span class="regexp">        ret.marginRight = ret.marginLeft;</span></span></span></span><br><span class="line"><span class="string"><span class="subst"><span class="regexp">      &#125;</span></span></span></span><br><span class="line"><span class="string"><span class="subst"><span class="regexp">      return ret;</span></span></span></span><br><span class="line"><span class="string"><span class="subst"><span class="regexp">    &#125;</span></span></span></span><br><span class="line"><span class="string"><span class="subst"><span class="regexp">  &#125;,</span></span></span></span><br><span class="line"><span class="string"><span class="subst"><span class="regexp"></span></span></span></span><br><span class="line"><span class="string"><span class="subst"><span class="regexp">  render(h) &#123;</span></span></span></span><br><span class="line"><span class="string"><span class="subst"><span class="regexp">    /</span><span class="regexp">/渲染函数，后面详细解释</span></span></span></span><br><span class="line"><span class="string"><span class="subst"><span class="regexp">    return h(</span></span></span></span><br><span class="line"><span class="string"><span class="subst"><span class="regexp">      this.tag,</span></span></span></span><br><span class="line"><span class="string"><span class="subst"><span class="regexp">      &#123;</span></span></span></span><br><span class="line"><span class="string"><span class="subst"><span class="regexp">        class: [</span></span></span></span><br><span class="line"><span class="string"><span class="subst"><span class="regexp">          "el-row",</span></span></span></span><br><span class="line"><span class="string"><span class="subst"><span class="regexp">          this.justify !== "start" ? `is-justify-$&#123;this.justify&#125;` : "",</span></span></span></span><br><span class="line"><span class="string"><span class="subst"><span class="regexp">          this.align !== "top" ? `is-align-$&#123;this.align&#125;` : "",</span></span></span></span><br><span class="line"><span class="string"><span class="subst"><span class="regexp">          &#123; "el-row--flex": this.type === "flex" &#125;</span></span></span></span><br><span class="line"><span class="string"><span class="subst"><span class="regexp">        ],</span></span></span></span><br><span class="line"><span class="string"><span class="subst"><span class="regexp">        style: this.style</span></span></span></span><br><span class="line"><span class="string"><span class="subst"><span class="regexp">      &#125;,</span></span></span></span><br><span class="line"><span class="string"><span class="subst"><span class="regexp">      this.$slots.default</span></span></span></span><br><span class="line"><span class="string"><span class="subst"><span class="regexp">    );</span></span></span></span><br><span class="line"><span class="string"><span class="subst"><span class="regexp">  &#125;</span></span></span></span><br><span class="line"><span class="string"><span class="subst"><span class="regexp">&#125;;</span></span></span></span><br></pre></td></tr></table></figure>
+        
+          <p class="article-more-link">
+            <a href="/2019/10/27/vue/element-layout/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://fourleafclove.github.io/2019/10/27/vue/element-layout/" data-id="ck952tk22003crki54qzrey6i" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/element/">element</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/vue/">vue</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-devOps/docker" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/10/16/devOps/docker/" class="article-date">
+  <time datetime="2019-10-15T16:00:00.000Z" itemprop="datePublished">2019-10-16</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/blog/">blog</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/10/16/devOps/docker/">Docker部署一个spa应用</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>用 vue cli 创建一个 vue 项目，修改一下创建出来的项目，在页面上写一个前端接口请求，构建一版线上资源 ，基于 nginx docker 镜像构建成一个前端工程镜像，然后基于这个前端工程镜像，启动一个容器 vuenginxcontainer。启动一个基于 node 镜像的容器 nodewebserver，提供后端接口。修改 vuenginxcontainer 的 nginx 配置，使前端页面的接口请求转发到 nodewebserver 上。稍作优化和改进。</p>
+</blockquote>
+        
+          <p class="article-more-link">
+            <a href="/2019/10/16/devOps/docker/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://fourleafclove.github.io/2019/10/16/devOps/docker/" data-id="ck952tk0p001jrki5e7u0dryp" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/css/">css</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-vue/Proxy" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/10/05/vue/Proxy/" class="article-date">
+  <time datetime="2019-10-04T16:00:00.000Z" itemprop="datePublished">2019-10-05</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/blog/">blog</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/10/05/vue/Proxy/">Proxy API</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Vue 的核心之一就是响应式系统，通过侦测数据的变化，来驱动更新视图。</p>
+<p>通过可响应对象，实现对数据的侦测，从而告知外界数据变化。实现可响应对象的方式：</p>
+<ul>
+<li>getter 和 setter</li>
+<li>defineProperty</li>
+<li>Proxy</li>
+</ul>
+<p>关于前两个 API 的使用方式不多赘述，单一的访问器 getter/setter 功能相对简单，而作为 Vue2.x 实现可响应对象的 API - defineProperty ，<br>API 本身存在较多问题。<br>Vue2.x 中，实现数据的可响应，需要对 Object 和 Array 两种类型采用不同的处理方式。<br>Object 类型通过 Object.defineProperty 将属性转换成 getter/setter ，这个过程需要递归侦测所有的对象 key，来实现深度的侦测。<br>为了感知 Array 的变化，对 Array 原型上几个改变数组自身的内容的方法做了拦截，虽然实现了对数组的可响应，但同样存在一些问题，或者说不够方便的情况。<br>同时，defineProperty 通过递归实现 getter/setter 也存在一定的性能问题。<br>更好的实现方式是通过 ES6 提供的 Proxy API。</p>
+        
+          <p class="article-more-link">
+            <a href="/2019/10/05/vue/Proxy/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://fourleafclove.github.io/2019/10/05/vue/Proxy/" data-id="ck952tk110021rki57dhkd24i" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/vue/">vue</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-browser/层叠上下文" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/09/13/browser/层叠上下文/" class="article-date">
+  <time datetime="2019-09-12T16:00:00.000Z" itemprop="datePublished">2019-09-13</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/blog/">blog</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/09/13/browser/层叠上下文/">层叠上下文、层叠等级、层叠顺序</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>在一个页面里，所有的盒模型元素都处于三维坐标系中，除了我们常用的横坐标和纵坐标，盒模型元素还可以沿着“z 轴”层叠摆放，当他们相互覆盖时，z 轴顺序就变得十分重要。<br>但“z 轴”顺序，不完全由 z-index 决定，在层叠比较复杂的 HTML 元素上使用 z-index 时，结果可能让人觉得困惑，甚至不可思议。这是由复杂的元素排布规则导致的。</p>
+        
+          <p class="article-more-link">
+            <a href="/2019/09/13/browser/层叠上下文/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://fourleafclove.github.io/2019/09/13/browser/层叠上下文/" data-id="ck952tk0j001frki5buvshht1" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/css/">css</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-js/puppeteer" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/09/10/js/puppeteer/" class="article-date">
+  <time datetime="2019-09-09T16:00:00.000Z" itemprop="datePublished">2019-09-10</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/blog/">blog</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/09/10/js/puppeteer/">无头浏览器 Puppeteer 初探</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>button 是比较简单的组件</p>
+<figure class="highlight jsx"><table><tr><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">  &lt;button</span><br><span class="line">    <span class="class"><span class="keyword">class</span></span>=<span class="string">"el-button"</span></span><br><span class="line">    @click=<span class="string">"handleClick"</span></span><br><span class="line">    :disabled=<span class="string">"buttonDisabled || loading"</span></span><br><span class="line">    :autofocus=<span class="string">"autofocus"</span></span><br><span class="line">    :type=<span class="string">"nativeType"</span></span><br><span class="line">    :<span class="class"><span class="keyword">class</span></span>=<span class="string">"[</span></span><br><span class="line"><span class="string">      type ? 'el-button--' + type : '',</span></span><br><span class="line"><span class="string">      buttonSize ? 'el-button--' + buttonSize : '',</span></span><br><span class="line"><span class="string">      &#123;</span></span><br><span class="line"><span class="string">        'is-disabled': buttonDisabled,</span></span><br><span class="line"><span class="string">        'is-loading': loading,</span></span><br><span class="line"><span class="string">        'is-plain': plain,</span></span><br><span class="line"><span class="string">        'is-round': round,</span></span><br><span class="line"><span class="string">        'is-circle': circle</span></span><br><span class="line"><span class="string">      &#125;</span></span><br><span class="line"><span class="string">    ]"</span></span><br><span class="line">  &gt;</span><br><span class="line">    &lt;i <span class="class"><span class="keyword">class</span></span>=<span class="string">"el-icon-loading"</span> v-<span class="keyword">if</span>=<span class="string">"loading"</span>&gt;&lt;<span class="regexp">/i&gt;</span></span><br><span class="line"><span class="regexp">    &lt;i :class="icon" v-if="icon &amp;&amp; !loading"&gt;&lt;/i</span>&gt;</span><br><span class="line">    &lt;span v-<span class="keyword">if</span>=<span class="string">"$slots.default"</span>&gt;<span class="xml"><span class="tag">&lt;<span class="name">slot</span>&gt;</span><span class="tag">&lt;/<span class="name">slot</span>&gt;</span></span>&lt;<span class="regexp">/span&gt;</span></span><br><span class="line"><span class="regexp">  &lt;/</span>button&gt;</span><br><span class="line">&lt;<span class="regexp">/template&gt;</span></span><br><span class="line"><span class="regexp">&lt;script&gt;</span></span><br><span class="line"><span class="regexp">  export default &#123;</span></span><br><span class="line"><span class="regexp">    name: 'ElButton',</span></span><br><span class="line"><span class="regexp">    inject: &#123;</span></span><br><span class="line"><span class="regexp">      elForm: &#123;</span></span><br><span class="line"><span class="regexp">        default: ''</span></span><br><span class="line"><span class="regexp">      &#125;,</span></span><br><span class="line"><span class="regexp">      elFormItem: &#123;</span></span><br><span class="line"><span class="regexp">        default: ''</span></span><br><span class="line"><span class="regexp">      &#125;</span></span><br><span class="line"><span class="regexp">    &#125;,</span></span><br><span class="line"><span class="regexp">    props: &#123;</span></span><br><span class="line"><span class="regexp">      type: &#123;</span></span><br><span class="line"><span class="regexp">        type: String,</span></span><br><span class="line"><span class="regexp">        default: 'default'</span></span><br><span class="line"><span class="regexp">      &#125;,</span></span><br><span class="line"><span class="regexp">      size: String,</span></span><br><span class="line"><span class="regexp">      icon: &#123;</span></span><br><span class="line"><span class="regexp">        type: String,</span></span><br><span class="line"><span class="regexp">        default: ''</span></span><br><span class="line"><span class="regexp">      &#125;,</span></span><br><span class="line"><span class="regexp">      nativeType: &#123;</span></span><br><span class="line"><span class="regexp">        type: String,</span></span><br><span class="line"><span class="regexp">        default: 'button'</span></span><br><span class="line"><span class="regexp">      &#125;,</span></span><br><span class="line"><span class="regexp">      loading: Boolean,</span></span><br><span class="line"><span class="regexp">      disabled: Boolean,</span></span><br><span class="line"><span class="regexp">      plain: Boolean,</span></span><br><span class="line"><span class="regexp">      autofocus: Boolean,</span></span><br><span class="line"><span class="regexp">      round: Boolean,</span></span><br><span class="line"><span class="regexp">      circle: Boolean</span></span><br><span class="line"><span class="regexp">    &#125;,</span></span><br><span class="line"><span class="regexp">    computed: &#123;</span></span><br><span class="line"><span class="regexp">      _elFormItemSize() &#123;</span></span><br><span class="line"><span class="regexp">        return (this.elFormItem || &#123;&#125;).elFormItemSize;</span></span><br><span class="line"><span class="regexp">      &#125;,</span></span><br><span class="line"><span class="regexp">      buttonSize() &#123;</span></span><br><span class="line"><span class="regexp">        return this.size || this._elFormItemSize || (this.$ELEMENT || &#123;&#125;).size;</span></span><br><span class="line"><span class="regexp">      &#125;,</span></span><br><span class="line"><span class="regexp">      buttonDisabled() &#123;</span></span><br><span class="line"><span class="regexp">        return this.disabled || (this.elForm || &#123;&#125;).disabled;</span></span><br><span class="line"><span class="regexp">      &#125;</span></span><br><span class="line"><span class="regexp">    &#125;,</span></span><br><span class="line"><span class="regexp">    methods: &#123;</span></span><br><span class="line"><span class="regexp">      handleClick(evt) &#123;</span></span><br><span class="line"><span class="regexp">        this.$emit('click', evt);</span></span><br><span class="line"><span class="regexp">      &#125;</span></span><br><span class="line"><span class="regexp">    &#125;</span></span><br><span class="line"><span class="regexp">  &#125;;</span></span><br><span class="line"><span class="regexp">&lt;/</span>script&gt;</span><br></pre></td></tr></table></figure>
+        
+          <p class="article-more-link">
+            <a href="/2019/09/10/js/puppeteer/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://fourleafclove.github.io/2019/09/10/js/puppeteer/" data-id="ck952tk0t001qrki5qwke2j43" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-css/BFC" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/09/01/css/BFC/" class="article-date">
+  <time datetime="2019-08-31T16:00:00.000Z" itemprop="datePublished">2019-09-01</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/blog/">blog</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/09/01/css/BFC/">BFC相关(Block Formatting Context)</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="什么是-BFC"><a href="#什么是-BFC" class="headerlink" title="什么是 BFC"></a>什么是 BFC</h3><p>BFC 全称是 Block Formatting Context，即块格式化上下文。它是 CSS2.1 规范定义的，关于 CSS 渲染定位的一个概念。要明白 BFC 到底是什么，首先来看看什么是视觉格式化模型</p>
+<h4 id="视觉格式化模型"><a href="#视觉格式化模型" class="headerlink" title="视觉格式化模型"></a>视觉格式化模型</h4><p>视觉格式化模型(visual formatting model)是用来处理文档并将它显示在视觉媒体上的机制，它也是 CSS 中的一个概念。<br>视觉格式化模型定义了盒（Box）的生成，盒主要包括了块盒、行内盒、匿名盒（没有名字不能被选择器选中的盒）以及一些实验性的盒（未来可能添加到规范中）。盒的类型由 <code>display</code> 属性决定。</p>
+        
+          <p class="article-more-link">
+            <a href="/2019/09/01/css/BFC/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://fourleafclove.github.io/2019/09/01/css/BFC/" data-id="ck952tjzy000wrki5y68v1sng" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/css/">css</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-js/Javascript执行上下文和执行栈" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/08/20/js/Javascript执行上下文和执行栈/" class="article-date">
+  <time datetime="2019-08-19T16:00:00.000Z" itemprop="datePublished">2019-08-20</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/blog/">blog</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/08/20/js/Javascript执行上下文和执行栈/">Javascript 执行上下文和执行栈</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="什么是执行上下文"><a href="#什么是执行上下文" class="headerlink" title="什么是执行上下文"></a>什么是执行上下文</h3><p>执行上下文就是当前 JavaScript 代码被解析和执行时所在环境的抽象概念， JavaScript 中运行任何的代码都是在执行上下文中运行。</p>
+        
+          <p class="article-more-link">
+            <a href="/2019/08/20/js/Javascript执行上下文和执行栈/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://fourleafclove.github.io/2019/08/20/js/Javascript执行上下文和执行栈/" data-id="ck952tk090018rki5ngc3q2ob" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/">javascript</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-IM/requestResponse" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/01/03/IM/requestResponse/" class="article-date">
+  <time datetime="2018-01-02T16:00:00.000Z" itemprop="datePublished">2018-01-03</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/blog/">blog</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/01/03/IM/requestResponse/">IM消息状态判定及回执实现</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="状态判定"><a href="#状态判定" class="headerlink" title="状态判定"></a>状态判定</h3><p>从技术角度来看，消息的状态就是发送（输入消息、发送中，发送成功/失败）和接收状态（已接收）。</p>
+<p>从产品角度来看，消息发送和接收也都容易理解容易处理，容易混淆的是“阅读状态”。</p>
+<p>消息的“阅读状态”是针对于会话而言的，需要区分对话双方。A 和 B 进行聊天，A 是否已读和 B 是否已读显然是不同的问题：</p>
+<pre><code>1. A 和 B 分别维护自己的阅读状态，涉及处理“新消息”和“历史消息”的关系
+
+2. 让对方看自己的阅读状态 涉及“消息回执”
+</code></pre>
+        
+          <p class="article-more-link">
+            <a href="/2018/01/03/IM/requestResponse/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://fourleafclove.github.io/2018/01/03/IM/requestResponse/" data-id="ck952tjza000arki5gpj4ye13" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/IM/">IM</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-IM/Electron开发小结" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/12/16/IM/Electron开发小结/" class="article-date">
+  <time datetime="2017-12-15T16:00:00.000Z" itemprop="datePublished">2017-12-16</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/blog/">blog</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/12/16/IM/Electron开发小结/">Electron开发小结</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="Electron-是什么？"><a href="#Electron-是什么？" class="headerlink" title="Electron 是什么？"></a>Electron 是什么？</h2><p>Electron 是一个可以用 JavaScript、HTML 和 CSS 构建桌面应用程序的库。这些应用程序能打包到 Mac、Windows 和 Linux 系统上运行，也能上架到 Mac 和 Windows 的 App Store。</p>
+        
+          <p class="article-more-link">
+            <a href="/2017/12/16/IM/Electron开发小结/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://fourleafclove.github.io/2017/12/16/IM/Electron开发小结/" data-id="ck952tjzb000brki53hvx3t6g" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/IM/">IM</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/electron/">electron</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-css/iphoneX样式兼容" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/12/06/css/iphoneX样式兼容/" class="article-date">
+  <time datetime="2017-12-05T16:00:00.000Z" itemprop="datePublished">2017-12-06</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/blog/">blog</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/12/06/css/iphoneX样式兼容/">iPhone X移动端样式适配</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>iPhone X 正面的全面屏上方有一条刘海，对于如何适配 iPhone X，苹果的 Human Interface Guidelines 文档已经给出详细的说明。</p>
+<p>苹果对于 iPhone X 的设计布局意见如下：</p>
+        
+          <p class="article-more-link">
+            <a href="/2017/12/06/css/iphoneX样式兼容/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://fourleafclove.github.io/2017/12/06/css/iphoneX样式兼容/" data-id="ck952tk00000zrki5uq9wsqjj" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/mobile/">mobile</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-IM/融云消息体系架构" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/12/01/IM/融云消息体系架构/" class="article-date">
+  <time datetime="2017-11-30T16:00:00.000Z" itemprop="datePublished">2017-12-01</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/blog/">blog</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/12/01/IM/融云消息体系架构/">融云消息体系架构</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>海马汇的即时通讯(IM)模块的开发依赖于第三方也就是融云提供的消息服务。由他们的API服务器、IM服务器支持基础的消息通讯，我们在提供客户端的ios、android、web SDK的基础上，根据项目具体需求进行二次开发</p>
+<p>这篇文章主要分析一下整个融云的消息服务体系架构，弄明白各个服务器、客户端之间究竟是怎样协同工作的，数据流是怎么样跑起来的，也算是做一个阶段性的项目总结。</p>
+        
+          <p class="article-more-link">
+            <a href="/2017/12/01/IM/融云消息体系架构/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://fourleafclove.github.io/2017/12/01/IM/融云消息体系架构/" data-id="ck952tk0n001hrki5jag6dw14" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/IM/">IM</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-IM/图片预览实现拖动、缩放、旋转" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/11/22/IM/图片预览实现拖动、缩放、旋转/" class="article-date">
+  <time datetime="2017-11-21T16:00:00.000Z" itemprop="datePublished">2017-11-22</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/blog/">blog</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/11/22/IM/图片预览实现拖动、缩放、旋转/">图片预览实现拖动、缩放、旋转</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>对于im中存在的图片消息，需要在原本可以全屏预览的基础上，增加鼠标拖动、放大缩小、自由旋转的功能</p>
+<p> <img src="https://ws3.sinaimg.cn/large/006tNc79gy1fmrx2h7ns9j30uu15a7wi.jpg" width="300"></p>
+<p>项目中点击放大图片的功能是用的一个基于 <code>jquery</code> 的插件 <code>rebox</code>，仅仅实现了全屏预览图片。自己在这个插件的基础上增加了功能，大体思路是使用top和left设置图片位置，用transform进行缩放旋转。下面记录分享一下遇到的问题和解决思路。</p>
+        
+          <p class="article-more-link">
+            <a href="/2017/11/22/IM/图片预览实现拖动、缩放、旋转/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://fourleafclove.github.io/2017/11/22/IM/图片预览实现拖动、缩放、旋转/" data-id="ck952tjzf000erki574chxode" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/IM/">IM</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-IM/文字和图片的复制" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/11/20/IM/文字和图片的复制/" class="article-date">
+  <time datetime="2017-11-19T16:00:00.000Z" itemprop="datePublished">2017-11-20</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/blog/">blog</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/11/20/IM/文字和图片的复制/">文字和图片的复制</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>im中需要对文字和图片消息进行复制,下面分享一下如何在浏览器和electron中的具体实现</p>
+<h3 id="1-文字复制"><a href="#1-文字复制" class="headerlink" title="1.文字复制"></a>1.文字复制</h3><p>文字的复制比较简单，本质上相当于帮用户实现 选择 <code>+ ctrl c</code></p>
+<p>手动创建选择容器 <code>selection</code> 和选择范围 <code>range</code></p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> selection = <span class="built_in">window</span>.getSelection();</span><br><span class="line"><span class="keyword">var</span> range = <span class="built_in">document</span>.createRange();</span><br></pre></td></tr></table></figure>
+<p>将文字内容添加到选择范围 <code>range</code> 中</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">range.selectNodeContents(<span class="xml"><span class="tag">&lt;<span class="name">any</span>&gt;</span>ele.find("pre")[0]);</span></span><br></pre></td></tr></table></figure>
+        
+          <p class="article-more-link">
+            <a href="/2017/11/20/IM/文字和图片的复制/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://fourleafclove.github.io/2017/11/20/IM/文字和图片的复制/" data-id="ck952tjzh000grki5nxx3p2pm" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/IM/">IM</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-js/async与promise" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/10/25/js/async与promise/" class="article-date">
+  <time datetime="2017-10-24T16:00:00.000Z" itemprop="datePublished">2017-10-25</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/blog/">blog</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/10/25/js/async与promise/">async与promise</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="async-和-await-在干什么"><a href="#async-和-await-在干什么" class="headerlink" title="async 和 await 在干什么"></a>async 和 await 在干什么</h3><p>任意一个名称都是有意义的，先从字面意思来理解。async 是“异步”的简写，而 await 可以认为是 async wait 的简写。所以应该很好理解 async 用于申明一个 function 是异步的，而 await 用于等待一个异步方法执行完成。</p>
+<p>另外还有一个很有意思的语法规定，await 只能出现在 async 函数中。但如果 await 只能出现在 async 函数中，那这个 async 函数应该怎么调用？</p>
+<p>如果 async 函数不需要 await 来调用，那 async 到底起个啥作用？</p>
+        
+          <p class="article-more-link">
+            <a href="/2017/10/25/js/async与promise/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://fourleafclove.github.io/2017/10/25/js/async与promise/" data-id="ck952tk050015rki5opwygoaa" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/">javascript</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-browser/notification" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/10/14/browser/notification/" class="article-date">
+  <time datetime="2017-10-13T16:00:00.000Z" itemprop="datePublished">2017-10-14</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/blog/">blog</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/10/14/browser/notification/">Web Notification桌面通知</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>IM客户端中使用了Notifications API 的通知接口用于向用户配置和显示桌面通知。</p>
+<h4 id="请求权限"><a href="#请求权限" class="headerlink" title="请求权限"></a>请求权限</h4><p>并不是所有用户都想看到自己的桌面不停弹出通知，所以在使用前要申请权限以供用户选择</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">Notification.requestPermission()</span><br></pre></td></tr></table></figure>
+        
+          <p class="article-more-link">
+            <a href="/2017/10/14/browser/notification/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://fourleafclove.github.io/2017/10/14/browser/notification/" data-id="ck952tjzm000nrki52ssfohf3" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/H5/">H5</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/IM/">IM</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-Commitizen" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/10/11/Commitizen/" class="article-date">
+  <time datetime="2017-10-10T16:00:00.000Z" itemprop="datePublished">2017-10-11</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/blog/">blog</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/10/11/Commitizen/">Commit message规范和Commitizen使用</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Git 每次提交代码，都要写 commit message（提交说明），否则就不允许提交。</p>
+<p><code>$ git commit -m &quot;hello world&quot;</code></p>
+<p>虽说理论上讲commit message想怎么写都可以，但是一个规范的项目，message应该应该清晰明了，说明本次提交的目的，多名成员最好共用一套commit规范。</p>
+        
+          <p class="article-more-link">
+            <a href="/2017/10/11/Commitizen/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://fourleafclove.github.io/2017/10/11/Commitizen/" data-id="ck952tjvw0001rki5i9fpz4zj" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/">git</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-IM/scroll2" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/09/12/IM/scroll2/" class="article-date">
+  <time datetime="2017-09-11T16:00:00.000Z" itemprop="datePublished">2017-09-12</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/blog/">blog</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/09/12/IM/scroll2/">滚动条禁用边缘回弹</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>webkit内核浏览器比如chrome、safari在处理页面滚动操作时会默认增加一个边缘回弹效果，本意是让人机交互更流畅，不至于出现界面突然静止的情况。但这个效果在electron页面里面却不太好，因为这样的话把鼠标放在窗口里滚动，即使上下没有滚动的内容，web窗口也会跟着上下抖，显得整个应用不那么“原生”。</p>
+        
+          <p class="article-more-link">
+            <a href="/2017/09/12/IM/scroll2/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://fourleafclove.github.io/2017/09/12/IM/scroll2/" data-id="ck952tjzd000drki5xxdyvfak" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/IM/">IM</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/browser/">browser</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-js/网络连接状态监测" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/09/05/js/网络连接状态监测/" class="article-date">
+  <time datetime="2017-09-04T16:00:00.000Z" itemprop="datePublished">2017-09-05</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/blog/">blog</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/09/05/js/网络连接状态监测/">网络连接状态监测</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>用JavaScript监测网络连接状态的几种思路</p>
+<h2 id="navigator-onLine"><a href="#navigator-onLine" class="headerlink" title="navigator.onLine"></a>navigator.onLine</h2><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span>(navigator.onLine == <span class="literal">true</span>)&#123;</span><br><span class="line">    alert（<span class="string">"已连接"</span>）；</span><br><span class="line">&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">    alert（<span class="string">"未连接"</span>）；</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><code>navigator.onLine</code> 是一个值为 <code>true</code>/<code>false</code>  (<code>true</code> 表示在线， <code>false</code> 表示离线) 的属性。。一旦浏览器的联网状态发生改变，该属性值也会随之变化。当用户点击链接或者脚本进行网络请求时，如果发现浏览器连接不上互联网，则该属性会被赋值为 <code>false</code>。</p>
+        
+          <p class="article-more-link">
+            <a href="/2017/09/05/js/网络连接状态监测/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://fourleafclove.github.io/2017/09/05/js/网络连接状态监测/" data-id="ck952tk0w001urki5caf0065e" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/">javascript</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+
+
+  <nav id="page-nav">
+    
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
+  </nav>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/blog/">blog</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/H5/">H5</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/IM/">IM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/angular/">angular</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/browser/">browser</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/">css</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/electron/">electron</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/element/">element</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/font/">font</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javascript/">javascript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/markdown/">markdown</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mobile/">mobile</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vue/">vue</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/H5/" style="font-size: 10px;">H5</a> <a href="/tags/IM/" style="font-size: 20px;">IM</a> <a href="/tags/angular/" style="font-size: 10px;">angular</a> <a href="/tags/browser/" style="font-size: 12px;">browser</a> <a href="/tags/css/" style="font-size: 20px;">css</a> <a href="/tags/electron/" style="font-size: 10px;">electron</a> <a href="/tags/element/" style="font-size: 14px;">element</a> <a href="/tags/font/" style="font-size: 12px;">font</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/javascript/" style="font-size: 18px;">javascript</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/mobile/" style="font-size: 10px;">mobile</a> <a href="/tags/vue/" style="font-size: 16px;">vue</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">November 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">October 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">September 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">August 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">October 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">August 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">July 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/01/">January 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">November 2015</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2019/11/23/vue/element-input/">Element源码分析-Input</a>
+          </li>
+        
+          <li>
+            <a href="/2019/11/10/vue/element-button/">Element源码分析-Button</a>
+          </li>
+        
+          <li>
+            <a href="/2019/10/27/vue/element-layout/">Element源码分析-Layout</a>
+          </li>
+        
+          <li>
+            <a href="/2019/10/16/devOps/docker/">Docker部署一个spa应用</a>
+          </li>
+        
+          <li>
+            <a href="/2019/10/05/vue/Proxy/">Proxy API</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2020 FLC<br>
+      Copyright © 2020 FLC 版权所有.<br>
+      <a href="http://beian.miit.gov.cn" target="_blank">鲁ICP备18033113号-1</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//code.jquery.com/jquery-2.0.3.min.js"></script>
+
+ <link rel="stylesheet" href="/fancybox/jquery.fancybox.css"> <script src="/fancybox/jquery.fancybox.pack.js"></script>  <script src="/js/script.js"></script> 
+
+
+  </div>
+</body>
+</html>

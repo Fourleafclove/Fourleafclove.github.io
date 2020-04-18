@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+
+  
+  <title>Element源码分析-Button | 个人工作记录</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Element源码分析-Button">
+<meta name="keywords" content="vue,element">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Element源码分析-Button">
+<meta property="og:url" content="https://fourleafclove.github.io/2019/11/10/vue/element-button/index.html">
+<meta property="og:site_name" content="个人工作记录">
+<meta property="og:description" content="Element源码分析-Button">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="https://user-gold-cdn.xitu.io/2018/8/17/16546ebf2de722fc?imageView2/0/w/1280/h/960/format/webp/ignore-error/1">
+<meta property="og:updated_time" content="2020-04-18T03:28:24.012Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Element源码分析-Button">
+<meta name="twitter:description" content="Element源码分析-Button">
+<meta name="twitter:image" content="https://user-gold-cdn.xitu.io/2018/8/17/16546ebf2de722fc?imageView2/0/w/1280/h/960/format/webp/ignore-error/1">
+  
+    <link rel="alternate" href="/atom.xml" title="个人工作记录" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">个人工作记录</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://fourleafclove.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-vue/element-button" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/11/10/vue/element-button/" class="article-date">
+  <time datetime="2019-11-09T16:00:00.000Z" itemprop="datePublished">2019-11-10</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/blog/">blog</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Element源码分析-Button
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>button 是比较简单的组件</p>
+<a id="more"></a>
+<figure class="highlight jsx"><table><tr><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">  &lt;button</span><br><span class="line">    <span class="class"><span class="keyword">class</span></span>=<span class="string">"el-button"</span></span><br><span class="line">    @click=<span class="string">"handleClick"</span></span><br><span class="line">    :disabled=<span class="string">"buttonDisabled || loading"</span></span><br><span class="line">    :autofocus=<span class="string">"autofocus"</span></span><br><span class="line">    :type=<span class="string">"nativeType"</span></span><br><span class="line">    :<span class="class"><span class="keyword">class</span></span>=<span class="string">"[</span></span><br><span class="line"><span class="string">      type ? 'el-button--' + type : '',</span></span><br><span class="line"><span class="string">      buttonSize ? 'el-button--' + buttonSize : '',</span></span><br><span class="line"><span class="string">      &#123;</span></span><br><span class="line"><span class="string">        'is-disabled': buttonDisabled,</span></span><br><span class="line"><span class="string">        'is-loading': loading,</span></span><br><span class="line"><span class="string">        'is-plain': plain,</span></span><br><span class="line"><span class="string">        'is-round': round,</span></span><br><span class="line"><span class="string">        'is-circle': circle</span></span><br><span class="line"><span class="string">      &#125;</span></span><br><span class="line"><span class="string">    ]"</span></span><br><span class="line">  &gt;</span><br><span class="line">    &lt;i <span class="class"><span class="keyword">class</span></span>=<span class="string">"el-icon-loading"</span> v-<span class="keyword">if</span>=<span class="string">"loading"</span>&gt;&lt;<span class="regexp">/i&gt;</span></span><br><span class="line"><span class="regexp">    &lt;i :class="icon" v-if="icon &amp;&amp; !loading"&gt;&lt;/i</span>&gt;</span><br><span class="line">    &lt;span v-<span class="keyword">if</span>=<span class="string">"$slots.default"</span>&gt;<span class="xml"><span class="tag">&lt;<span class="name">slot</span>&gt;</span><span class="tag">&lt;/<span class="name">slot</span>&gt;</span></span>&lt;<span class="regexp">/span&gt;</span></span><br><span class="line"><span class="regexp">  &lt;/</span>button&gt;</span><br><span class="line">&lt;<span class="regexp">/template&gt;</span></span><br><span class="line"><span class="regexp">&lt;script&gt;</span></span><br><span class="line"><span class="regexp">  export default &#123;</span></span><br><span class="line"><span class="regexp">    name: 'ElButton',</span></span><br><span class="line"><span class="regexp">    inject: &#123;</span></span><br><span class="line"><span class="regexp">      elForm: &#123;</span></span><br><span class="line"><span class="regexp">        default: ''</span></span><br><span class="line"><span class="regexp">      &#125;,</span></span><br><span class="line"><span class="regexp">      elFormItem: &#123;</span></span><br><span class="line"><span class="regexp">        default: ''</span></span><br><span class="line"><span class="regexp">      &#125;</span></span><br><span class="line"><span class="regexp">    &#125;,</span></span><br><span class="line"><span class="regexp">    props: &#123;</span></span><br><span class="line"><span class="regexp">      type: &#123;</span></span><br><span class="line"><span class="regexp">        type: String,</span></span><br><span class="line"><span class="regexp">        default: 'default'</span></span><br><span class="line"><span class="regexp">      &#125;,</span></span><br><span class="line"><span class="regexp">      size: String,</span></span><br><span class="line"><span class="regexp">      icon: &#123;</span></span><br><span class="line"><span class="regexp">        type: String,</span></span><br><span class="line"><span class="regexp">        default: ''</span></span><br><span class="line"><span class="regexp">      &#125;,</span></span><br><span class="line"><span class="regexp">      nativeType: &#123;</span></span><br><span class="line"><span class="regexp">        type: String,</span></span><br><span class="line"><span class="regexp">        default: 'button'</span></span><br><span class="line"><span class="regexp">      &#125;,</span></span><br><span class="line"><span class="regexp">      loading: Boolean,</span></span><br><span class="line"><span class="regexp">      disabled: Boolean,</span></span><br><span class="line"><span class="regexp">      plain: Boolean,</span></span><br><span class="line"><span class="regexp">      autofocus: Boolean,</span></span><br><span class="line"><span class="regexp">      round: Boolean,</span></span><br><span class="line"><span class="regexp">      circle: Boolean</span></span><br><span class="line"><span class="regexp">    &#125;,</span></span><br><span class="line"><span class="regexp">    computed: &#123;</span></span><br><span class="line"><span class="regexp">      _elFormItemSize() &#123;</span></span><br><span class="line"><span class="regexp">        return (this.elFormItem || &#123;&#125;).elFormItemSize;</span></span><br><span class="line"><span class="regexp">      &#125;,</span></span><br><span class="line"><span class="regexp">      buttonSize() &#123;</span></span><br><span class="line"><span class="regexp">        return this.size || this._elFormItemSize || (this.$ELEMENT || &#123;&#125;).size;</span></span><br><span class="line"><span class="regexp">      &#125;,</span></span><br><span class="line"><span class="regexp">      buttonDisabled() &#123;</span></span><br><span class="line"><span class="regexp">        return this.disabled || (this.elForm || &#123;&#125;).disabled;</span></span><br><span class="line"><span class="regexp">      &#125;</span></span><br><span class="line"><span class="regexp">    &#125;,</span></span><br><span class="line"><span class="regexp">    methods: &#123;</span></span><br><span class="line"><span class="regexp">      handleClick(evt) &#123;</span></span><br><span class="line"><span class="regexp">        this.$emit('click', evt);</span></span><br><span class="line"><span class="regexp">      &#125;</span></span><br><span class="line"><span class="regexp">    &#125;</span></span><br><span class="line"><span class="regexp">  &#125;;</span></span><br><span class="line"><span class="regexp">&lt;/</span>script&gt;</span><br></pre></td></tr></table></figure>
+<p>首先很明确，<code>&lt;el-button&gt;</code>就是封装了原生的 button 而已，原生 button 有个地方需要注意，请始终为 <code>&lt;button&gt;</code> 元素规定 type 属性。不同的浏览器对 <code>&lt;button&gt;</code> 元素的 type 属性使用不同的默认值,值有 3 种,button,submit,reset 分别表示按钮，提交，重置。而且如果在 HTML 表单中使用<code>&lt;button&gt;</code> 元素，不同的浏览器可能会提交不同的按钮值。请使用 <code>&lt;input&gt;</code> 在 HTML 表单中创建按钮</p>
+<p>首先我们来看第一句 class=”el-button”,这里声明了按钮的基本类，也就是所有按钮通用的样式，见下图</p>
+<p><img src="https://user-gold-cdn.xitu.io/2018/8/17/16546ebf2de722fc?imageView2/0/w/1280/h/960/format/webp/ignore-error/1"></p>
+<p>可以看到其中有几个样式比较重要，首先是<code>display:inline-block</code>,表明按钮内联块状分布，一行可以有多个排列，且可以控制宽高，<code>-webkit-appearence:none</code>表示将按钮原生的样式去掉，首先是太丑其实不同浏览器表现不同，注意这里的按钮没有设置宽高，宽高都是由字体大小撑开来的，然后设置 padding 来产生内间距，<code>line-height:1</code>表示行高和字体大小一样</p>
+<p>然后第二句<code>@click=&quot;handleClick&quot;</code>这个是重点，这表明给原生 button 绑定了点击事件，我们使用该组件时是按下面的方式</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">el-button</span> @<span class="attr">click</span>=<span class="string">"handleClick"</span>&gt;</span>测试<span class="tag">&lt;/<span class="name">el-button</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>这里需要手动写一个@click,然后我们看一下 handleClick 的代码</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">methods: &#123;</span><br><span class="line">      handleClick(evt) &#123;</span><br><span class="line">        <span class="keyword">this</span>.$emit(<span class="string">'click'</span>, evt);</span><br><span class="line">      &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这里实际上是用 Vue 的内置事件系统向父级触发了一个 click 事件，父级就是<code>&lt;el-button&gt;</code>,因为实际点击我们是点击在原生 button 上的，而使用组件时却是在<code>&lt;el-button&gt;</code>上监听事件，所以这里需要将 click 事件派发到父级，父级监听这个 click 事件，第二个参数是事件对象。如果不写这个 handleClick 将不会触发任何点击效果</p>
+<p>第三句:disabled=”buttonDisabled || loading”表示控制按钮的禁用状态，注意 disabled 是原生的属性，当其为 true 时，按钮无法被点击，且鼠标 hover 的样式不是小手，这里禁用状态是由 loading 状态和用户自定义的禁用与否共同决定，其中用户定义的 disabled 会被转化为一个计算属性，如下，后面的项表示表单相关的内容，此处不详细解释</p>
+<p>禁用状态是由 2 部分组成：一是功能禁用，通过原生的 disabled 属性来实现,二是样式上禁用，通过将按钮置灰和 cursor:not-alowed 将鼠标展示为一个禁止的标志来实现</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">buttonDisabled() &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>.disabled || (<span class="keyword">this</span>.elForm || &#123;&#125;).disabled;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+<p>再来看:autofocus=”autofocus”这句话，如果为 true 表示按钮自动获得焦点，按钮获得焦点就是按钮为 focus 的状态，可以用于提示用户<br>:type=”nativeType”表示按钮的原生类型，button ,reset 还是 submit，接下来是控制按钮不同种类的 class</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">:class=&quot;[</span><br><span class="line">      type ? &apos;el-button--&apos; + type : &apos;&apos;,</span><br><span class="line">      buttonSize ? &apos;el-button--&apos; + buttonSize : &apos;&apos;,</span><br><span class="line">      &#123;</span><br><span class="line">        &apos;is-disabled&apos;: buttonDisabled,</span><br><span class="line">        &apos;is-loading&apos;: loading,</span><br><span class="line">        &apos;is-plain&apos;: plain,</span><br><span class="line">        &apos;is-round&apos;: round,</span><br><span class="line">        &apos;is-circle&apos;: circle</span><br><span class="line">      &#125;</span><br><span class="line">    ]&quot;</span><br></pre></td></tr></table></figure>
+<p>这里注意绑定的 class 是一个数组，里面又混合了对象的形式，这种写法可以借鉴，对象里面的类控制了该按钮是否是禁用，loading，朴素，圆角，圆形，然后是这 3 句话</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">i</span> <span class="attr">class</span>=<span class="string">"el-icon-loading"</span> <span class="attr">v-if</span>=<span class="string">"loading"</span>&gt;</span><span class="tag">&lt;/<span class="name">i</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">i</span> <span class="attr">:class</span>=<span class="string">"icon"</span> <span class="attr">v-if</span>=<span class="string">"icon &amp;&amp; !loading"</span>&gt;</span><span class="tag">&lt;/<span class="name">i</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">span</span> <span class="attr">v-if</span>=<span class="string">"$slots.default"</span>&gt;</span><span class="tag">&lt;<span class="name">slot</span>&gt;</span><span class="tag">&lt;/<span class="name">slot</span>&gt;</span><span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>这 3 句就是<code>&lt;button&gt;&lt;/button&gt;</code>中间的内容了，第一个 i 标签表示加载状态下的 loading 图案，可以看出这个图案就是一个字体图标而已，在不断的旋转(<code>animation:rotating 2s linear infinite</code>)</p>
+<p>第二个 i 标签是按钮的图标，用户设置，此图标在 loading 状态下隐藏，然后是<span>这个标签当且仅当<el-button>中有内容时才存在，内容放在 slot 插槽中，用\$slots.default 来判断是否有子元素存在，可以借鉴</el-button></span></p>
+<p>后面的 inject 估计是和表单相关，这里不做介绍，注意一下当按钮被点击时，样式也会发生变化，下图中成功按钮被点击变成深色，这是通过 css 的:active 伪类来实现，我之前一直以为只有 a 标签有 active 伪类,原来 button 也可以用啊</p>
+<p>size 属性在通过绑定 class 的这句话 buttonSize ? ‘el-button–’ + buttonSize : ‘’将 size 转化为类名，从而使用不同的尺寸类来控制大小，buttonSize 是个计算属性通过 size 得到</p>
+<p>综上,我们明白了组件的各种属性最终会转化为对应的 class 来控制按钮的样式表现，就是在:class 里拼接字符串而已</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://fourleafclove.github.io/2019/11/10/vue/element-button/" data-id="ck952tk0y001xrki5rchjaqys" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/element/">element</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/vue/">vue</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2019/11/23/vue/element-input/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Element源码分析-Input
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2019/10/27/vue/element-layout/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Element源码分析-Layout</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/blog/">blog</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/H5/">H5</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/IM/">IM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/angular/">angular</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/browser/">browser</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/">css</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/electron/">electron</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/element/">element</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/font/">font</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javascript/">javascript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/markdown/">markdown</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mobile/">mobile</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vue/">vue</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/H5/" style="font-size: 10px;">H5</a> <a href="/tags/IM/" style="font-size: 20px;">IM</a> <a href="/tags/angular/" style="font-size: 10px;">angular</a> <a href="/tags/browser/" style="font-size: 12px;">browser</a> <a href="/tags/css/" style="font-size: 20px;">css</a> <a href="/tags/electron/" style="font-size: 10px;">electron</a> <a href="/tags/element/" style="font-size: 14px;">element</a> <a href="/tags/font/" style="font-size: 12px;">font</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/javascript/" style="font-size: 18px;">javascript</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/mobile/" style="font-size: 10px;">mobile</a> <a href="/tags/vue/" style="font-size: 16px;">vue</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">November 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">October 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">September 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">August 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">October 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">August 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">July 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/01/">January 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">November 2015</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2019/11/23/vue/element-input/">Element源码分析-Input</a>
+          </li>
+        
+          <li>
+            <a href="/2019/11/10/vue/element-button/">Element源码分析-Button</a>
+          </li>
+        
+          <li>
+            <a href="/2019/10/27/vue/element-layout/">Element源码分析-Layout</a>
+          </li>
+        
+          <li>
+            <a href="/2019/10/16/devOps/docker/">Docker部署一个spa应用</a>
+          </li>
+        
+          <li>
+            <a href="/2019/10/05/vue/Proxy/">Proxy API</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2020 FLC<br>
+      Copyright © 2020 FLC 版权所有.<br>
+      <a href="http://beian.miit.gov.cn" target="_blank">鲁ICP备18033113号-1</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//code.jquery.com/jquery-2.0.3.min.js"></script>
+
+ <link rel="stylesheet" href="/fancybox/jquery.fancybox.css"> <script src="/fancybox/jquery.fancybox.pack.js"></script>  <script src="/js/script.js"></script> 
+
+
+  </div>
+</body>
+</html>

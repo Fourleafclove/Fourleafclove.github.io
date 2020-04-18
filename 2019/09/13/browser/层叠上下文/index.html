@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+
+  
+  <title>层叠上下文、层叠等级、层叠顺序 | 个人工作记录</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="层叠上下文、层叠等级、层叠顺序">
+<meta name="keywords" content="css">
+<meta property="og:type" content="article">
+<meta property="og:title" content="层叠上下文、层叠等级、层叠顺序">
+<meta property="og:url" content="https://fourleafclove.github.io/2019/09/13/browser/层叠上下文/index.html">
+<meta property="og:site_name" content="个人工作记录">
+<meta property="og:description" content="层叠上下文、层叠等级、层叠顺序">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="https://user-gold-cdn.xitu.io/2018/8/30/165890e9dcadf485?imageView2/0/w/1280/h/960/format/webp/ignore-error/1">
+<meta property="og:image" content="https://user-gold-cdn.xitu.io/2018/8/30/165890ecb78125b2?imageView2/0/w/1280/h/960/format/webp/ignore-error/1">
+<meta property="og:image" content="https://user-gold-cdn.xitu.io/2018/8/30/1658910c5cb364b6?imageView2/0/w/1280/h/960/format/webp/ignore-error/1">
+<meta property="og:updated_time" content="2020-04-18T03:28:24.004Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="层叠上下文、层叠等级、层叠顺序">
+<meta name="twitter:description" content="层叠上下文、层叠等级、层叠顺序">
+<meta name="twitter:image" content="https://user-gold-cdn.xitu.io/2018/8/30/165890e9dcadf485?imageView2/0/w/1280/h/960/format/webp/ignore-error/1">
+  
+    <link rel="alternate" href="/atom.xml" title="个人工作记录" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">个人工作记录</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://fourleafclove.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-browser/层叠上下文" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/09/13/browser/层叠上下文/" class="article-date">
+  <time datetime="2019-09-12T16:00:00.000Z" itemprop="datePublished">2019-09-13</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/blog/">blog</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      层叠上下文、层叠等级、层叠顺序
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>在一个页面里，所有的盒模型元素都处于三维坐标系中，除了我们常用的横坐标和纵坐标，盒模型元素还可以沿着“z 轴”层叠摆放，当他们相互覆盖时，z 轴顺序就变得十分重要。<br>但“z 轴”顺序，不完全由 z-index 决定，在层叠比较复杂的 HTML 元素上使用 z-index 时，结果可能让人觉得困惑，甚至不可思议。这是由复杂的元素排布规则导致的。</p>
+<a id="more"></a>
+<p>以往，由于自己使用 z-index 的频率不大，所以对这个 CSS 属性存在比较片面的认识。一直认为 z-index 就是用来描述定义一个元素在屏幕 Z 轴上的堆叠顺序。z-index 值越大在 Z 轴上就越靠上，也就是离屏幕观察者越近。最后才发现这个认识存在很大的问题：</p>
+<ol>
+<li><p>首先，z-index 属性值并不是在任何元素上都有效果。它仅在定位元素（定义了 position 属性，且属性值为非 static 值的元素）上有效果。</p>
+</li>
+<li><p>判断元素在 Z 轴上的堆叠顺序，不仅仅是直接比较两个元素的 z-index 值的大小，这个堆叠顺序实际由元素的<strong>层叠上下文、层叠等级</strong>共同决定。</p>
+</li>
+</ol>
+<p>要想完全理解一个东西，首先要明白它是什么，也就是它的定义。我们先看看上面提到的层叠上下文、层叠等级、层叠顺序都是什么？</p>
+<h3 id="什么是“层叠上下文”"><a href="#什么是“层叠上下文”" class="headerlink" title="什么是“层叠上下文”"></a>什么是“层叠上下文”</h3><p>层叠上下文(stacking context)，是 HTML 中一个三维的概念。在 CSS2.1 规范中，每个盒模型的位置是三维的，分别是平面画布上的 X 轴，Y 轴以及表示层叠的 Z 轴。一般情况下，元素在页面上沿 X 轴 Y 轴平铺，我们察觉不到它们在 Z 轴上的层叠关系。而一旦元素发生堆叠，这时就能发现某个元素可能覆盖了另一个元素或者被另一个元素覆盖。</p>
+<p>如果一个元素含有层叠上下文，(也就是说它是层叠上下文元素)，我们可以理解为这个元素在 Z 轴上就“高人一等”，最终表现就是它离屏幕观察者更近。</p>
+<blockquote>
+<p>具象的比喻：你可以把层叠上下文元素理解为理解为该元素当了官，而其他非层叠上下文元素则可以理解为普通群众。凡是“当了官的元素”就比普通元素等级要高，也就是说元素在 Z 轴上更靠上，更靠近观察者。</p>
+</blockquote>
+<h3 id="什么是“层叠等级”"><a href="#什么是“层叠等级”" class="headerlink" title="什么是“层叠等级”"></a>什么是“层叠等级”</h3><p>那么，层叠等级指的又是什么？层叠等级(stacking level，叫“层叠级别”/“层叠水平”也行)</p>
+<ul>
+<li>在同一个层叠上下文中，它描述定义的是该层叠上下文中的层叠上下文元素在 Z 轴上的上下顺序。</li>
+<li>在其他普通元素中，它描述定义的是这些普通元素在 Z 轴上的上下顺序。</li>
+</ul>
+<p>说到这，可能很多人疑问了，不论在层叠上下文中还是在普通元素中，层叠等级都表示元素在 Z 轴上的上下顺序，那就直接说它描述定义了所有元素在 Z 轴上的上下顺序就 OK 啊！为什么要分开描述？<br>为了说明原因，先举个栗子：</p>
+<blockquote>
+<p>具象的比喻：我们之前说到，处于层叠上下文中的元素，就像是元素当了官，等级自然比普通元素高。再想象一下，假设一个官员 A 是个省级领导，他下属有一个秘书 a-1，家里有一个保姆 a-2。另一个官员 B 是一个县级领导，他下属有一个秘书 b-1，家里有一个保姆 b-2。a-1 和 b-1 虽然都是秘书，但是你想一个省级领导的秘书和一个县级领导的秘书之间有可比性么？甚至保姆 a-2 都要比秘书 b-1 的等级高得多。谁大谁小，谁高谁低一目了然，所以根本没有比较的意义。只有在 A 下属的 a-1、a-2 以及 B 下属的 b-1、b-2 中相互比较大小高低才有意义。</p>
+</blockquote>
+<p>再类比回“层叠上下文”和“层叠等级”，就得出一个结论：</p>
+<p>普通元素的层叠等级优先由其所在的层叠上下文决定。<br>层叠等级的比较只有在当前层叠上下文元素中才有意义。不同层叠上下文中比较层叠等级是没有意义的。</p>
+<p>如何产生“层叠上下文”<br>前面说了那么多，知道了“层叠上下文”和“层叠等级”，其中还有一个最关键的问题：到底如何产生层叠上下文呢？如何让一个元素变成层叠上下文元素呢？<br>其实，层叠上下文也基本上是有一些特定的 CSS 属性创建的，一般有 3 种方法：</p>
+<p>HTML 中的根元素<html></html>本身 j 就具有层叠上下文，称为“根层叠上下文”。<br>普通元素设置 position 属性为非 static 值并设置 z-index 属性为具体数值，产生层叠上下文。<br>CSS3 中的新属性也可以产生层叠上下文。</p>
+<p>至此，终于可以上代码了，我们用代码说话，来验证上面的结论：<br>栗子 1:<br>有两个 div，p.a、p.b 被包裹在一个 div 里，p.c 被包裹在另一个盒子里，只为.a、.b、.c 设置 position 和 z-index 属性</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">style</span>&gt;</span></span><br><span class="line">  div &#123;</span><br><span class="line">    position: relative;</span><br><span class="line">    width: 100px;</span><br><span class="line">    height: 100px;</span><br><span class="line">  &#125;</span><br><span class="line">  p &#123;</span><br><span class="line">    position: absolute;</span><br><span class="line">    font-size: 20px;</span><br><span class="line">    width: 100px;</span><br><span class="line">    height: 100px;</span><br><span class="line">  &#125;</span><br><span class="line"><span class="css">  <span class="selector-class">.a</span> &#123;</span></span><br><span class="line">    background-color: blue;</span><br><span class="line">    z-index: 1;</span><br><span class="line">  &#125;</span><br><span class="line"><span class="css">  <span class="selector-class">.b</span> &#123;</span></span><br><span class="line">    background-color: green;</span><br><span class="line">    z-index: 2;</span><br><span class="line">    top: 20px;</span><br><span class="line">    left: 20px;</span><br><span class="line">  &#125;</span><br><span class="line"><span class="css">  <span class="selector-class">.c</span> &#123;</span></span><br><span class="line">    background-color: red;</span><br><span class="line">    z-index: 3;</span><br><span class="line">    top: -20px;</span><br><span class="line">    left: 40px;</span><br><span class="line">  &#125;</span><br><span class="line"><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span> <span class="attr">class</span>=<span class="string">"a"</span>&gt;</span>a<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span> <span class="attr">class</span>=<span class="string">"b"</span>&gt;</span>b<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span> <span class="attr">class</span>=<span class="string">"c"</span>&gt;</span>c<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p><img src="https://user-gold-cdn.xitu.io/2018/8/30/165890e9dcadf485?imageView2/0/w/1280/h/960/format/webp/ignore-error/1"></p>
+<p>因为 p.a、p.b、p.c 三个的父元素 div 都没有设置 z-index，所以不会产生层叠上下文，所以.a、.b、.c 都处于由<code>&lt;html&gt;`</code>标签产生的“根层叠上下文”中，属于同一个层叠上下文，此时谁的 z-index 值大，谁在上面。<br>栗子 2：<br>有两个 div，p.a、p.b 被包裹在一个 div 里，p.c 被包裹在另一个盒子里，同时为两个 div 和.a、.b、.c 设置 position 和 z-index 属性</p>
+<p><img src="https://user-gold-cdn.xitu.io/2018/8/30/165890ecb78125b2?imageView2/0/w/1280/h/960/format/webp/ignore-error/1"></p>
+<p>我们发现，虽然 p.c 元素的 z-index 值为 9999，远大于 p.a 和 p.b 的 z-index 值，但是由于 p.a、p.b 的父元素 div.box1 产生的层叠上下文的 z-index 的值为 2，p.c 的父元素 div.box2 所产生的层叠上下文的 z-index 值为 1，所以 p.c 永远在 p.a 和 p.b 下面。</p>
+<p>同时，如果我们只更改 p.a 和 p.b 的 z-index 值，由于这两个元素都在父元素 div.box1 产生的层叠上下文中，所以，谁的 z-index 值大，谁在上面。</p>
+<h3 id="什么是“层叠顺序”"><a href="#什么是“层叠顺序”" class="headerlink" title="什么是“层叠顺序”"></a>什么是“层叠顺序”</h3><p>说完“层叠上下文”和“层叠等级”，我们再来说说“层叠顺序”。“层叠顺序”(stacking order)表示元素发生层叠时按照特定的顺序规则在 Z 轴上垂直显示。由此可见，前面所说的“层叠上下文”和“层叠等级”是一种概念，而这里的“层叠顺序”是一种规则。</p>
+<p><img src="https://user-gold-cdn.xitu.io/2018/8/30/1658910c5cb364b6?imageView2/0/w/1280/h/960/format/webp/ignore-error/1"></p>
+<p>在不考虑 CSS3 的情况下，当元素发生层叠时，层叠顺讯遵循上面途中的规则。<br>这里值得注意的是：</p>
+<ul>
+<li>左上角”层叠上下文 background/border”指的是层叠上下文元素的背景和边框。</li>
+<li>inline/inline-block 元素的层叠顺序要高于 block(块级)/float(浮动)元素。</li>
+<li>单纯考虑层叠顺序，z-index: auto 和 z-index: 0 在同一层级，但这两个属性值本身是有根本区别的。</li>
+</ul>
+<blockquote>
+<p>为什么 <code>inline/inline-block</code> 元素的层叠顺序要高于 <code>block</code>(块级)/<code>float</code>(浮动)元素?<br>其实很简单，像 border/background 属于装饰元素的属性，浮动和块级元素一般用来页面布局，而网页设计之初最重要的就是文字内容，所以在发生层叠时会优先显示文字内容，保证其不被覆盖。</p>
+</blockquote>
+<p>这么多概念规则，来点最实际的，有没有一个“套路”当遇到元素层叠时，能很清晰地判断出他们谁在上谁在下呢？</p>
+<blockquote>
+<p>1、首先先看要比较的两个元素是否处于同一个层叠上下文中：<br>      1.1 如果是，谁的层叠等级大，谁在上面（怎么判断层叠等级大小呢？看“层叠顺序”图）。<br>      1.2 如果两个元素不在统一层叠上下文中，请先比较他们所处的层叠上下文的层叠等级。<br>2、当两个元素层叠等级相同、层叠顺序相同时，在 DOM 结构中后面的元素层叠等级在前面元素之上。</p>
+</blockquote>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://fourleafclove.github.io/2019/09/13/browser/层叠上下文/" data-id="ck952tk0j001frki5buvshht1" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/css/">css</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2019/10/05/vue/Proxy/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Proxy API
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2019/09/10/js/puppeteer/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">无头浏览器 Puppeteer 初探</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/blog/">blog</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/H5/">H5</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/IM/">IM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/angular/">angular</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/browser/">browser</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/">css</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/electron/">electron</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/element/">element</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/font/">font</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javascript/">javascript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/markdown/">markdown</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mobile/">mobile</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vue/">vue</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/H5/" style="font-size: 10px;">H5</a> <a href="/tags/IM/" style="font-size: 20px;">IM</a> <a href="/tags/angular/" style="font-size: 10px;">angular</a> <a href="/tags/browser/" style="font-size: 12px;">browser</a> <a href="/tags/css/" style="font-size: 20px;">css</a> <a href="/tags/electron/" style="font-size: 10px;">electron</a> <a href="/tags/element/" style="font-size: 14px;">element</a> <a href="/tags/font/" style="font-size: 12px;">font</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/javascript/" style="font-size: 18px;">javascript</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/mobile/" style="font-size: 10px;">mobile</a> <a href="/tags/vue/" style="font-size: 16px;">vue</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">November 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">October 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">September 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">August 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">October 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">August 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">July 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/01/">January 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">November 2015</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2019/11/23/vue/element-input/">Element源码分析-Input</a>
+          </li>
+        
+          <li>
+            <a href="/2019/11/10/vue/element-button/">Element源码分析-Button</a>
+          </li>
+        
+          <li>
+            <a href="/2019/10/27/vue/element-layout/">Element源码分析-Layout</a>
+          </li>
+        
+          <li>
+            <a href="/2019/10/16/devOps/docker/">Docker部署一个spa应用</a>
+          </li>
+        
+          <li>
+            <a href="/2019/10/05/vue/Proxy/">Proxy API</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2020 FLC<br>
+      Copyright © 2020 FLC 版权所有.<br>
+      <a href="http://beian.miit.gov.cn" target="_blank">鲁ICP备18033113号-1</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//code.jquery.com/jquery-2.0.3.min.js"></script>
+
+ <link rel="stylesheet" href="/fancybox/jquery.fancybox.css"> <script src="/fancybox/jquery.fancybox.pack.js"></script>  <script src="/js/script.js"></script> 
+
+
+  </div>
+</body>
+</html>

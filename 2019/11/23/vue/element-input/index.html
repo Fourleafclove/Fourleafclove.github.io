@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+
+  
+  <title>Element源码分析-Input | 个人工作记录</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Element源码分析-Input">
+<meta name="keywords" content="vue,element">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Element源码分析-Input">
+<meta property="og:url" content="https://fourleafclove.github.io/2019/11/23/vue/element-input/index.html">
+<meta property="og:site_name" content="个人工作记录">
+<meta property="og:description" content="Element源码分析-Input">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="https://user-gold-cdn.xitu.io/2018/8/22/16560ba1fd8d1d19?imageView2/0/w/1280/h/960/format/webp/ignore-error/1">
+<meta property="og:image" content="https://user-gold-cdn.xitu.io/2018/8/22/16560bce859264f6?imageView2/0/w/1280/h/960/format/webp/ignore-error/1">
+<meta property="og:image" content="https://user-gold-cdn.xitu.io/2018/8/22/16560e5b2e241525?imageView2/0/w/1280/h/960/format/webp/ignore-error/1">
+<meta property="og:image" content="https://user-gold-cdn.xitu.io/2018/8/22/16560ff400955e86?imageView2/0/w/1280/h/960/format/webp/ignore-error/1">
+<meta property="og:image" content="https://user-gold-cdn.xitu.io/2018/8/22/1656128113058beb?imageView2/0/w/1280/h/960/format/webp/ignore-error/1">
+<meta property="og:image" content="https://user-gold-cdn.xitu.io/2018/8/22/165613ddec96fd4d?imageView2/0/w/1280/h/960/format/webp/ignore-error/1">
+<meta property="og:image" content="https://user-gold-cdn.xitu.io/2018/8/22/165613e64d53a1cd?imageView2/0/w/1280/h/960/format/webp/ignore-error/1">
+<meta property="og:updated_time" content="2020-04-18T03:28:24.013Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Element源码分析-Input">
+<meta name="twitter:description" content="Element源码分析-Input">
+<meta name="twitter:image" content="https://user-gold-cdn.xitu.io/2018/8/22/16560ba1fd8d1d19?imageView2/0/w/1280/h/960/format/webp/ignore-error/1">
+  
+    <link rel="alternate" href="/atom.xml" title="个人工作记录" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">个人工作记录</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://fourleafclove.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-vue/element-input" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/11/23/vue/element-input/" class="article-date">
+  <time datetime="2019-11-22T16:00:00.000Z" itemprop="datePublished">2019-11-23</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/blog/">blog</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Element源码分析-Input
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>首先来看一下 html 代码：</p>
+<figure class="highlight jsx"><table><tr><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">  &lt;div ...&gt;</span><br><span class="line">    &lt;template v-<span class="keyword">if</span>=<span class="string">"type !== 'textarea'"</span>&gt;</span><br><span class="line">      &lt;!-- 前置元素 --&gt;</span><br><span class="line">      &lt;div <span class="class"><span class="keyword">class</span></span>=<span class="string">"el-input-group__prepend"</span> v-<span class="keyword">if</span>=<span class="string">"$slots.prepend"</span>&gt;</span><br><span class="line">        &lt;slot name=<span class="string">"prepend"</span>&gt;&lt;<span class="regexp">/slot&gt;</span></span><br><span class="line"><span class="regexp">      &lt;/</span>div&gt;</span><br><span class="line"></span><br><span class="line">      &lt;!--主体input--&gt;</span><br><span class="line">      &lt;input ...&gt;</span><br><span class="line"></span><br><span class="line">      &lt;!-- 前置内容 --&gt;</span><br><span class="line">      &lt;span <span class="class"><span class="keyword">class</span></span>=<span class="string">"el-input__prefix"</span> v-<span class="keyword">if</span>=<span class="string">"$slots.prefix || prefixIcon"</span>&gt;</span><br><span class="line">       ...</span><br><span class="line">      &lt;<span class="regexp">/span&gt;</span></span><br><span class="line"><span class="regexp">      &lt;!-- 后置内容 --&gt;</span></span><br><span class="line"><span class="regexp">      &lt;span</span></span><br><span class="line"><span class="regexp">        ...</span></span><br><span class="line"><span class="regexp">      &lt;/</span>span&gt;</span><br><span class="line">      &lt;!-- 后置元素 --&gt;</span><br><span class="line">      &lt;div <span class="class"><span class="keyword">class</span></span>=<span class="string">"el-input-group__append"</span> v-<span class="keyword">if</span>=<span class="string">"$slots.append"</span>&gt;</span><br><span class="line">       ...</span><br><span class="line">      &lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">    &lt;/</span>template&gt;</span><br><span class="line">    &lt;textarea v-<span class="keyword">else</span>&gt;</span><br><span class="line">    &lt;<span class="regexp">/textarea&gt;</span></span><br><span class="line"><span class="regexp">  &lt;/</span>div&gt;</span><br><span class="line">&lt;<span class="regexp">/template&gt;</span></span><br></pre></td></tr></table></figure>
+<a id="more"></a>
+<p>其实很简单，最外层一个 div 作为 wrapper 包裹里面的元素，然后里面是 template 标签(template 实际不会渲染出来)的 v-if，最下面是 textarea 的 v-else,说明 type 这个选项控制输入框组件是显示 input 还是 textarea,对于 v-else 就一个 textarea，没啥可说的，关键在于前面的 v-if,仔细看这个结构，是由前置元素,主体 input，前置内容，后置内容，后置元素这几部分构成</p>
+<p><img src="https://user-gold-cdn.xitu.io/2018/8/22/16560ba1fd8d1d19?imageView2/0/w/1280/h/960/format/webp/ignore-error/1"></p>
+<p>中间的是 input 输入框，前后 2 个都是辅助性的内容，这 2 个就是前后置元素，而输入框内的搜索和日期 Icon 就是前后置内容，因此要封装这么个完整的 input，代码量确实比较多</p>
+<p>这里值得注意的是前后置元素和 input 主体的布局,修改前后置元素内容可以发现，中间 input 的宽度是自适应的</p>
+<p><img src="https://user-gold-cdn.xitu.io/2018/8/22/16560bce859264f6?imageView2/0/w/1280/h/960/format/webp/ignore-error/1"></p>
+<p>中间 input 自动变窄，那么这个布局是咋回事呢，这个布局类似于左列宽度不定，右列自适应,左列不定的意思是宽度由内容撑开来，查看 css 代码得知，这是 table-cell 布局，我们知道 table 内表格宽度都是自适应的，某一列很宽的话，另外的列就会变窄，因此这个思想可以用到这里来，下面就是示例布局(左列宽度不定，右列自适应)，注意外层容器设置 display:table</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">style</span>=<span class="string">"display:table"</span> <span class="attr">class</span>=<span class="string">"wrapper"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">style</span>=<span class="string">"display:table-cell"</span> <span class="attr">class</span>=<span class="string">"left"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">style</span>=<span class="string">"display:table-cell"</span> <span class="attr">class</span>=<span class="string">"right"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h3 id="禁用状态的实现"><a href="#禁用状态的实现" class="headerlink" title="禁用状态的实现"></a>禁用状态的实现</h3><p>禁用很简单，通过用户传入的 disabled 属性来控制，如下代码</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">el-input</span> <span class="attr">placeholder</span>=<span class="string">"请输入内容"</span> <span class="attr">v-model</span>=<span class="string">"input1"</span> <span class="attr">:disabled</span>=<span class="string">"true"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">el-input</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>源码里通过<input :disabled="inputDisabled" ...>来控制 input 的功能禁用，这个 inputDisabled 是个计算属性</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">inputDisabled() &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>.disabled || (<span class="keyword">this</span>.elForm || &#123;&#125;).disabled;</span><br><span class="line">      &#125;,</span><br></pre></td></tr></table></figure>
+<p>这里因为要判断如果 input 被包含在表单内，如果表单禁用，那么自然自己也就被禁用了。输入框样式上的禁用是由最外层的 div 的 class 控制的</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">:class</span>=<span class="string">[&#123;</span>'<span class="attr">is-disabled</span>'<span class="attr">:</span> <span class="attr">inputDisabled</span>&#125;<span class="attr">...</span>]&gt;</span>...<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>这里没有放在里面的 input 上进行控制，原因是放在最外层可以统一控制里面的 textarea 和 input，减少代码冗余，通过子选择器选择到 input 和 textarea 进行控制，这里 placeholder 的颜色也是可以控制的，但要注意兼容性</p>
+<h3 id="input-元素的属性"><a href="#input-元素的属性" class="headerlink" title="input 元素的属性"></a>input 元素的属性</h3><p>通过查看组件里原生 input 的属性，了解了很多知识点</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">input</span></span></span><br><span class="line"><span class="tag">  <span class="attr">:tabindex</span>=<span class="string">"tabindex"</span></span></span><br><span class="line"><span class="tag">  <span class="attr">v-if</span>=<span class="string">"type !== 'textarea'"</span></span></span><br><span class="line"><span class="tag">  <span class="attr">class</span>=<span class="string">"el-input__inner"</span></span></span><br><span class="line"><span class="tag">  <span class="attr">v-bind</span>=<span class="string">"$attrs"</span></span></span><br><span class="line"><span class="tag">  <span class="attr">:type</span>=<span class="string">"type"</span></span></span><br><span class="line"><span class="tag">  <span class="attr">:disabled</span>=<span class="string">"inputDisabled"</span></span></span><br><span class="line"><span class="tag">  <span class="attr">:readonly</span>=<span class="string">"readonly"</span></span></span><br><span class="line"><span class="tag">  <span class="attr">:autocomplete</span>=<span class="string">"autoComplete"</span></span></span><br><span class="line"><span class="tag">  <span class="attr">:value</span>=<span class="string">"currentValue"</span></span></span><br><span class="line"><span class="tag">  <span class="attr">ref</span>=<span class="string">"input"</span></span></span><br><span class="line"><span class="tag">  @<span class="attr">compositionstart</span>=<span class="string">"handleComposition"</span></span></span><br><span class="line"><span class="tag">  @<span class="attr">compositionupdate</span>=<span class="string">"handleComposition"</span></span></span><br><span class="line"><span class="tag">  @<span class="attr">compositionend</span>=<span class="string">"handleComposition"</span></span></span><br><span class="line"><span class="tag">  @<span class="attr">input</span>=<span class="string">"handleInput"</span></span></span><br><span class="line"><span class="tag">  @<span class="attr">focus</span>=<span class="string">"handleFocus"</span></span></span><br><span class="line"><span class="tag">  @<span class="attr">blur</span>=<span class="string">"handleBlur"</span></span></span><br><span class="line"><span class="tag">  @<span class="attr">change</span>=<span class="string">"handleChange"</span></span></span><br><span class="line"><span class="tag">  <span class="attr">:aria-label</span>=<span class="string">"label"</span></span></span><br><span class="line"><span class="tag">/&gt;</span></span><br></pre></td></tr></table></figure>
+<p>先看 tabindex，就是控制 tab 键按下后的访问顺序，由用户传入 tabindex 如果设置为负数则无法通过 tab 键访问，设置为 0 则是在最后访问。然后 v-if=”type !== ‘textarea’”控制了这个 input 的渲染与否，用户传入 type 属性进行控制，然后是 input 的类 el-input__inner，前面介绍过，然后是 v-bind=”\$attrs”这句话，这句话是干嘛的？翻开官网得知</p>
+<p><img src="https://user-gold-cdn.xitu.io/2018/8/22/16560e5b2e241525?imageView2/0/w/1280/h/960/format/webp/ignore-error/1"></p>
+<p>读起来很拗口，下面用个例子说明</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">el-input</span> <span class="attr">maxlength</span>=<span class="string">"5"</span> <span class="attr">minlength</span>=<span class="string">"2"</span>&gt;</span> <span class="tag">&lt;/<span class="name">el-input</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>这里我们给<el-input>组件添加了 2 个原生属性，注意这 2 个原生属性并没有在 prop 里面，这 2 个属性是控制 input 的最大输入和最小输入长度的，那么这 2 个属性现在仅仅放在了父元素<el-input>上，如何将其传递给素<el-input>内的原生 input 子元素呢？不传递则这 2 个属性不起作用，因为子 input 上没有这 2 个属性。答案就是通过 v-bind=”$attrs”来实现，它将父元素所有非prop的特性都绑定在了子元素input上，否则你还得在props里声明maxlength,minlength,代码量增大。这就是$attrs 的优势所在<br>往下看:readonly=”readonly” :autocomplete=”autoComplete”,这 2 个属性都是原生的属性，由用户传入，控制输入框只读和是否自动补全，然后是输入框的 value:value=”currentValue”这里的 currentValue 是在 data 里面</el-input></el-input></el-input></p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">currentValue: <span class="keyword">this</span>.value === <span class="literal">undefined</span> || <span class="keyword">this</span>.value === <span class="literal">null</span></span><br><span class="line">          ? <span class="string">''</span></span><br><span class="line">          : <span class="keyword">this</span>.value,</span><br></pre></td></tr></table></figure>
+<p>如果用户没有在<el-input>上写 v-model(v-model 原理参考官网),那么就没有传入 value，所以 currentValue 就是空字符串，否则就是传入的值，接着 ref=”input”一句,ref 用来给元素或子组件注册引用信息。引用信息将会注册在父组件的 \$refs 对象上，这是为了方便后续代码直接拿到原生 input 的 dom</el-input></p>
+<p>然后是这 3 句话</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">@compositionstart=&quot;handleComposition&quot;</span><br><span class="line">@compositionupdate=&quot;handleComposition&quot;</span><br><span class="line">@compositionend=&quot;handleComposition&quot;</span><br></pre></td></tr></table></figure>
+<p>这 3 个方法是原生的方法，这里简单介绍下，官方定义如下 compositionstart 事件触发于一段文字的输入之前（类似于 keydown 事件，但是该事件仅在若干可见字符的输入之前，而这些可见字符的输入可能需要一连串的键盘操作、语音识别或者点击输入法的备选词）<br>简单来说就是切换中文输入法时在打拼音时(此时 input 内还没有填入真正的内容)，会首先触发 compositionstart，然后每打一个拼音字母，触发 compositionupdate，最后将输入好的中文填入 input 中时触发 compositionend。触发 compositionstart 时，文本框会填入 “虚拟文本”（待确认文本），同时触发 input 事件；在触发 compositionend 时，就是填入实际内容后（已确认文本）,所以这里如果不想触发 input 事件的话就得设置一个 bool 变量来控制</p>
+<p><img src="https://user-gold-cdn.xitu.io/2018/8/22/16560ff400955e86?imageView2/0/w/1280/h/960/format/webp/ignore-error/1"></p>
+<p>上图中点击空格后才会填入实际的文本，输入英文或数字则没有这 3 个事件的触发</p>
+<p>那么问题来了，为啥 Element 要设置这 3 个事件的处理函数呢？原因很简单，我们肯定不希望在输入拼音的过程中就直接触发 input 事件改变<code>&lt;el-input v-model=&quot;inputValue&quot;&gt;&lt;/el-input&gt;</code>中 inputValue 的值，而是希望输入完成后再改变，所以需要特殊处理，我们来看 handleComposition 的源码，注意这里只写了一个方法而不是 3 个，通过 event.type 来判断事件类型从而简化代码,可以借鉴</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">handleComposition(event) &#123;</span><br><span class="line">        <span class="keyword">if</span> (event.type === <span class="string">'compositionend'</span>) &#123;</span><br><span class="line">          <span class="keyword">this</span>.isOnComposition = <span class="literal">false</span>;</span><br><span class="line">          <span class="keyword">this</span>.currentValue = <span class="keyword">this</span>.valueBeforeComposition;</span><br><span class="line">          <span class="keyword">this</span>.valueBeforeComposition = <span class="literal">null</span>;</span><br><span class="line">          <span class="keyword">this</span>.handleInput(event);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">          <span class="keyword">const</span> text = event.target.value;</span><br><span class="line">          <span class="keyword">const</span> lastCharacter = text[text.length - <span class="number">1</span>] || <span class="string">''</span>;</span><br><span class="line">          <span class="keyword">this</span>.isOnComposition = !isKorean(lastCharacter);</span><br><span class="line">          <span class="keyword">if</span> (<span class="keyword">this</span>.isOnComposition &amp;&amp; event.type === <span class="string">'compositionstart'</span>) &#123;</span><br><span class="line">            <span class="keyword">this</span>.valueBeforeComposition = text;</span><br><span class="line">          &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
+<p>这里首先在 data 中定义了一个 bool 变量 isOnComposition,这个变量就是用来判断是否在打拼音的过程中，初始为 false，当开始打拼音后，触发 compositionstart 事件，更新 isOnComposition,通过 this.isOnComposition = !isKorean(lastCharacter)来更新，这里的逻辑是判断输入的字符的最后一个是不是韩文，韩文通过正则表达式来判断，至于为啥要判断韩文的最后一个字符，不清楚~ 如果是中文，则 isOnComposition 为 true，这里比较难理解的是后面这个 if，当正在打拼音的过程中且是 compositionstart 事件时，则用一个 valueBeforeComposition 变量保存当前的文本，也就是保存此次打字前 input 中的文本内容，这个 valueBeforeComposition 的作用后面介绍，接下来看 if (event.type === ‘compositionend’)中的内容，当打完拼音后，触发 compositionend,此时设置 isOnComposition 为 false 表明打字完成，然后注意这里会手动触发一个 this.handleInput(event)(handleInput 就是 input 上绑定的 v-on:input)，这是因为最后输入完成时，compositionend 会在 input 事件后触发，此时 isOnComposition 还是 true，无法触发下面 handleInput 中的 emit 将新的 input 的 value 传递给父组件，所以这里需要手动调用一次 handleInput</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">handleInput(event) &#123;</span><br><span class="line">        <span class="keyword">const</span> value = event.target.value;</span><br><span class="line">        <span class="keyword">this</span>.setCurrentValue(value);</span><br><span class="line">        <span class="keyword">if</span> (<span class="keyword">this</span>.isOnComposition) <span class="keyword">return</span>;</span><br><span class="line">        <span class="keyword">this</span>.$emit(<span class="string">'input'</span>, value);</span><br><span class="line">      &#125;,</span><br></pre></td></tr></table></figure>
+<p>handleInput 中当 isOnComposition 为 true 时表明正在打拼音输入，则不触发 emit 事件，这是合理且正常的</p>
+<h3 id="可清空的实现"><a href="#可清空的实现" class="headerlink" title="可清空的实现"></a>可清空的实现</h3><p><code>&lt;el-input&gt;</code>中如果添加了 clearable 属性则输入文字后会出现一个叉的图标，点击后 input 内容清空，如下图<br><img src="https://user-gold-cdn.xitu.io/2018/8/22/1656128113058beb?imageView2/0/w/1280/h/960/format/webp/ignore-error/1"></p>
+<p>先看 html 结构，下面是后置内容的 html 代码</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 后置内容 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">span</span></span></span><br><span class="line"><span class="tag">  <span class="attr">class</span>=<span class="string">"el-input__suffix"</span></span></span><br><span class="line"><span class="tag">  <span class="attr">v-if</span>=<span class="string">"$slots.suffix || suffixIcon || showClear || validateState &amp;&amp; needStatusIcon"</span></span></span><br><span class="line"><span class="tag">&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">"el-input__suffix-inner"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">template</span> <span class="attr">v-if</span>=<span class="string">"!showClear"</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">slot</span> <span class="attr">name</span>=<span class="string">"suffix"</span>&gt;</span><span class="tag">&lt;/<span class="name">slot</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">i</span> <span class="attr">class</span>=<span class="string">"el-input__icon"</span> <span class="attr">v-if</span>=<span class="string">"suffixIcon"</span> <span class="attr">:class</span>=<span class="string">"suffixIcon"</span>&gt;</span> <span class="tag">&lt;/<span class="name">i</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">template</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">i</span></span></span><br><span class="line"><span class="tag">      <span class="attr">v-else</span></span></span><br><span class="line"><span class="tag">      <span class="attr">class</span>=<span class="string">"el-input__icon el-icon-circle-close el-input__clear"</span></span></span><br><span class="line"><span class="tag">      @<span class="attr">click</span>=<span class="string">"clear"</span></span></span><br><span class="line"><span class="tag">    &gt;</span><span class="tag">&lt;/<span class="name">i</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">i</span></span></span><br><span class="line"><span class="tag">    <span class="attr">class</span>=<span class="string">"el-input__icon"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">v-if</span>=<span class="string">"validateState"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">:class</span>=<span class="string">"['el-input__validateIcon', validateIcon]"</span></span></span><br><span class="line"><span class="tag">  &gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">i</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>中间这段<code>&lt;i&gt;</code>就是清空按钮，它是一个 i 标签，有一个 click 事件，前面通过 showClear 来判断是否需要显示清空按钮，逻辑如下</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">showClear() &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>.clearable &amp;&amp;</span><br><span class="line">          !<span class="keyword">this</span>.disabled &amp;&amp;</span><br><span class="line">          !<span class="keyword">this</span>.readonly &amp;&amp;</span><br><span class="line">          <span class="keyword">this</span>.currentValue !== <span class="string">''</span> &amp;&amp;</span><br><span class="line">          (<span class="keyword">this</span>.focused || <span class="keyword">this</span>.hovering);</span><br><span class="line">      &#125;</span><br></pre></td></tr></table></figure>
+<p>这个计算属性第一步得看用户是否添加了显示清空按钮的属性，如果没有则不显示，如果有则继续判断，在非禁用且非只读状态下才且当前 input 的 value 不是空且该 input 获得焦点或者鼠标移动上去才显示，条件略多啊<br>然后看 clear 清空这个方法</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">clear() &#123;</span><br><span class="line">        <span class="keyword">this</span>.$emit(<span class="string">'input'</span>, <span class="string">''</span>);</span><br><span class="line">        <span class="keyword">this</span>.$emit(<span class="string">'change'</span>, <span class="string">''</span>);</span><br><span class="line">        <span class="keyword">this</span>.$emit(<span class="string">'clear'</span>);</span><br><span class="line">        <span class="keyword">this</span>.setCurrentValue(<span class="string">''</span>);</span><br><span class="line">        <span class="keyword">this</span>.focus();</span><br><span class="line">      &#125;</span><br></pre></td></tr></table></figure>
+<p>居然有 5 句话，但都不能少，第一个 emit 是通知父组件自己的 value 值变成了空，从而更新<code>&lt;el-input v-model=&quot;v&quot;&gt;</code>中的 v 这个 data 为空，第二句 emit 触发了父组件的 change 事件，这样在<code>&lt;el-input v-model=&quot;v&quot; @change=&quot;inputChange&quot;&gt;</code>中的 inputChange 中就能监听到该事件了，第 3 个 emit 触发父组件的@clear 方法，让父组件知道自己已经清空了，第四句话更新自己的 currentValue 为空，第五局让 input 获得焦点便于输入内容</p>
+<h3 id="textarea-高度自适应的实现"><a href="#textarea-高度自适应的实现" class="headerlink" title="textarea 高度自适应的实现"></a>textarea 高度自适应的实现</h3><p>原生的 textarea 随着内容增多则会出现滚动条<br><img src="https://user-gold-cdn.xitu.io/2018/8/22/165613ddec96fd4d?imageView2/0/w/1280/h/960/format/webp/ignore-error/1"><br>而 Element 的处理却能够让其自适应高度，也就是不出现滚动条<br><img src="https://user-gold-cdn.xitu.io/2018/8/22/165613e64d53a1cd?imageView2/0/w/1280/h/960/format/webp/ignore-error/1"></p>
+<p>核心原理是在 textarea 的 input 事件中进行逻辑判断，每触发一次 input 就判断一次，具体在下面函数中进行处理</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">calcTextareaHeight</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  ...</span><br><span class="line">  <span class="keyword">let</span> height = hiddenTextarea.scrollHeight;</span><br><span class="line">  <span class="keyword">const</span> result = &#123;&#125;;</span><br><span class="line">  ...</span><br><span class="line">  result.height = <span class="string">`<span class="subst">$&#123; height &#125;</span>px`</span>;</span><br><span class="line">  <span class="keyword">return</span> result</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这里让 height 等于 scrollHeight，也就是滚动条卷去的高度，这里就将 height 变大了，然后返回该 height 并绑定到 input 的 style 中从而动态改变 textarea 的 height，具体代码很复杂，还要处理最大最小高度等</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://fourleafclove.github.io/2019/11/23/vue/element-input/" data-id="ck952tk160027rki5n54961qg" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/element/">element</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/vue/">vue</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2019/11/10/vue/element-button/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Element源码分析-Button</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/blog/">blog</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/H5/">H5</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/IM/">IM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/angular/">angular</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/browser/">browser</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/">css</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/electron/">electron</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/element/">element</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/font/">font</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javascript/">javascript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/markdown/">markdown</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mobile/">mobile</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vue/">vue</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/H5/" style="font-size: 10px;">H5</a> <a href="/tags/IM/" style="font-size: 20px;">IM</a> <a href="/tags/angular/" style="font-size: 10px;">angular</a> <a href="/tags/browser/" style="font-size: 12px;">browser</a> <a href="/tags/css/" style="font-size: 20px;">css</a> <a href="/tags/electron/" style="font-size: 10px;">electron</a> <a href="/tags/element/" style="font-size: 14px;">element</a> <a href="/tags/font/" style="font-size: 12px;">font</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/javascript/" style="font-size: 18px;">javascript</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/mobile/" style="font-size: 10px;">mobile</a> <a href="/tags/vue/" style="font-size: 16px;">vue</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">November 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">October 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">September 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">August 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">October 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">August 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">July 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/01/">January 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">November 2015</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2019/11/23/vue/element-input/">Element源码分析-Input</a>
+          </li>
+        
+          <li>
+            <a href="/2019/11/10/vue/element-button/">Element源码分析-Button</a>
+          </li>
+        
+          <li>
+            <a href="/2019/10/27/vue/element-layout/">Element源码分析-Layout</a>
+          </li>
+        
+          <li>
+            <a href="/2019/10/16/devOps/docker/">Docker部署一个spa应用</a>
+          </li>
+        
+          <li>
+            <a href="/2019/10/05/vue/Proxy/">Proxy API</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2020 FLC<br>
+      Copyright © 2020 FLC 版权所有.<br>
+      <a href="http://beian.miit.gov.cn" target="_blank">鲁ICP备18033113号-1</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//code.jquery.com/jquery-2.0.3.min.js"></script>
+
+ <link rel="stylesheet" href="/fancybox/jquery.fancybox.css"> <script src="/fancybox/jquery.fancybox.pack.js"></script>  <script src="/js/script.js"></script> 
+
+
+  </div>
+</body>
+</html>

@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+
+  
+  <title>深入探究font(2) | 个人工作记录</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="深入探究font(2)">
+<meta name="keywords" content="font,css">
+<meta property="og:type" content="article">
+<meta property="og:title" content="深入探究font(2)">
+<meta property="og:url" content="https://fourleafclove.github.io/2017/08/04/browser/font2/index.html">
+<meta property="og:site_name" content="个人工作记录">
+<meta property="og:description" content="深入探究font(2)">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="https://ws3.sinaimg.cn/large/006tKfTcgy1fndusybu8uj30a102pgli.jpg">
+<meta property="og:updated_time" content="2020-04-18T03:28:24.003Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="深入探究font(2)">
+<meta name="twitter:description" content="深入探究font(2)">
+<meta name="twitter:image" content="https://ws3.sinaimg.cn/large/006tKfTcgy1fndusybu8uj30a102pgli.jpg">
+  
+    <link rel="alternate" href="/atom.xml" title="个人工作记录" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">个人工作记录</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://fourleafclove.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-browser/font2" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/08/04/browser/font2/" class="article-date">
+  <time datetime="2017-08-03T16:00:00.000Z" itemprop="datePublished">2017-08-04</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/blog/">blog</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      深入探究font(2)
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="字体样式"><a href="#字体样式" class="headerlink" title="字体样式"></a>字体样式</h3><p>常见的字体样式分为</p>
+<pre><code>正常（Normal）
+
+粗体（Bold）：会让字体颜色更深、更粗。
+
+斜体（Italic）：用于在当前段落中强调某段文字。
+</code></pre><p>不同的字体样式意味着不同版本的字体库。</p>
+<a id="more"></a>
+<blockquote>
+<p>CSS中通过font-style来设置斜体</p>
+</blockquote>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-tag">font-style</span>: <span class="selector-tag">normal</span>;</span><br><span class="line"><span class="selector-tag">font-style</span>: <span class="selector-tag">italic</span>;</span><br><span class="line"><span class="selector-tag">font-style</span>: <span class="selector-tag">oblique</span>;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>通过font-weight来设置粗体</p>
+</blockquote>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-tag">font-weight</span>: <span class="selector-tag">normal</span>; <span class="comment">/* 默认样式 */</span></span><br><span class="line"><span class="selector-tag">font-weight</span>: <span class="selector-tag">bold</span>; <span class="comment">/* 粗体 */</span></span><br><span class="line"><span class="selector-tag">font-weight</span>: <span class="selector-tag">bolder</span>; <span class="comment">/* 粗体 */</span></span><br><span class="line"><span class="selector-tag">font-weight</span>: <span class="selector-tag">lighter</span>; <span class="comment">/* 细体 */</span></span><br><span class="line"><span class="selector-tag">font-weight</span>: 100; <span class="comment">/* 字重代号 */</span></span><br><span class="line"><span class="selector-tag">font-weight</span>: 200; <span class="comment">/* 字重代号 */</span></span><br><span class="line"><span class="selector-tag">font-weight</span>: 300; <span class="comment">/* 字重代号 */</span></span><br><span class="line"><span class="selector-tag">font-weight</span>: 400; <span class="comment">/* 字重代号，相当于normal */</span></span><br><span class="line"><span class="selector-tag">font-weight</span>: 500; <span class="comment">/* 字重代号 */</span></span><br><span class="line"><span class="selector-tag">font-weight</span>: 600; <span class="comment">/* 字重代号 */</span></span><br><span class="line"><span class="selector-tag">font-weight</span>: 700; <span class="comment">/* 字重代号，相当于bold */</span></span><br><span class="line"><span class="selector-tag">font-weight</span>: 800; <span class="comment">/* 字重代号 */</span></span><br><span class="line"><span class="selector-tag">font-weight</span>: 900; <span class="comment">/* 字重代号 */</span></span><br></pre></td></tr></table></figure>
+<h3 id="baseline"><a href="#baseline" class="headerlink" title="baseline"></a>baseline</h3><p> 对于inline-level box元素的垂直方向排版、对齐等操作时，必定离不开baseline。</p>
+<p> <img src="https://ws3.sinaimg.cn/large/006tKfTcgy1fndusybu8uj30a102pgli.jpg" width="400"></p>
+<p>  <code>ascent</code>，上行线</p>
+<p>  <code>mean line</code>，等分线（又称为median中位线），注意mean line并不会位于inline-level box的正中间。</p>
+<p>  <code>baseline</code>，基线</p>
+<p>  <code>descent</code>，下行线</p>
+<p>  <code>ascender height</code>，mean line至ascender间的高度</p>
+<p>  <code>cap height</code>，大写字母高度</p>
+<p>  <code>descender height</code>，baseline至descender间的高度</p>
+<p>  <code>x-height</code>，baseline至mean line间的高度</p>
+<p>  注意ascent、mean line、baseline和descent四根线并不像我们用的4线格那样一成不变，它们的位置是根据采用的字体类型和字体大小来决定的。</p>
+<p>  其实与我们密切相关的就两条线baseline和mean line，而它们的位置则由当前字体的小写字母x决定。x脚踩在baseline上，头顶着mean line，因此baseline与mean line间的高度很语义化的称为x-height。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://fourleafclove.github.io/2017/08/04/browser/font2/" data-id="ck952tjzu000rrki5geb44g2g" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/css/">css</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/font/">font</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2017/08/22/js/图片预加载/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          图片预加载的几种方式
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/08/02/browser/font1/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">深入探究font(1)</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/blog/">blog</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/H5/">H5</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/IM/">IM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/angular/">angular</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/browser/">browser</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/">css</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/electron/">electron</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/element/">element</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/font/">font</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javascript/">javascript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/markdown/">markdown</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mobile/">mobile</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vue/">vue</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/H5/" style="font-size: 10px;">H5</a> <a href="/tags/IM/" style="font-size: 20px;">IM</a> <a href="/tags/angular/" style="font-size: 10px;">angular</a> <a href="/tags/browser/" style="font-size: 12px;">browser</a> <a href="/tags/css/" style="font-size: 20px;">css</a> <a href="/tags/electron/" style="font-size: 10px;">electron</a> <a href="/tags/element/" style="font-size: 14px;">element</a> <a href="/tags/font/" style="font-size: 12px;">font</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/javascript/" style="font-size: 18px;">javascript</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/mobile/" style="font-size: 10px;">mobile</a> <a href="/tags/vue/" style="font-size: 16px;">vue</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">November 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">October 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">September 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">August 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">October 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">August 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">July 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/01/">January 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">November 2015</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2019/11/23/vue/element-input/">Element源码分析-Input</a>
+          </li>
+        
+          <li>
+            <a href="/2019/11/10/vue/element-button/">Element源码分析-Button</a>
+          </li>
+        
+          <li>
+            <a href="/2019/10/27/vue/element-layout/">Element源码分析-Layout</a>
+          </li>
+        
+          <li>
+            <a href="/2019/10/16/devOps/docker/">Docker部署一个spa应用</a>
+          </li>
+        
+          <li>
+            <a href="/2019/10/05/vue/Proxy/">Proxy API</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2020 FLC<br>
+      Copyright © 2020 FLC 版权所有.<br>
+      <a href="http://beian.miit.gov.cn" target="_blank">鲁ICP备18033113号-1</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//code.jquery.com/jquery-2.0.3.min.js"></script>
+
+ <link rel="stylesheet" href="/fancybox/jquery.fancybox.css"> <script src="/fancybox/jquery.fancybox.pack.js"></script>  <script src="/js/script.js"></script> 
+
+
+  </div>
+</body>
+</html>
